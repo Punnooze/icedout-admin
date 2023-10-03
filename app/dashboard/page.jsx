@@ -1,12 +1,12 @@
 import React from 'react';
-import Dashboard from '@/components/Dashboard';
+import DashboardLayout from '@/components/DashboardLayout';
 import Sidebar from '@/components/Sidebar';
 
 function page() {
   return (
     <div className="flex ">
       <Sidebar />
-      <Dashboard />
+      <DashboardLayout />
     </div>
   );
 }
