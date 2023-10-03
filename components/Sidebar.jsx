@@ -1,22 +1,27 @@
-'use client';
-import React, { useEffect } from 'react';
-import Image from 'next/image';
-import { Card, Typography, List, ListItem, ListItemPrefix, Chip } from "@material-tailwind/react";
-import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, Cog6ToothIcon, InboxIcon, PowerIcon } from "@heroicons/react/24/solid";
+import React from 'react';
 import logo from '../public/logo.png';
-import { signOut } from 'next-auth/react';
+import Image from 'next/image';
 
 function Sidebar() {
-  useEffect(() => {
-  }, []);
-
   return (
-    <Card className="w-[270px] h-[100vh] bg-lightgrey p-4 shadow-xl shadow-blue-gray-900/5">
-      <div className="mb-2">
-        <Typography variant="h2-xl" color="blue-gray">
-          Admin Dashboard
-          <Image src={logo} alt="logo" width={200} height={100} />
-        </Typography>
+    <>
+      <div className="w-[200px] h-[100vh] bg-banner">
+        <div id="top" className="flex flex-col">
+          <Image src={logo} alt="logo" />
+
+          <p>Icedout</p>
+          <button>logout</button>
+        </div>
+        <div>---median---</div>
+        <div id="pages" className="flex flex-col items-center">
+          <div>Dashboard</div>
+          <div>Orders</div>
+          <div>Customer</div>
+          <div>Products</div>
+          <div>Statistics</div>
+          <div>Customer Support</div>
+          <div>Marketing</div>
+        </div>
       </div>
       <List>
         <ListItem>
