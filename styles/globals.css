@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,9 +24,9 @@
 }
 
 @layer base {
-  .container{
-    @apply tw-container lg:tw-container tw-mx-auto tw-px-4 tw-py-[50px]
-  }
+  /* .container{
+    @apply container lg:container mx-auto px-4 py-[50px]
+  } */
   body{
     color: black;
   }

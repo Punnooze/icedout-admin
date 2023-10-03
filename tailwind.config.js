@@ -1,6 +1,6 @@
 
 module.exports = {
-  // prefix: 'tw-',
+  //prefix: 'tw-',
   
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",

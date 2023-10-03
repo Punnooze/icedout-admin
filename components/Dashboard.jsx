@@ -94,8 +94,6 @@ function Dashboard() {
   return (
     <div>
       <div class="pl-6">
-      <h1>DASHBOARD</h1>
-      <br/>
     <DashboardCard title="Sales Overview" action={
       <Select
         labelId="month-dd"

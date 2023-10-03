@@ -1,27 +1,22 @@
-import React from 'react';
-import logo from '../public/logo.png';
+'use client';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
+import { Card, Typography, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
+import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid";
+import logo from '../public/logo.png';
+import { signOut } from 'next-auth/react';
 
 function Sidebar() {
-  return (
-    <>
-      <div className="w-[200px] h-[100vh] bg-banner">
-        <div id="top" className="flex flex-col">
-          <Image src={logo} alt="logo" />
+  useEffect(() => {
+  }, []);
 
-          <p>Icedout</p>
-          <button>logout</button>
-        </div>
-        <div>---median---</div>
-        <div id="pages" className="flex flex-col items-center">
-          <div>Dashboard</div>
-          <div>Orders</div>
-          <div>Customer</div>
-          <div>Products</div>
-          <div>Statistics</div>
-          <div>Customer Support</div>
-          <div>Marketing</div>
-        </div>
+  return (
+    <Card className="w-[270px] h-[100vh] bg-lightgrey p-4 shadow-xl shadow-blue-gray-900/5 ">
+      <div className="mb-2">
+        <Typography variant="h2-xl" color="blue-gray">
+          Admin Dashboard
+          <Image src={logo} alt="logo" width={200} height={100} />
+        </Typography>
       </div>
       <List>
         <ListItem>
@@ -77,12 +72,10 @@ function Sidebar() {
           Marketing
           </Typography>
         </ListItem>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <br/><br/>
+        <br/><br/>
+        <br/><br/>
+        <br/><br/>
         <ListItem>
           <button onClick={signOut} className="bg-blue-gray-100 text-blue-gray-500 p-2 rounded-md mt-4">
           <Typography variant="h2-xl" color="blue-gray">
