@@ -1,29 +1,28 @@
-
 module.exports = {
   // prefix: 'tw-',
-  
+
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    './app/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     colors: {
-      'lightblue': '#58B6C3',
-      'darkblue': '#04122A',
-      'background': '#DEDEDE',
-      'navbg': '#082546',
-      'banner':'#58C6D4',
-      'grey': '#707070',
-      'lightgrey': '#aba2a23f',
-      'lightpurple':'#383d82',
+      lightblue: '#58B6C3',
+      darkblue: '#04122A',
+      background: '#DEDEDE',
+      navbg: '#082546',
+      banner: '#58C6D4',
+      grey: '#707070',
+      lightgrey: '#aba2a23f',
+      lightpurple: '#383d82',
     },
     extend: {
       fontFamily: {
-        'ARegular': ['ARegular', 'sans-serif'],
-        'ABold': ['ABold', 'sans-serif'],
-        'syne': ['syne', 'monospace'],
-        'melt': ['melt', 'sans-serif']
+        ARegular: ['ARegular', 'sans-serif'],
+        ABold: ['ABold', 'sans-serif'],
+        syne: ['syne', 'monospace'],
+        melt: ['melt', 'sans-serif'],
       },
 
       fontSize: {
@@ -36,8 +35,8 @@ module.exports = {
         'h1-sm': '2.5rem',
         'h2-sm': '1.4rem',
         'body-sm': '0.85rem',
-        'footer-sm': '0.6rem'
-      }
+        'footer-sm': '0.6rem',
+      },
     },
   },
   plugins: [require('daisyui')],
@@ -45,17 +44,13 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          'primary': '#58B6C3',
-          'secondary': '#383d82',
-          'neutral': '#aba2a23f',
+          primary: '#58B6C3',
+          secondary: '#383d82',
+          neutral: '#aba2a23f',
           'base-100': '#DEDEDE',
-          'red': '#ff4646de',
-
+          red: '#ff4646de',
         },
       },
-
     ],
   },
-}
-
-
+};

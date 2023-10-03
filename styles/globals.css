@@ -23,9 +23,9 @@
 }
 
 @layer base {
-  .container{
+  /* .container{
     @apply tw-container lg:tw-container tw-mx-auto tw-px-4 tw-py-[50px]
-  }
+  } */
   body{
     color: black;
   }
