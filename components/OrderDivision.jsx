@@ -8,36 +8,41 @@ const { IconArrowUpRight } = require('@tabler/icons-react');
 import DashboardCard from "./DashboardCard";
 
 const OrderDivision = () => {
-  // chart color
+  // Initialize the theme using useTheme
   const theme = useTheme();
+
+  // Check if theme.palette exists before accessing the mode property
+  const isDarkMode = theme.palette && theme.palette.mode === "dark";
+
+  // chart color
   const primary = theme.palette.primary.main;
-  const primarylight = '#ecf2ff';
+  const primarylight = "#ecf2ff";
   const successlight = theme.palette.success.light;
 
   // chart
   const optionscolumnchart = {
     chart: {
-      type: 'donut',
+      type: "donut",
       fontFamily: "'Plus Jakarta Sans', sans-serif;",
-      foreColor: '#adb0bb',
+      foreColor: "#adb0bb",
       toolbar: {
         show: false,
       },
       height: 155,
     },
-    colors: [primary, primarylight, '#F9F9FD'],
+    colors: [primary, primarylight, "#F9F9FD"],
     plotOptions: {
       pie: {
         startAngle: 0,
         endAngle: 360,
         donut: {
-          size: '75%',
-          background: 'transparent',
+          size: "75%",
+          background: "transparent",
         },
       },
     },
     tooltip: {
-      theme: theme.palette.mode === 'dark' ? 'dark' : 'light',
+      theme: isDarkMode ? "dark" : "light", // Use the isDarkMode variable
       fillSeriesColor: false,
     },
     stroke: {

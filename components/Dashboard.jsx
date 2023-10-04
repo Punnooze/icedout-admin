@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react'; // Removed unused useEffect import
-import { signOut } from 'next-auth/react';
 import { useTheme } from '@mui/material/styles'; // Import useTheme from Material-UI
 import DashboardCard from './DashboardCard';
 import dynamic from "next/dynamic";
@@ -17,9 +16,13 @@ function Dashboard() {
   };
 
   // chart color
-  const theme = useTheme();
-  const primary = theme.palette.error.main;
-  const secondary = theme.palette.primary.main;
+  const theme = useTheme(); // Initialize the theme using useTheme
+
+  // Check if theme.palette exists before accessing the mode property
+  const isDarkMode = theme.palette && theme.palette.mode === 'dark';
+
+  const primary = isDarkMode ? theme.palette.error.main : theme.palette.primary.main;
+  const secondary = theme.palette.error.main;
 
   // chart
   const optionscolumnchart = {
@@ -37,8 +40,8 @@ function Dashboard() {
     plotOptions: {
       bar: {
         horizontal: false,
-        barHeight: '60%',
-        columnWidth: '42%',
+        barHeight: '70%',
+        columnWidth: '50%',
         borderRadius: [6],
         borderRadiusApplication: 'end',
         borderRadiusWhenStacked: 'all',
@@ -93,7 +96,7 @@ function Dashboard() {
 
   return (
     <div>
-      <div class="pl-6">
+      <div class="pl-0">
     <DashboardCard title="Sales Overview" action={
       <Select
         labelId="month-dd"
