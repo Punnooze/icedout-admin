@@ -15,6 +15,9 @@ module.exports = {
       grey: '#707070',
       lightgrey: '#aba2a23f',
       lightpurple: '#383d82',
+      // niceblue: '#9081e5',
+      // darkbg: '#1f2937',
+      // darkbgtext: '#b7b8ba',
     },
     extend: {
       fontFamily: {

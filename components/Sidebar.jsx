@@ -18,7 +18,7 @@ import {
   UserGroupIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  ChatBubbleLeftRightIcon
+  ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/solid';
 import logo from '../public/logo.png';
 import { signOut } from 'next-auth/react';
@@ -32,7 +32,7 @@ function Sidebar() {
     <Card
       className={`${
         click ? 'w-[90px]' : 'w-[200px]'
-      } sticky bg-lightgrey p-4 shadow-xl shadow-blue-gray-900/5 `}
+      } h-[100vh] sticky bg-lightgrey p-4 shadow-xl shadow-blue-gray-900/5 `}
     >
       <div className="mb-2">
         <button
@@ -47,7 +47,7 @@ function Sidebar() {
         </button>
 
         <Typography
-          variant="h2-xl"
+          variant="h2"
           className={`lg:text-[18px] ${click ? 'invisible' : 'visible'} `}
           color="blue-gray"
         >
@@ -174,7 +174,11 @@ function Sidebar() {
             onClick={signOut}
             className="bg-blue-gray-100 text-blue-gray-500 p-2 rounded-md mt-4 "
           >
-            <PowerIcon className={`h-6 w-6 ${click ? 'visible' : 'hidden'} stroke-darkblue `} />
+            <PowerIcon
+              className={`h-6 w-6 ${
+                click ? 'visible' : 'hidden'
+              } stroke-darkblue `}
+            />
             <Typography
               variant="h2-xl"
               className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
