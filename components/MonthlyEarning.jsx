@@ -1,6 +1,7 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { useTheme } from '@mui/material/styles';
 import { Stack, Typography, Avatar, Fab } from '@mui/material';
 import { IconArrowUpRight, IconCurrencyDollar } from '@tabler/icons-react';
@@ -59,35 +60,35 @@ const MonthlyEarnings = () => {
   ];
 
   return (
-    <div className="pr-3">
-      <DashboardCard
-        title="Monthly Earnings"
-        action={
-          <Fab color="secondary" size="medium" sx={{ color: '#ffffff' }}>
-            <IconCurrencyDollar width={24} />
-          </Fab>
-        }
-        footer={
-          <Chart options={optionscolumnchart} series={seriescolumnchart} type="area" height="60px" />
-        }
-      >
-        <>
-          <Typography variant="h3" fontWeight="700" mt="-20px">
-            $6,820
+    <div class="pr-3">
+    <DashboardCard
+      title="Monthly Earnings"
+      action={
+        <Fab color="secondary" size="medium" sx={{color: '#ffffff'}}>
+          <IconCurrencyDollar width={24} />
+        </Fab>
+      }
+      footer={
+        <Chart options={optionscolumnchart} series={seriescolumnchart} type="area" height="60px" />
+      }
+    >
+      <>
+        <Typography variant="h3" fontWeight="700" mt="-20px">
+          $6,820
+        </Typography>
+        <Stack direction="row" spacing={1} my={1} alignItems="center">
+          <Avatar sx={{ bgcolor: 'lightgreen', width: 27, height: 27 }}>
+            <IconArrowUpRight width={20} color="green" />
+          </Avatar>
+          <Typography variant="subtitle2" fontWeight="600">
+            +9%
           </Typography>
-          <Stack direction="row" spacing={1} my={1} alignItems="center">
-            <Avatar sx={{ bgcolor: 'lightgreen', width: 27, height: 27 }}>
-              <IconArrowUpRight width={20} color="green" />
-            </Avatar>
-            <Typography variant="subtitle2" fontWeight="600">
-              +9%
-            </Typography>
-            <Typography variant="subtitle2" color="textSecondary">
-              last year
-            </Typography>
-          </Stack>
-        </>
-      </DashboardCard>
+          <Typography variant="subtitle2" color="textSecondary">
+            last year
+          </Typography>
+        </Stack>
+      </>
+    </DashboardCard>
     </div>
   );
 };

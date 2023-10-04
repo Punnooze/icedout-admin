@@ -32,7 +32,7 @@ function Sidebar() {
     <Card
       className={`${
         click ? 'w-[90px]' : 'w-[200px]'
-      } h-[100vh] bg-lightgrey p-4 shadow-xl shadow-blue-gray-900/5 `}
+      } h-[100%] bg-lightgrey p-4 shadow-xl shadow-blue-gray-900/5 `}
     >
       <div className="mb-2">
         <button
