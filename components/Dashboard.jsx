@@ -50,9 +50,7 @@ function Dashboard() {
 
     stroke: {
       show: true,
-      width: 5,
-      lineCap: "butt",
-      colors: ["transparent"],
+      curve: 'smooth',
     },
     dataLabels: {
       enabled: false,
@@ -113,8 +111,8 @@ function Dashboard() {
       <Chart
         options={optionscolumnchart}
         series={seriescolumnchart}
-        type="bar"
-        height="300px"
+        type="area"
+        height="425px"
         width="700px"
       />
     </DashboardCard>

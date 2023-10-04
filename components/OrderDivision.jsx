@@ -113,6 +113,7 @@ const OrderDivision = () => {
             series={seriescolumnchart}
             type="donut"
             height="150px"
+            width='100%'
           />
         </Grid>
       </Grid>

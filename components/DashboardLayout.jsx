@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import Dashboard from "./Dashboard";
 import MonthlyEarnings from "./MonthlyEarning";
 import OrderDivision from "./OrderDivision";
-import ProductPerformance  from "./ProductPerformance";
+import ProductStock  from "./ProductStock";
 
 
 function DashboardLayout() {
@@ -26,8 +26,8 @@ function DashboardLayout() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} lg={8}>
-            <ProductPerformance />
+          <Grid item xs={12} lg={12}>
+            <ProductStock />
           </Grid>
         </Grid>
       </div>

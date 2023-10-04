@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
 import dynamic from "next/dynamic";
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { useTheme } from '@mui/material/styles';
 import { Stack, Typography, Avatar, Fab } from '@mui/material';
 import { IconArrowUpRight, IconCurrencyDollar } from '@tabler/icons-react';
@@ -69,7 +68,7 @@ const MonthlyEarnings = () => {
         </Fab>
       }
       footer={
-        <Chart options={optionscolumnchart} series={seriescolumnchart} type="area" height="60px" />
+        <Chart options={optionscolumnchart} series={seriescolumnchart} type="area" height="60px" width='100%'/>
       }
     >
       <>

@@ -38,10 +38,11 @@ const products = [
     },
 ];
 
-const ProductPerformance = () => {
+const ProductStock = () => {
     return (
-        <DashboardCard title="Product Performance">
-            <Box sx={{ overflow: 'auto', width: { xs: '280px', sm: 'auto' } }}>
+        <div class="pr-3">
+        <DashboardCard title="Product Stock">
+            <Box sx={{ overflow: 'auto', width: { xs: '280px', sm: 'auto' }}}>
                 <Table aria-label="simple table" sx={{ whiteSpace: "nowrap", mt: 2 }}>
                     <TableHead>
                         <TableRow>
@@ -63,11 +64,6 @@ const ProductPerformance = () => {
                             <TableCell>
                                 <Typography variant="subtitle2" fontWeight={600}>
                                     Stock Priority
-                                </Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Typography variant="subtitle2" fontWeight={600}>
-                                    Sales
                                 </Typography>
                             </TableCell>
                         </TableRow>
@@ -123,16 +119,14 @@ const ProductPerformance = () => {
                                         label={product.priority}
                                     ></Chip>
                                 </TableCell>
-                                <TableCell align="right">
-                                    <Typography variant="h6">${product.budget}k</Typography>
-                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </Box>
         </DashboardCard>
+        </div>
     );
 };
 
-export default ProductPerformance;
+export default ProductStock;
