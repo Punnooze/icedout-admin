@@ -10,7 +10,7 @@ import ProductStock  from "./ProductStock";
 function DashboardLayout() {
   return (
     <div>  
-      <div class="pl-6">
+      <div class="pl-6 h-[100vh] overflow-y-auto">
       <h1>DASHBOARD</h1>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={8}>
