@@ -66,7 +66,7 @@ function Sidebar() {
             />
           </ListItemPrefix>
           <Typography
-            variant="h2-xl"
+            variant="h2"
             className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
             color="blue-gray"
           >
@@ -84,7 +84,7 @@ function Sidebar() {
             />
           </ListItemPrefix>
           <Typography
-            variant="h2-xl"
+            variant="h2"
             className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
             color="blue-gray"
           >
@@ -102,7 +102,7 @@ function Sidebar() {
             />
           </ListItemPrefix>
           <Typography
-            variant="h2-xl"
+            variant="h2"
             className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
             color="blue-gray"
           >
@@ -120,7 +120,7 @@ function Sidebar() {
             />
           </ListItemPrefix>
           <Typography
-            variant="h2-xl"
+            variant="h2"
             className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
             color="blue-gray"
           >
@@ -138,7 +138,7 @@ function Sidebar() {
             />
           </ListItemPrefix>
           <Typography
-            variant="h2-xl"
+            variant="h2"
             className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
             color="blue-gray"
           >
@@ -156,7 +156,7 @@ function Sidebar() {
             />
           </ListItemPrefix>
           <Typography
-            variant="h2-xl"
+            variant="h2"
             className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
             color="blue-gray"
           >
@@ -180,7 +180,7 @@ function Sidebar() {
               } stroke-darkblue `}
             />
             <Typography
-              variant="h2-xl"
+              variant="h2"
               className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
               color="blue-gray"
             >
