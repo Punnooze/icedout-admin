@@ -50,7 +50,7 @@ function Dashboard() {
 
     stroke: {
       show: true,
-      curve: 'smooth',
+      curve: 'straight',
     },
     dataLabels: {
       enabled: false,

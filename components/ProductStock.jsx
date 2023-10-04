@@ -42,7 +42,7 @@ const ProductStock = () => {
     return (
         <div class="pr-3">
         <DashboardCard title="Product Stock">
-            <Box sx={{ overflow: 'auto', width: { xs: '280px', sm: 'auto' }}}>
+            <Box sx={{ overflow: 'auto', width: { xs: '280px', sm: 'auto' }, height:'325px'}}>
                 <Table aria-label="simple table" sx={{ whiteSpace: "nowrap", mt: 2 }}>
                     <TableHead>
                         <TableRow>

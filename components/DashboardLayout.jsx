@@ -5,6 +5,8 @@ import Dashboard from "./Dashboard";
 import MonthlyEarnings from "./MonthlyEarning";
 import OrderDivision from "./OrderDivision";
 import ProductStock  from "./ProductStock";
+import Followers from "./Followers";
+import Traffic from "./Traffic";
 
 
 function DashboardLayout() {
@@ -26,7 +28,17 @@ function DashboardLayout() {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} lg={12}>
+          <Grid item xs={12} lg={4}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Traffic />
+              </Grid>
+              <Grid item xs={12}>
+                <Followers />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} lg={8}>
             <ProductStock />
           </Grid>
         </Grid>

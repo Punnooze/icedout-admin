@@ -8,7 +8,7 @@ import DashboardCard from './DashboardCard';
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const MonthlyEarnings = () => {
+const Traffic = () => {
   // Initialize the theme using useTheme
   const theme = useTheme();
 
@@ -22,7 +22,7 @@ const MonthlyEarnings = () => {
   // chart
   const optionscolumnchart = {
     chart: {
-      type: 'area',
+      type: 'line',
       fontFamily: "'Plus Jakarta Sans', sans-serif;",
       foreColor: '#adb0bb',
       toolbar: {
@@ -35,13 +35,7 @@ const MonthlyEarnings = () => {
       group: 'sparklines',
     },
     stroke: {
-      curve: 'smooth',
-      width: 2,
-    },
-    fill: {
-      colors: [secondarylight],
-      type: 'solid',
-      opacity: 0.05,
+      curve: 'straight',
     },
     markers: {
       size: 0,
@@ -54,36 +48,31 @@ const MonthlyEarnings = () => {
     {
       name: '',
       color: secondary,
-      data: [25, 66, 20, 40, 12, 58, 20],
+      data: [250, 660, 200, 400, 120, 580, 200],
     },
   ];
 
   return (
     <div class="pr-3">
     <DashboardCard
-      title="Monthly Earnings"
+      title="Website Traffic"
       action={
         <Fab color="#58B6C3" size="medium">
           <IconCurrencyDollar width={25}/>
         </Fab>
       }
       footer={
-        <Chart options={optionscolumnchart} series={seriescolumnchart} type="area" height="60px" width='100%'/>
+        <Chart options={optionscolumnchart} series={seriescolumnchart} type="line" height="60px" width='100%'/>
       }
     >
       <>
         <Typography variant="h3" fontWeight="700" mt="-20px">
           $6,820
         </Typography>
-        <Stack direction="row" spacing={1} my={1} alignItems="center">
-          <Avatar sx={{ bgcolor: 'lightgreen', width: 27, height: 27 }}>
-            <IconArrowUpRight width={20} color="green" />
-          </Avatar>
-        </Stack>
       </>
     </DashboardCard>
     </div>
   );
 };
 
-export default MonthlyEarnings;
+export default Traffic;
