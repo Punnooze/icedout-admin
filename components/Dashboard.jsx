@@ -21,8 +21,8 @@ function Dashboard() {
   // Check if theme.palette exists before accessing the mode property
   const isDarkMode = theme.palette && theme.palette.mode === 'dark';
 
-  const primary = isDarkMode ? theme.palette.error.main : theme.palette.primary.main;
-  const secondary = theme.palette.error.main;
+  const primary = isDarkMode ? '#04122A' : '#04122A';
+  const secondary = '#58B6C3';
 
   // chart
   const optionscolumnchart = {

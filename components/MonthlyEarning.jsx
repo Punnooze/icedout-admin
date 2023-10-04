@@ -16,7 +16,7 @@ const MonthlyEarnings = () => {
   const isDarkMode = theme.palette && theme.palette.mode === 'dark';
 
   // chart color
-  const secondary = theme.palette.secondary.main;
+  const secondary = '#58B6C3';
   const secondarylight = '#f5fcff';
 
   // chart
@@ -63,8 +63,8 @@ const MonthlyEarnings = () => {
     <DashboardCard
       title="Monthly Earnings"
       action={
-        <Fab color="secondary" size="medium" sx={{color: '#ffffff'}}>
-          <IconCurrencyDollar width={24} />
+        <Fab color="#58B6C3" size="medium">
+          <IconCurrencyDollar width={25}/>
         </Fab>
       }
       footer={

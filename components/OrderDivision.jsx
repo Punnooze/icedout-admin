@@ -15,8 +15,8 @@ const OrderDivision = () => {
   const isDarkMode = theme.palette && theme.palette.mode === "dark";
 
   // chart color
-  const primary = theme.palette.primary.main;
-  const primarylight = "#ecf2ff";
+  const primary = '#04122A';
+  const primarylight = "#58B6C3";
   const successlight = theme.palette.success.light;
 
   // chart
@@ -30,7 +30,7 @@ const OrderDivision = () => {
       },
       height: 155,
     },
-    colors: [primary, primarylight, "#F9F9FD"],
+    colors: [primary, primarylight],
     plotOptions: {
       pie: {
         startAngle: 0,
@@ -65,16 +65,16 @@ const OrderDivision = () => {
       },
     ],
   };
-  const seriescolumnchart = [38, 40, 25];
+  const seriescolumnchart = [2000,1000];
 
   return (
     <div class="pr-3">
-    <DashboardCard title="Total Sales">
+    <DashboardCard title="Total Orders">
       <Grid container spacing={3}>
         {/* column */}
         <Grid item xs={7} sm={7}>
           <Typography variant="h3" fontWeight="700">
-            $36,35
+            3000
           </Typography>
           <Stack direction="row" spacing={1} mt={1} alignItems="center">
             <Avatar sx={{ bgcolor: 'lightgreen', width: 27, height: 27 }}>
@@ -84,7 +84,7 @@ const OrderDivision = () => {
               +9%
             </Typography>
             <Typography variant="subtitle2" color="textSecondary">
-              last year
+              last month
             </Typography>
           </Stack>
           <Stack spacing={3} mt={5} direction="row">
@@ -93,7 +93,7 @@ const OrderDivision = () => {
                 sx={{ width: 9, height: 9, bgcolor: primary, svg: { display: 'none' } }}
               ></Avatar>
               <Typography variant="subtitle2" color="textSecondary">
-                2022
+                Online
               </Typography>
             </Stack>
             <Stack direction="row" spacing={1} alignItems="center">
@@ -101,7 +101,7 @@ const OrderDivision = () => {
                 sx={{ width: 9, height: 9, bgcolor: primarylight, svg: { display: 'none' } }}
               ></Avatar>
               <Typography variant="subtitle2" color="textSecondary">
-                2023
+                COD
               </Typography>
             </Stack>
           </Stack>
@@ -111,7 +111,7 @@ const OrderDivision = () => {
           <Chart
             options={optionscolumnchart}
             series={seriescolumnchart}
-            type="donut"
+            type="pie"
             height="150px"
             width='100%'
           />
