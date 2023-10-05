@@ -53,9 +53,9 @@ function ProductPage() {
   };
 
   return (
-    <div className="h-[100vh] w-[100vw] overflow-y-auto pl-5 pr-5">
+    <div className="h-[100vh] w-[100vw] overflow-y-auto pl-5 pr-5 ">
       <h1 className="font-medium text-black dark:text-white">Products Form</h1>
-      <div className="bg-lightgrey rounded-md shadow-md hover:shadow-lg duration-200 ">
+      <div className="bg-lightgrey rounded-md shadow-md hover:shadow-lg duration-200 mb-[30px] ">
         <form action="#" onSubmit={handleSubmit}>
           <div className="p-6.5">
             <div className="mb-4.5 flex space-x-4">

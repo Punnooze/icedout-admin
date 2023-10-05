@@ -29,11 +29,11 @@ function CustomersCard({ data }) {
     {
       field: 'name',
       headerName: 'Name',
-      width: 150,
+      width: 200,
       editable: true,
     }, // Allow editing
-    { field: 'email', headerName: 'email', width: 150 },
-    { field: 'whatsapp', headerName: 'Mobile Number', width: 150 },
+    { field: 'email', headerName: 'email', width: 200 },
+    { field: 'whatsapp', headerName: 'Mobile Number', width: 200 },
   ];
 
   useEffect(() => {
@@ -72,7 +72,7 @@ function CustomersCard({ data }) {
               />
             </div>
             <div className="flex justify-center items-center mt-[10px]">
-              <div style={{ height: 500, width: '95%' }}>
+              <div style={{ height: 500, width: '90%' }}>
                 {filteredRows ? (
                   <DataGrid
                     sx={{

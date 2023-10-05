@@ -32,19 +32,18 @@ function Sidebar() {
     <Card
       className={`${
         click ? 'w-[90px]' : 'w-[200px]'
-      } h-[100vh] sticky bg-lightgrey p-4 shadow-xl shadow-blue-gray-900/5 `}
+      } h-[100vh] bg-lightgrey p-4 shadow-xl shadow-blue-gray-900/5 `}
     >
-      <div className="mb-2">
-        <button
-          onClick={() => setClick(!click)}
-          className="w-[100%] flex justify-end"
-        >
-          {click ? (
-            <ChevronRightIcon className="stroke-[2px] stroke-[#000] w-5 h-5" />
-          ) : (
-            <ChevronLeftIcon className="stroke-[2px] stroke-[#000] w-5 h-5" />
-          )}
-        </button>
+      <div className=" mb-2">
+        <div className="w-[100%] flex justify-end">
+          <button onClick={() => setClick(!click)}>
+            {click ? (
+              <ChevronRightIcon className="stroke-[2px] stroke-[#000] w-5 h-5" />
+            ) : (
+              <ChevronLeftIcon className="stroke-[2px] stroke-[#000] w-5 h-5" />
+            )}
+          </button>
+        </div>
 
         <Typography
           variant="h2"
@@ -58,7 +57,7 @@ function Sidebar() {
       <List className=" w-[100%]">
         <ListItem
           onClick={() => router.push('/dashboard')}
-          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] pr-[10px] pl-[10px] "
+          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
         >
           <ListItemPrefix>
             <PresentationChartBarIcon
@@ -76,7 +75,7 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/order')}
-          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] pr-[10px] pl-[10px] "
+          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
         >
           <ListItemPrefix>
             <ShoppingBagIcon
@@ -94,7 +93,7 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/customers')}
-          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] pr-[10px] pl-[10px] "
+          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
         >
           <ListItemPrefix>
             <UserCircleIcon
@@ -112,7 +111,7 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/products')}
-          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] pr-[10px] pl-[10px] "
+          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
         >
           <ListItemPrefix>
             <Cog6ToothIcon
@@ -130,7 +129,7 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/support')}
-          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] pr-[10px] pl-[10px] "
+          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
         >
           <ListItemPrefix>
             <UserGroupIcon
@@ -148,7 +147,7 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/marketing')}
-          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] pr-[10px] pl-[10px] "
+          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
         >
           <ListItemPrefix>
             <ChatBubbleLeftRightIcon
@@ -164,12 +163,46 @@ function Sidebar() {
           </Typography>
         </ListItem>
         <br />
+        <ListItem
+          onClick={() => router.push('/marketing')}
+          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
+        >
+          <ListItemPrefix>
+            <ChatBubbleLeftRightIcon
+              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'}`}
+            />
+          </ListItemPrefix>
+          <Typography
+            variant="h2"
+            className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
+            color="blue-gray"
+          >
+            Banners
+          </Typography>
+        </ListItem>
         <br />
+        <ListItem
+          onClick={() => router.push('/marketing')}
+          className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
+        >
+          <ListItemPrefix>
+            <ChatBubbleLeftRightIcon
+              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'}`}
+            />
+          </ListItemPrefix>
+          <Typography
+            variant="h2"
+            className={`lg:text-[18px] ${click ? 'hidden' : 'visible'} `}
+            color="blue-gray"
+          >
+            Coupons
+          </Typography>
+        </ListItem>
+        {/* <br /> */}
+        {/* <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <ListItem className=" hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] pr-[10px] pl-[10px] flex justify-center items-center align-middle ">
+        <br /> */}
+        <ListItem className=" hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] flex justify-center items-center align-middle ">
           <button
             onClick={signOut}
             className="bg-blue-gray-100 text-blue-gray-500 p-2 rounded-md mt-4 "
