@@ -164,7 +164,7 @@ function Sidebar() {
         </ListItem>
         <br />
         <ListItem
-          onClick={() => router.push('/marketing')}
+          onClick={() => router.push('/banners')}
           className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
         >
           <ListItemPrefix>
@@ -182,7 +182,7 @@ function Sidebar() {
         </ListItem>
         <br />
         <ListItem
-          onClick={() => router.push('/marketing')}
+          onClick={() => router.push('/coupons')}
           className=" flex justify-between hover:bg-lightgrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] "
         >
           <ListItemPrefix>
