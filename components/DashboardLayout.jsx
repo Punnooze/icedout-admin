@@ -8,7 +8,6 @@ import ProductStock  from "./ProductStock";
 import Followers from "./Followers";
 import Traffic from "./Traffic";
 
-
 function DashboardLayout() {
   return (
     <div>  

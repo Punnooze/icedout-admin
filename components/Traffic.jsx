@@ -53,7 +53,7 @@ const Traffic = () => {
   ];
 
   return (
-    <div class="pr-3">
+    <div >
     <DashboardCard
       title="Website Traffic"
       action={
@@ -67,7 +67,7 @@ const Traffic = () => {
     >
       <>
         <Typography variant="h3" fontWeight="700" mt="-20px">
-          $6,820
+          Too much traffic
         </Typography>
       </>
     </DashboardCard>

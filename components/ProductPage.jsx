@@ -66,6 +66,7 @@ function ProductPage() {
                 <input
                   type="text"
                   placeholder="Enter SKU"
+                  style={{ textTransform: "uppercase" }}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -77,6 +78,7 @@ function ProductPage() {
                 <input
                   type="text"
                   placeholder="Enter product name"
+                  style={{ textTransform: "uppercase" }}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -89,6 +91,7 @@ function ProductPage() {
                 <input
                   type="text"
                   placeholder="Enter slug"
+                  style={{ textTransform: "uppercase" }}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -100,6 +103,7 @@ function ProductPage() {
                 <input
                   type="text"
                   placeholder="Enter Category"
+                  style={{ textTransform: "uppercase" }}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -111,6 +115,7 @@ function ProductPage() {
                 </label>
                 <input
                   type="text"
+                  style={{ textTransform: "uppercase" }}
                   placeholder="Enter Drop"
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
@@ -123,6 +128,7 @@ function ProductPage() {
                 <input
                   type="number"
                   placeholder="Enter Product Price"
+                  style={{ textTransform: "uppercase" }}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -150,6 +156,7 @@ function ProductPage() {
                 <input
                   type="boolean"
                   placeholder="Yes/No"
+                  style={{ textTransform: "uppercase" }}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -163,6 +170,7 @@ function ProductPage() {
                 <input
                   type="number"
                   placeholder="Enter Discount (if any)"
+                  style={{ textTransform: "uppercase" }}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -174,6 +182,7 @@ function ProductPage() {
                 <input
                   type="text"
                   placeholder="Enter Product Details"
+                  style={{ textTransform: "uppercase" }}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
               </div>
@@ -189,6 +198,7 @@ function ProductPage() {
                     key={index}
                     type="text"
                     value={description}
+                    style={{ textTransform: "uppercase" }}
                     onChange={(e) =>
                       handleDescriptionChange(index, e.target.value)
                     }
@@ -258,6 +268,7 @@ function ProductPage() {
                   type="text"
                   name="featureMessage"
                   value={formValues.featureMessage}
+                  style={{ textTransform: "uppercase" }}
                   onChange={handleInputChange}
                   placeholder="Enter feature Message"
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
