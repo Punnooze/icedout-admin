@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import SearchBar from './SearchBar';
 import Select from './Select';
@@ -7,56 +7,48 @@ import Select from './Select';
 function CustomersCard({ data }) {
   const [searchText, setSearchText] = useState('');
   const [filterColumn, setFilterColumn] = useState('');
-  const rows = data;
-  //    [
-  //     {
-  //       id: 1,
-  //       name: 'Punnoose',
-  //       age: 20,
-  //     },
-  //     {
-  //       id: 2,
-  //       name: 'thejas',
-  //       age: 20,
-  //     },
-  //     {
-  //       id: 3,
-  //       name: 'Punnoose',
-  //       age: 20,
-  //     },
-  //     {
-  //       id: 4,
-  //       name: 'wasimf',
-  //       age: 20,
-  //     },
-  //   ];
+  const [filteredRows, setFilteredRows] = useState('');
+  const [rows, setRows] = useState('');
 
-  console.log(data);
-  console.log(rows);
+  let count = 0;
+  useEffect(() => {
+    if (Array.isArray(data)) {
+      const value = data.map((item) => {
+        count++;
+        return {
+          ...item,
+          id: count,
+        };
+      });
+      setRows(value);
+    }
+  }, [data, count]);
 
   const columns = [
-    { field: 'userId', headerName: 'User Id', width: 100 },
+    { field: 'id', headerName: 'ID', width: 100 },
     {
-      field: 'firstName',
-      headerName: 'First Name',
+      field: 'name',
+      headerName: 'Name',
       width: 150,
       editable: true,
     }, // Allow editing
-    { field: 'lastName', headerName: 'Last Name', width: 150 },
-    { field: 'mobile', headerName: 'Mobile Number', width: 150 },
-    // Add more columns
+    { field: 'email', headerName: 'email', width: 150 },
+    { field: 'whatsapp', headerName: 'Mobile Number', width: 150 },
   ];
 
-  //   if (rows) {
-  //     const filteredRows = rows.filter((row) => {
-  //       return (
-  //         !filterColumn ||
-  //         String(row[filterColumn])
-  //           .toLowerCase()
-  //           .includes(searchText.toLowerCase())
-  //       );
-  //     });
-  //   }
+  useEffect(() => {
+    if (Array.isArray(rows)) {
+      const filteredRows = rows.filter((row) => {
+        return (
+          !filterColumn ||
+          String(row[filterColumn])
+            .toLowerCase()
+            .includes(searchText.toLowerCase())
+        );
+      });
+      if (filteredRows) setFilteredRows(filteredRows);
+    }
+  }, [rows, filterColumn, searchText]);
 
   return (
     <>
@@ -64,42 +56,46 @@ function CustomersCard({ data }) {
         <h1 className="pl-6">Customers</h1>
         <div className="flex justify-center items-center h-[100vh]  w-[100%]">
           <div className=" w-[95%] h-[95%] bg-lightgrey rounded-md shadow-md ">
-            <Select
-              options={['', 'id', 'name', 'age']}
-              value={filterColumn}
-              onChange={(value) => setFilterColumn(value)}
-            />
-            <SearchBar
-              value={searchText}
-              onChange={(value) => setSearchText(value)}
-              placeholder={`Search`}
-            />
-            <div className=" w-[90%] ">
-              <div style={{ height: 500, width: '100%' }}>
-                <DataGrid
-                  getRowId={(row) => row.userId}
-                  sx={{
-                    boxShadow: 2,
-                    border: 2,
-                    backgroundColor: 'Background',
-                    borderRadius: 2,
-                    borderColor: 'primary.light',
-                    '& .MuiDataGrid-cell': {
-                      border: 1,
-                      borderColor: 'primary.main',
-                    },
-                    '& .MuiDataGrid-cell:hover': {
-                      color: 'primary.main',
-                    },
-                  }}
-                  rows={rows}
-                  columns={columns}
-                  //   components={{
-                  //     Toolbar: GridToolbar,
-                  //   }}
-                  //   onEditCellChange={handleEditCellChange} // Handle cell editing
-                  className="border rounded shadow-md " // Apply Tailwind CSS styling
+            <div className="grid grid-cols-2 gap-[20px] p-[10px]">
+              <div className="w-[200px]">
+                <Select
+                  options={['', 'id', 'name', 'email', 'whatsapp']}
+                  value={filterColumn}
+                  onChange={(value) => setFilterColumn(value)}
                 />
+              </div>
+
+              <SearchBar
+                value={searchText}
+                onChange={(value) => setSearchText(value)}
+                placeholder={`Search`}
+              />
+            </div>
+            <div className="flex justify-center items-center mt-[10px]">
+              <div style={{ height: 500, width: '95%' }}>
+                {filteredRows ? (
+                  <DataGrid
+                    sx={{
+                      boxShadow: 2,
+                      border: 2,
+                      backgroundColor: 'Background',
+                      borderRadius: 2,
+                      borderColor: 'primary.light',
+                      '& .MuiDataGrid-cell': {
+                        border: 1,
+                        borderColor: 'primary.main',
+                      },
+                      '& .MuiDataGrid-cell:hover': {
+                        color: 'primary.main',
+                      },
+                    }}
+                    rows={filteredRows}
+                    columns={columns}
+                    className="border rounded shadow-md "
+                  />
+                ) : (
+                  <div>Loading..</div>
+                )}
               </div>
             </div>
           </div>

@@ -10,7 +10,7 @@ export default function page() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch('api/orders', {
+        const res = await fetch('api/customers', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -24,20 +24,20 @@ export default function page() {
     };
     getData();
 
-    setData('hello');
+    // setData('hello');
   }, []);
   return (
     <>
       {data ? (
-      <div className="flex ">
-        <Sidebar />
-        <CustomersCard data={data} />
-      </div>
-       ) : (
+        <div className="flex ">
+          <Sidebar />
+          <CustomersCard data={data} />
+        </div>
+      ) : (
         <div className="h-[100vh] p-[100px] flex items-center ">
           <Image src={logo} alt="logo" />
         </div>
-      )} 
+      )}
     </>
   );
 }
