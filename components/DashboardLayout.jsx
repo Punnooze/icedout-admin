@@ -10,7 +10,7 @@ import DailyEarning from "./DailyEarning";
 function DashboardLayout() {
   return (
     <div>
-      <div className="pl-6 h-[100vh] overflow-y-auto">
+      <div className="ml-[70px] pl-6 h-[100vh] overflow-y-auto bg-background">
         <h1>DASHBOARD</h1>
         <Grid container spacing={3}>
           {/* Row containing Traffic, Followers, Monthly Earnings, and Order Division */}

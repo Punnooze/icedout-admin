@@ -5,10 +5,9 @@ import Coupons from '@/components/Coupons'
 export default function page() {
   return (
     <>
-      <div className='flex'>
-          <Sidebar />
+      
           <Coupons/>
-      </div>
+  
     </>
   )
 }

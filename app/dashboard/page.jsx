@@ -5,7 +5,7 @@ import Sidebar from '@/components/Sidebar';
 function page() {
   return (
     <div className="flex ">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <DashboardLayout />
     </div>
   );

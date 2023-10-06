@@ -1,10 +1,30 @@
 'use client';
 import React, { useState } from 'react';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridToolbarFilterButton,
+  GridToolbarExport,
+} from '@mui/x-data-grid';
 import Select from './Select'; // Custom Select component
 import SearchBar from './SearchBar'; // Custom SearchBar component
 import { TrashIcon } from '@heroicons/react/24/solid';
+import { ThemeOptions } from '@mui/material/styles';
+import MyTable from './Table';
+import DailyEarning from './DailyEarning';
+import OrderDivision from './OrderDivision';
 
+export const themeOptions = {
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#03dac6',
+      light: '#3f51b5',
+    },
+    secondary: {
+      main: '#383d82',
+    },
+  },
+};
 let rows = [
   { id: 1, status: 'completed', col2: 'Data 1' },
   { id: 2, status: 'failed', col2: 'Data 2' },
@@ -59,81 +79,92 @@ function Orders({ data }) {
   };
 
   return (
-    <div className="flex flex-col h-[100vh] w-[100vw]  bg-lightblue  justify-center items-center align-middle">
-      {/* {data && <div>{data}</div>} */}
-      <div className="grid grid-cols-10 gap-[20px] w-[90%] mb-[20px]">
-        <div className="flex flex-col justify-center items-center col-span-3 h-[100%] w-[100%]">
-          <label className='text-[14px] font-normal'>Filter by status</label>
-          <Select
-            options={['', 'completed', 'failed', 'processing']}
-            value={filterStatus}
-            onChange={(value) => setFilterStatus(value)}
-          />
-        </div>
-
-        <div className="flex flex-col justify-center items-center col-span-3 ">
-          <label className='text-[14px] font-normal'>Select column</label>
-          <Select
-            options={['', 'id', 'status', 'col2']}
-            value={filterColumn}
-            onChange={(value) => setFilterColumn(value)}
-          />
-        </div>
-
-        <div className="flex flex-col justify-center items-center col-span-3 w-[100%]">
-          <label className='text-[14px] font-normal'>Searchbar</label>
-          <SearchBar
-            value={searchText}
-            onChange={(value) => setSearchText(value)}
-            placeholder={`Search`}
-          />
-        </div>
-        <div className="w-[100%] h-[100%]">
-          <button
-            className="w-[100%] h-[100%] flex justify-center items-center align-middle"
-            onClick={() => {
-              setFilterColumn('');
-              setFilterStatus('');
-              setSearchText('');
-            }}
-          >
-            <TrashIcon
-              onMouseEnter={() => setEnter(true)}
-              onMouseLeave={() => setEnter(false)}
-              className="w-6 h-6 lg:w-7 lg:h-7 lg:hover:w-8 lg:hover:h-8 duration-100"
-            />
-          </button>
-        </div>
+    <div className="h-[100vh] ml-[70px]">
+      <div className=' h-[200px] '>
+        <OrderDivision />
       </div>
 
-      <div className=" w-[90%] ">
-        <div  style={{ height: 500, width: '100%' }}>
-          <DataGrid
-            sx={{
-              boxShadow: 2,
-              border: 2,
-              backgroundColor : 'Background',
-              borderRadius: 2,
-              borderColor: 'primary.light',
-              '& .MuiDataGrid-cell': {
-                border: 1,
-                borderColor: 'primary.main',
-              },
-              '& .MuiDataGrid-cell:hover': {
-                color: 'primary.main',
-              },
-            }}
-            rows={filteredRows}
-            columns={columns}
-            components={{
-              Toolbar: GridToolbar,
-            }}
-            onEditCellChange={handleEditCellChange} // Handle cell editing
-            className="border rounded shadow-md " // Apply Tailwind CSS styling
-          />
-        </div>
+      <div>
+        <MyTable />
       </div>
     </div>
+    // <div className="flex flex-col ml-[70px] h-[100vh]  bg-background  justify-center items-center align-middle">
+
+    //   <div className="grid bg-darkgrey grid-cols-10 gap-[20px] w-[90%] mb-[20px]">
+    //     <div className="flex flex-col justify-center items-center col-span-3 h-[100%] w-[100%]">
+    //       <label className="text-[14px] font-normal">Filter by status</label>
+    //       <Select
+    //         options={['', 'completed', 'failed', 'processing']}
+    //         value={filterStatus}
+    //         onChange={(value) => setFilterStatus(value)}
+    //       />
+    //     </div>
+
+    //     <div className="flex flex-col justify-center items-center col-span-3 ">
+    //       <label className="text-[14px] font-normal">Select column</label>
+    //       <Select
+    //         options={['', 'id', 'status', 'col2']}
+    //         value={filterColumn}
+    //         onChange={(value) => setFilterColumn(value)}
+    //       />
+    //     </div>
+
+    //     <div className="flex flex-col justify-center items-center col-span-3 w-[100%]">
+    //       <label className="text-[14px] font-normal">Searchbar</label>
+    //       <SearchBar
+    //         value={searchText}
+    //         onChange={(value) => setSearchText(value)}
+    //         placeholder={`Search`}
+    //       />
+    //     </div>
+    //     <div className="w-[100%] h-[100%]">
+    //       <button
+    //         className="w-[100%] h-[100%] flex justify-center items-center align-middle"
+    //         onClick={() => {
+    //           setFilterColumn('');
+    //           setFilterStatus('');
+    //           setSearchText('');
+    //         }}
+    //       >
+    //         <TrashIcon
+    //           onMouseEnter={() => setEnter(true)}
+    //           onMouseLeave={() => setEnter(false)}
+    //           className="w-6 h-6 lg:w-7 lg:h-7 lg:hover:w-8 lg:hover:h-8 duration-100"
+    //         />
+    //       </button>
+    //     </div>
+    //   </div>
+
+    //   {/* <MyTable /> */}
+
+    //   <div className=" w-[90%]  ">
+    //     <div style={{ height: 500, width: '100%' }}>
+    //       <DataGrid
+    //         sx={{
+    //           boxShadow: 2,
+    //           border: 2,
+    //           backgroundColor: 'darkgrey',
+    //           borderRadius: 2,
+    //           borderColor: 'primary.main',
+    //           '& .MuiDataGrid-cell': {
+    //             border: 1,
+    //             borderColor: 'primary.main',
+    //           },
+    //           '& .MuiDataGrid-cell:hover': {
+    //             color: 'secondary.main',
+    //           },
+    //         }}
+    //         rows={filteredRows}
+    //         columns={columns}
+    //         components={{
+    //           Toolbar:  GridToolbarFilterButton
+    //         }}
+    //         onEditCellChange={handleEditCellChange} // Handle cell editing
+    //         className="border rounded shadow-md " // Apply Tailwind CSS styling
+    //       />
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 

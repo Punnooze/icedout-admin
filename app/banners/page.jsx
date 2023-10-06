@@ -1,7 +1,13 @@
-import React from 'react'
+import Sidebar from '@/components/Sidebar';
+import React from 'react';
 
 export default function page() {
   return (
-    <div>Bannersss</div>
-  )
+    <>
+      <div className='flex'>
+        <Sidebar />
+        <div>Bannersss</div>
+      </div>
+    </>
+  );
 }
