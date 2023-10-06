@@ -28,7 +28,7 @@ const OrderDivision = () => {
       toolbar: {
         show: false,
       },
-      height: 155,
+      height: 400,
     },
     colors: [primary, primarylight],
     plotOptions: {
@@ -113,7 +113,7 @@ const OrderDivision = () => {
             series={seriescolumnchart}
             type="pie"
             height="150px"
-            width='100%'
+            width='75%'
           />
         </Grid>
       </Grid>

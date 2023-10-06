@@ -8,40 +8,38 @@ import MenuItem from '@mui/material/MenuItem';
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 function Dashboard() {
-  // select
-  const [month, setMonth] = useState('1');
+   // select
+   const [month, setMonth] = useState('1');
 
-  const handleChange = (event) => {
-    setMonth(event.target.value);
-  };
-
-  // chart color
-  const theme = useTheme(); // Initialize the theme using useTheme
-
-  // Check if theme.palette exists before accessing the mode property
-  const isDarkMode = theme.palette && theme.palette.mode === 'dark';
-
-  const primary = isDarkMode ? '#04122A' : '#04122A';
-  const secondary = '#58B6C3';
-
-  // chart
-  const optionscolumnchart = {
-    chart: {
-      type: 'bar',
-      fontFamily: "'Plus Jakarta Sans', sans-serif;",
-      foreColor: '#adb0bb',
-      toolbar: {
-        show: true,
-      },
-      height: 350,
-      width:400,
-    },
-    colors: [primary, secondary],
+   const handleChange = (event) => {
+     setMonth(event.target.value);
+   };
+ 
+   // chart color
+   const theme = useTheme();
+   const isDarkMode = theme.palette && theme.palette.mode === 'dark';
+ 
+   const primary = isDarkMode ? '#04122A' : '#04122A';
+   const secondary = '#58B6C3';
+ 
+   // chart
+   const optionscolumnchart = {
+     chart: {
+       type: 'bar',
+       fontFamily: "'Plus Jakarta Sans', sans-serif;",
+       foreColor: '#adb0bb',
+       toolbar: {
+         show: true,
+       },
+       height: 350,
+       width: "1325px", // Use the chartWidth variable for responsiveness
+     },
+     colors: [primary, secondary],
     plotOptions: {
       bar: {
-        horizontal: false,
+        horizontal: true,
         barHeight: '70%',
-        columnWidth: '50%',
+        columnWidth: '60%',
         borderRadius: [6],
         borderRadiusApplication: 'end',
         borderRadiusWhenStacked: 'all',
@@ -71,7 +69,7 @@ function Dashboard() {
       tickAmount: 4,
     },
     xaxis: {
-      categories: ['16/08', '17/08', '18/08', '19/08', '20/08', '21/08', '22/08', '23/08'],
+      categories: ['16/08', '17/08', '18/08', '19/08', '20/08', '21/08', '22/08', '23/08', '24/08', '25/08', '26/08', '27/08'],
       axisBorder: {
         show: false,
       },
@@ -84,17 +82,17 @@ function Dashboard() {
   const seriescolumnchart = [
     {
       name: 'Total Sales',
-      data: [355, 390, 300, 350, 390, 180, 355, 390],
+      data: [355, 390, 300, 350, 390, 180, 355, 390,355, 390, 300],
     },
     {
       name: 'Total Revenue',
-      data: [280, 250, 325, 215, 250, 310, 280, 250],
+      data: [280, 250, 325, 215, 250, 310, 280, 250,280, 250, 325],
     },
   ];
 
   return (
     <div>
-      <div class="pl-0">
+      <div class="pl-0 pr-3">
     <DashboardCard title="Sales Overview" action={
       <Select
         labelId="month-dd"
@@ -113,7 +111,7 @@ function Dashboard() {
         series={seriescolumnchart}
         type="area"
         height="425px"
-        width="700px"
+        width="1325px"
       />
     </DashboardCard>
     </div>

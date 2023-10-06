@@ -4,40 +4,33 @@ import { Grid } from '@mui/material';
 import Dashboard from "./Dashboard";
 import MonthlyEarnings from "./MonthlyEarning";
 import OrderDivision from "./OrderDivision";
-import ProductStock  from "./ProductStock";
-import Followers from "./Followers";
-import Traffic from "./Traffic";
+import ProductStock from "./ProductStock";
+import DailyEarning from "./DailyEarning";
 
 function DashboardLayout() {
   return (
-    <div>  
-      <div class="pl-6 h-[100vh] overflow-y-auto">
-      <h1>DASHBOARD</h1>
+    <div>
+      <div className="pl-6 h-[100vh] overflow-y-auto">
+        <h1>DASHBOARD</h1>
         <Grid container spacing={3}>
-          <Grid item xs={12} lg={8}>
+          {/* Row containing Traffic, Followers, Monthly Earnings, and Order Division */}
+          <Grid item xs={12} sm={6} lg={4}>
+            <MonthlyEarnings />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={4}>
+            <OrderDivision />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={4}>
+            <DailyEarning />
+          </Grid>
+
+          {/* Row containing Dashboard */}
+          <Grid item xs={12} lg={12}>
             <Dashboard />
           </Grid>
-          <Grid item xs={12} lg={4}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <OrderDivision />
-              </Grid>
-              <Grid item xs={12}>
-                <MonthlyEarnings />
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} lg={4}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <Traffic />
-              </Grid>
-              <Grid item xs={12}>
-                <Followers />
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} lg={8}>
+          
+          {/* Row containing Product Stock */}
+          <Grid item xs={12} lg={12}>
             <ProductStock />
           </Grid>
         </Grid>

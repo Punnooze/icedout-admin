@@ -8,7 +8,7 @@ import DashboardCard from './DashboardCard';
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const Traffic = () => {
+const DailyEarning = () => {
   // Initialize the theme using useTheme
   const theme = useTheme();
 
@@ -16,13 +16,13 @@ const Traffic = () => {
   const isDarkMode = theme.palette && theme.palette.mode === 'dark';
 
   // chart color
-  const secondary = '#58B6C3';
-  const secondarylight = '#f5fcff';
+  const secondary = '#04122A';
+  const secondarylight = '#04122A';
 
   // chart
   const optionscolumnchart = {
     chart: {
-      type: 'line',
+      type: 'area',
       fontFamily: "'Plus Jakarta Sans', sans-serif;",
       foreColor: '#adb0bb',
       toolbar: {
@@ -36,6 +36,12 @@ const Traffic = () => {
     },
     stroke: {
       curve: 'straight',
+      width: 2,
+    },
+    fill: {
+      colors: [secondarylight],
+      type: 'solid',
+      opacity: 0.05,
     },
     markers: {
       size: 0,
@@ -48,31 +54,36 @@ const Traffic = () => {
     {
       name: '',
       color: secondary,
-      data: [250, 660, 200, 400, 120, 580, 200],
+      data: [25, 66, 20, 40, 12, 58, 20],
     },
   ];
 
   return (
-    <div >
+    <div class="pr-3">
     <DashboardCard
-      title="Website Traffic"
+      title="Daily Earnings"
       action={
         <Fab color="#58B6C3" size="medium">
           <IconCurrencyDollar width={25}/>
         </Fab>
       }
       footer={
-        <Chart options={optionscolumnchart} series={seriescolumnchart} type="line" height="60px" width='100%'/>
+        <Chart options={optionscolumnchart} series={seriescolumnchart} type="area" height="50%" width='100%'/>
       }
     >
       <>
         <Typography variant="h3" fontWeight="700" mt="-20px">
-          Too much traffic
+          $$$
         </Typography>
+        <Stack direction="row" spacing={1} my={1} alignItems="center">
+          <Avatar sx={{ bgcolor: 'lightgreen', width: 27, height: 27 }}>
+            <IconArrowUpRight width={20} color="green" />
+          </Avatar>
+        </Stack>
       </>
     </DashboardCard>
     </div>
   );
 };
 
-export default Traffic;
+export default DailyEarning;
