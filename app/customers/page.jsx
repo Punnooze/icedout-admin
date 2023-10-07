@@ -29,10 +29,7 @@ export default function page() {
   return (
     <>
       {data ? (
-        <div className="flex ">
-          <Sidebar />
-          <CustomersCard data={data} />
-        </div>
+        <CustomersCard data={data} />
       ) : (
         <div className="h-[100vh] p-[100px] flex items-center ">
           <Image src={logo} alt="logo" />

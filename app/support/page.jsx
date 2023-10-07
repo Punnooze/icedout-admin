@@ -4,10 +4,7 @@ import React from 'react';
 export default function page() {
   return (
     <>
-      <div className='flex'>
-          <Sidebar />
-          <div>Support</div>
-      </div>
+      <div className="ml-[70px]">Support</div>
     </>
   );
 }

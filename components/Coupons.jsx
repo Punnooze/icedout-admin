@@ -9,7 +9,7 @@ function Coupons() {
   };
 
   return (
-    <div className="h-[100vh] w-[100vw] overflow-y-auto pl-5 pr-5 ">
+    <div className="h-[100vh] ml-[70px] overflow-y-auto pl-5 pr-5 ">
       <h1 className="font-medium text-black dark:text-white">
         Coupons Creation
       </h1>
