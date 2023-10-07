@@ -36,8 +36,11 @@ function CouponTable({ data }) {
 
   return (
     <div className="flex flex-col h-screen w-screen bg-grey justify-center items-center align-middle">
-      <div className="mt-4">
-        <h1>COUPON TABLE</h1>
+      <div className="mt-4 grid grid-cols-2 align-self gap-4">
+        <h1 className="col-span-1">COUPON TABLE</h1>
+        <div className="col-span-1 flex justify-end">
+          <button onClick={() => router.push('/couponinput')} className="btn btn-primary rounded">Add coupon</button>
+        </div>
       </div>
       <div className="w-90%">
         <div style={{ height: 500, width: 1325 }}>
@@ -54,7 +57,6 @@ function CouponTable({ data }) {
           />
         </div>
       </div>
-      <button onClick={() => router.push('/couponinput')} className=" btn btn-primary rounded ">Add coupon</button>
     </div>
   );
 }
