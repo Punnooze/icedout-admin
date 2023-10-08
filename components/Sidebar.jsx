@@ -32,49 +32,49 @@ function Sidebar() {
   return (
     <Card
       className={`${
-        click ? 'w-[70px]' : 'w-[180px]'
-      } h-[100vh] absolute bg-darkgrey p-2 shadow-xl shadow-blue-gray-900/5 z-30`}
+        click ? 'tw-w-[70px]' : 'tw-w-[180px]'
+      } tw-h-[100vh] tw-absolute tw-bg-darkgrey tw-p-2 tw-shadow-xl tw-shadow-blue-gray-900/5 tw-z-30 tw-overflow-y-auto`}
     >
-      <div className=" mb-2">
-        <div className="w-[100%]  flex justify-end">
+      <div className=" tw-mb-2">
+        <div className="tw-w-[100%]  tw-flex tw-justify-end">
           <button onClick={() => setClick(!click)}>
             {click ? (
-              <ChevronRightIcon className="stroke-[2px] stroke-bluepurple w-5 h-5" />
+              <ChevronRightIcon className="tw-stroke-[2px] tw-stroke-bluepurple tw-w-5 tw-h-5" />
             ) : (
-              <ChevronLeftIcon className="stroke-[2px] stroke-bluepurple w-5 h-5" />
+              <ChevronLeftIcon className="tw-stroke-[2px] tw-stroke-bluepurple tw-w-5 tw-h-5" />
             )}
           </button>
         </div>
 
         <Typography
           variant="h2"
-          className={`lg:text-[18px] ${click ? 'invisible' : 'visible'} `}
+          className={`tw-lg:text-[18px] ${click ? 'tw-invisible' : 'tw-visible'} `}
           color="blue-gray"
         >
           <Image src={logo} alt="logo" width={200} height={100} />
         </Typography>
       </div>
 
-      <List className=" w-[100%] ">
+      <List className=" tw-w-[100%] ">
         <ListItem
           onClick={() => router.push('/dashboard')}
-          className={` flex ${
-            click ? 'justify-center' : 'justify-between'
-          }  items-center align-middle  hover:bg-darkergrey
-           hover:shadow-sm duration-200 rounded-md 
-           ${click ? 'p-[10px]' : 'p-[5px]'} 
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
            `}
         >
           <ListItemPrefix>
             <PresentationChartBarIcon
-              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'} 
-              ${pathname === '/dashboard' ? 'text-teal' : 'text-bluepurple'}`}
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} 
+              ${pathname === '/dashboard' ? 'tw-text-teal' : 'tw-text-bluepurple'}`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
-            className={`text-[18px] ${click ? 'hidden' : 'visible'} ${
-              pathname === '/dashboard' ? 'text-teal' : 'text-bluepurple'
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/dashboard' ? 'tw-text-teal' : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
@@ -84,25 +84,25 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/order')}
-          className={` flex ${
-            click ? 'justify-center' : 'justify-between'
-          }  items-center align-middle  hover:bg-darkergrey
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
         
-           hover:shadow-sm duration-200 rounded-md 
-           ${click ? 'p-[10px]' : 'p-[5px]'} 
+          hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
            `}
         >
           <ListItemPrefix>
             <ShoppingBagIcon
-              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'} ${
-                pathname === '/order' ? 'text-teal' : 'text-bluepurple'
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+                pathname === '/order' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
-            className={`text-[18px] ${click ? 'hidden' : 'visible'} ${
-              pathname === '/order' ? 'text-teal' : 'text-bluepurple'
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/order' ? 'tw-text-teal' : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
@@ -112,24 +112,24 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/customers')}
-          className={` flex ${
-            click ? 'justify-center' : 'justify-between'
-          }  items-center align-middle  hover:bg-darkergrey
-           hover:shadow-sm duration-200 rounded-md 
-           ${click ? 'p-[10px]' : 'p-[5px]'} 
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
            `}
         >
           <ListItemPrefix>
             <UserCircleIcon
-              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'} ${
-                pathname === '/customers' ? 'text-teal' : 'text-bluepurple'
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+                pathname === '/customers' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
-            className={`text-[18px] ${click ? 'hidden' : 'visible'} ${
-              pathname === '/customers' ? 'text-teal' : 'text-bluepurple'
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/customers' ? 'tw-text-teal' : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
@@ -139,24 +139,24 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/products')}
-          className={` flex ${
-            click ? 'justify-center' : 'justify-between'
-          }  items-center align-middle  hover:bg-darkergrey
-           hover:shadow-sm duration-200 rounded-md 
-           ${click ? 'p-[10px]' : 'p-[5px]'} 
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
            `}
         >
           <ListItemPrefix>
             <Cog6ToothIcon
-              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'} ${
-                pathname === '/products' ? 'text-teal' : 'text-bluepurple'
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+                pathname === '/products' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
-            className={`text-[18px] ${click ? 'hidden' : 'visible'} ${
-              pathname === '/products' ? 'text-teal' : 'text-bluepurple'
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/products' ? 'tw-text-teal' : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
@@ -166,24 +166,24 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/support')}
-          className={` flex ${
-            click ? 'justify-center' : 'justify-between'
-          }  items-center align-middle  hover:bg-darkergrey
-           hover:shadow-sm duration-200 rounded-md 
-           ${click ? 'p-[10px]' : 'p-[5px]'} 
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
            `}
         >
           <ListItemPrefix>
             <UserGroupIcon
-              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'} ${
-                pathname === '/support' ? 'text-teal' : 'text-bluepurple'
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+                pathname === '/support' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
-            className={`text-[18px] ${click ? 'hidden' : 'visible'} ${
-              pathname === '/support' ? 'text-teal' : 'text-bluepurple'
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/support' ? 'tw-text-teal' : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
@@ -193,24 +193,24 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/marketing')}
-          className={` flex ${
-            click ? 'justify-center' : 'justify-between'
-          }  items-center align-middle  hover:bg-darkergrey
-           hover:shadow-sm duration-200 rounded-md 
-           ${click ? 'p-[10px]' : 'p-[5px]'} 
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
            `}
         >
           <ListItemPrefix>
             <ChatBubbleLeftRightIcon
-              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'} ${
-                pathname === '/marketing' ? 'text-teal' : 'text-bluepurple'
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+                pathname === '/marketing' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
-            className={`text-[18px] ${click ? 'hidden' : 'visible'} ${
-              pathname === '/marketing' ? 'text-teal' : 'text-bluepurple'
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/marketing' ? 'tw-text-teal' : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
@@ -220,24 +220,24 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/banners')}
-          className={` flex ${
-            click ? 'justify-center' : 'justify-between'
-          }  items-center align-middle  hover:bg-darkergrey
-           hover:shadow-sm duration-200 rounded-md 
-           ${click ? 'p-[10px]' : 'p-[5px]'} 
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
            `}
         >
           <ListItemPrefix>
             <ChatBubbleLeftRightIcon
-              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'} ${
-                pathname === '/banners' ? 'text-teal' : 'text-bluepurple'
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+                pathname === '/banners' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
-            className={`text-[18px] ${click ? 'hidden' : 'visible'} ${
-              pathname === '/banners' ? 'text-teal' : 'text-bluepurple'
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/banners' ? 'tw-text-teal' : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
@@ -247,24 +247,24 @@ function Sidebar() {
         <br />
         <ListItem
           onClick={() => router.push('/coupons')}
-          className={` flex ${
-            click ? 'justify-center' : 'justify-between'
-          }  items-center align-middle  hover:bg-darkergrey
-           hover:shadow-sm duration-200 rounded-md 
-           ${click ? 'p-[10px]' : 'p-[5px]'} 
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
            `}
         >
           <ListItemPrefix>
             <ChatBubbleLeftRightIcon
-              className={`${click ? 'h-6' : 'h-5'} ${click ? 'w-6' : 'w-5'} ${
-                pathname === '/coupons' ? 'text-teal' : 'text-bluepurple'
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+                pathname === '/coupons' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
-            className={`text-[18px] ${click ? 'hidden' : 'visible'} ${
-              pathname === '/coupons' ? 'text-teal' : 'text-bluepurple'
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/coupons' ? 'tw-text-teal' : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
@@ -275,21 +275,21 @@ function Sidebar() {
         {/* <br />
         <br />
         <br /> */}
-        <ListItem className=" hover:bg-darkergrey hover:shadow-sm duration-200 rounded-md p-[5px] px-[10px] flex justify-center items-center align-middle mt-[20px] ">
+        <ListItem className=" hover:tw-bg-darkergrey hover:tw-shadow-sm tw-duration-200 tw-rounded-md tw-p-[5px] tw-px-[10px] tw-flex tw-justify-center tw-items-center tw-align-middle tw-mt-[20px] ">
           <button
             onClick={signOut}
-            className=" p-[10px] rounded-md flex justify-center items-center align-middle "
+            className=" tw-p-[10px] tw-rounded-md tw-flex tw-justify-center tw-items-center tw-align-middle "
           >
             <PowerIcon
-              className={`h-6 w-6 ${
-                click ? 'visible' : 'hidden'
-              } stroke-bluepurple text-bluepurple `}
+              className={`tw-h-6 tw-w-6 ${
+                click ? 'tw-visible' : 'tw-hidden'
+              } tw-stroke-bluepurple tw-text-bluepurple `}
             />
             <Typography
               variant="h2"
-              className={`text-[18px] ${
-                click ? 'hidden' : 'visible'
-              } text-bluepurple`}
+              className={`tw-text-[18px] ${
+                click ? 'tw-hidden' : 'tw-visible'
+              } tw-text-bluepurple`}
               color="blue-gray"
             >
               Logout

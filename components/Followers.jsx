@@ -7,7 +7,7 @@ import DashboardCard from "./DashboardCard";
 const Followers = () => {
 
   return (
-    <div class="pr-3">
+    <div class="tw-pr-3">
     <DashboardCard title="Instagram Followers" action={
         <Fab color="#58B6C3" size="medium">
           <IconBrandInstagram width={25}/>

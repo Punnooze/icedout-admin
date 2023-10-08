@@ -12,6 +12,8 @@ import { ThemeOptions } from '@mui/material/styles';
 import MyTable from './Table';
 import DailyEarning from './DailyEarning';
 import OrderDivision from './OrderDivision';
+import NumberCard from './NumberCard';
+import { PieChart } from '@mui/x-charts/PieChart';
 
 export const themeOptions = {
   palette: {
@@ -79,19 +81,48 @@ function Orders({ data }) {
   };
 
   return (
-    <div className="h-[100vh] ml-[70px]">
-      <div className=' h-[200px] '>
+    <div className="tw-h-[100vh] tw-ml-[70px] tw-bg-background tw-flex tw-flex-col tw-items-center tw-align-middle">
+      {/* <div className=' h-[200px] '>
         <OrderDivision />
+      </div> */}
+      <div className=" tw-grid md:tw-grid-cols-7 tw-grid-cols-2 tw-gap-[20px] md:tw-gap-0 tw-ml-[70px] tw-mr-[70px] md:tw-mr-0 md:tw-ml-0 tw-p-[20px] tw-w-[90vw] md:tw-w-[95vw] ">
+        <div className="tw-col-start-1 md:tw-col-start-2">
+          <NumberCard header="Total Sales" number="3000" />
+        </div>
+
+        <div className="tw-col-start-2 md:tw-col-start-4">
+          <NumberCard header="Live orders" number="120" />
+        </div>
+        {/* <PieChartCard /> */}
+        <div
+          className="tw-hidden md:tw-visible tw-row-start-2 md:tw-row-start-1 md:tw-col-start-6 tw-w-[200px] tw-h-[110px] tw-bg-darkergrey md:tw-flex tw-justify-center tw-items-center tw-align-middle tw-p-[10px] tw-rounded-md"
+          tw-
+        >
+          <PieChart
+            series={[
+              {
+                data: [
+                  { id: 0, value: 100, label: 'Dispatchd' },
+                  { id: 1, value: 250, label: 'Processng' },
+                  { id: 2, value: 200, label: 'Failed' },
+                ],
+              },
+            ]}
+            width={350}
+            height={175}
+          />
+        </div>
       </div>
 
-      <div>
-        <MyTable />
+      <div className="  tw-bg-darkergrey tw-rounded-md tw-tw-shadmd tw- tw-flex tw-justify-center tw-items-center tw-align-middle">
+        {/* <div className='w-[100%] h-[100%] bg-lightpurple'>hello</div> */}
+        <MyTable data={data} />
       </div>
     </div>
     // <div className="flex flex-col ml-[70px] h-[100vh]  bg-background  justify-center items-center align-middle">
 
     //   <div className="grid bg-darkgrey grid-cols-10 gap-[20px] w-[90%] mb-[20px]">
-    //     <div className="flex flex-col justify-center items-center col-span-3 h-[100%] w-[100%]">
+    //     <div className="flex flex-col justify-center items-center col-span-3 h-[100%] w-[100%]
     //       <label className="text-[14px] font-normal">Filter by status</label>
     //       <Select
     //         options={['', 'completed', 'failed', 'processing']}
@@ -135,7 +166,7 @@ function Orders({ data }) {
     //     </div>
     //   </div>
 
-    //   {/* <MyTable /> */}
+    //   {/*<div> <MyTable /></div> */}
 
     //   <div className=" w-[90%]  ">
     //     <div style={{ height: 500, width: '100%' }}>
@@ -160,7 +191,7 @@ function Orders({ data }) {
     //           Toolbar:  GridToolbarFilterButton
     //         }}
     //         onEditCellChange={handleEditCellChange} // Handle cell editing
-    //         className="border rounded shadow-md " // Apply Tailwind CSS styling
+    //         className="border rounded shadmd tw-" // Apply Tailwind CSS styling
     //       />
     //     </div>
     //   </div>

@@ -53,93 +53,93 @@ function ProductPage() {
   };
 
   return (
-    <div className="h-[100vh] ml-[70px] overflow-y-auto pl-5 pr-5 ">
-      <h1 className="font-medium text-black dark:text-white">Products Form</h1>
-      <div className="bg-lightgrey rounded-md shadow-md hover:shadow-lg duration-200 mb-[30px] ">
+    <div className="tw-h-[100vh] tw-ml-[70px] tw-overflow-y-auto tw-pl-5 tw-pr-5 ">
+      <h1 className="tw-font-medium tw-text-black tw-dark:text-white">Products Form</h1>
+      <div className="tw-bg-lightgrey tw-rounded-md tw-shadow-md tw-hover:shadow-lg tw-duration-200 tw-mb-[30px] ">
         <form action="#" onSubmit={handleSubmit}>
-          <div className="p-6.5">
-            <div className="mb-4.5 flex space-x-4">
+          <div className="tw-p-6.5">
+            <div className="tw-mb-4.5 tw-flex tw-space-x-4">
               <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   SKU
                 </label>
                 <input
                   type="text"
                   placeholder="Enter SKU"
                   style={{ textTransform: "uppercase" }}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
               </div>
 
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Name
                 </label>
                 <input
                   type="text"
                   placeholder="Enter product name"
                   style={{ textTransform: "uppercase" }}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
               </div>
             </div>
-            <div className="mb-4.5 flex space-x-4">
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+            <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Slug
                 </label>
                 <input
                   type="text"
                   placeholder="Enter slug"
                   style={{ textTransform: "uppercase" }}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
               </div>
 
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Category
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Category"
                   style={{ textTransform: "uppercase" }}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
               </div>
             </div>
-            <div className="mb-4.5 flex space-x-4">
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+            <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Drop
                 </label>
                 <input
                   type="text"
                   style={{ textTransform: "uppercase" }}
                   placeholder="Enter Drop"
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
               </div>
 
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Price
                 </label>
                 <input
                   type="number"
                   placeholder="Enter Product Price"
                   style={{ textTransform: "uppercase" }}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
               </div>
             </div>
 
-            <div className="mb-4.5 flex space-x-4">
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+            <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Select Size
                 </label>
-                <select className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                <select className="tw-relative tw-z-20 tw-w-full tw-appearance-none tw-rounded tw-border tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary">
                   <option placeholder="Select"></option>
                   <option value="">S</option>
                   <option value="">M</option>
@@ -149,48 +149,48 @@ function ProductPage() {
                 </select>
               </div>
 
-              <div className="w-1/2 relative z-20 bg-transparent dark:bg-form-input">
-                <label className="mb-2.5 block text-black dark:text-white">
+              <div className="tw-w-1/2 relative z-20 bg-transparent dark:bg-form-input">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Stock
                 </label>
                 <input
                   type="boolean"
                   placeholder="Yes/No"
                   style={{ textTransform: "uppercase" }}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
               </div>
             </div>
 
-            <div className="mb-4.5 flex space-x-4">
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+            <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Discount
                 </label>
                 <input
                   type="number"
                   placeholder="Enter Discount (if any)"
                   style={{ textTransform: "uppercase" }}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
               </div>
 
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Details
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Product Details"
                   style={{ textTransform: "uppercase" }}
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
               </div>
             </div>
 
-            <div className="mb-4.5 flex space-x-4">
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+            <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Description
                 </label>
                 {formValues.descriptions.map((description, index) => (
@@ -203,27 +203,27 @@ function ProductPage() {
                       handleDescriptionChange(index, e.target.value)
                     }
                     placeholder={`Enter Description ${index + 1}`}
-                    className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                   />
                 ))}
                 {formValues.descriptionCount < 5 && (
                   <button
                     type="button"
                     onClick={handleAddDescriptionField}
-                    className="text-primary hover:underline"
+                    className="tw-text-primary tw-hover:underline"
                   >
                     Add Description Field
                   </button>
                 )}
               </div>
 
-              <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Attached Image
                 </label>
                 <input
                   type="file"
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary tw-file:mr-4 tw-file:py-2 tw-file:px-4 tw-file:rounded-full tw-file:border-0 tw-file:text-sm tw-file:font-semibold"
                   multiple="multiple"
                   accept="image/jpeg, image/png, image/jpg"
                 />
@@ -231,9 +231,9 @@ function ProductPage() {
               </div>
             </div>
 
-            <div className="mb-4.5 flex space-x-4">
-            <div className="w-1/2">
-                <label className="mb-2.5 block text-black dark:text-white">
+            <div classNametw-="mb-4.tw-5 tw-flex space-x-4">
+            <div className="tw-w-1/2">
+                <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                   Is Feature
                 </label>
                 <input
@@ -260,8 +260,8 @@ function ProductPage() {
             {/* Conditionally render the Feature Message input */}
             {formValues.isFeature === "YES" && (
               <div className="w-1/2">
-                <div className="">
-                  <label className="mb-2.5 block text-black dark:text-white">
+                <div classNtw-ame="">
+                  <label className="tw-mb-2.5 tw-block tw-text-black tw-dark:text-white">
                     Feature Message
                   </label>
                   <input
@@ -271,7 +271,7 @@ function ProductPage() {
                   style={{ textTransform: "uppercase" }}
                   onChange={handleInputChange}
                   placeholder="Enter feature Message"
-                  className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                  className="tw-w-full tw-rounded tw-border-[1.5px] tw-border-stroke tw-bg-transparent tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-transition tw-focus:border-primary tw-active:border-primary tw-disabled:cursor-default tw-disabled:bg-whiter tw-dark:border-form-strokedark tw-dark:bg-form-input tw-dark:focus:border-primary"
                 />
                 </div>
               </div>
@@ -279,7 +279,7 @@ function ProductPage() {
             </div>
             <br/>
             
-            <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
+            <button className="tw-flex tw-w-full tw-justify-center tw-rounded tw-bg-primary tw-p-3 tw-font-medium tw-text-gray">
               Add Product
             </button>
           </div>

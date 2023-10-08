@@ -2,11 +2,11 @@ import React from 'react';
 
 const SearchBar = ({ value, onChange, placeholder }) => {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="tw-flex tw-items-center tw-space-x-2">
 
       <input
         type="text"
-        className="border rounded-md w-[100%] px-2 py-1"
+        className="tw-border tw-rounded-md tw-w-[100%] tw-px-2 tw-tw-py-1"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}

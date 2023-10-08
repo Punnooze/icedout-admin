@@ -31,7 +31,7 @@ export default function page() {
       {data ? (
         <CustomersCard data={data} />
       ) : (
-        <div className="h-[100vh] p-[100px] flex items-center ">
+        <div className="tw-h-[100vh] tw-p-[100px] tw-flex tw-items-center ">
           <Image src={logo} alt="logo" />
         </div>
       )}

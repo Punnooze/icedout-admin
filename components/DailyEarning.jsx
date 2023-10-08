@@ -59,7 +59,7 @@ const DailyEarning = () => {
   ];
 
   return (
-    <div class="pr-3">
+    <div class="tw-pr-3">
     <DashboardCard
       title="Daily Earnings"
       action={

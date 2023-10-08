@@ -68,7 +68,7 @@ const OrderDivision = () => {
   const seriescolumnchart = [2000,1000];
 
   return (
-    <div class="pr-3">
+    <div class="tw-pr-3">
     <DashboardCard title="Total Orders">
       <Grid container spacing={3}>
         {/* column */}

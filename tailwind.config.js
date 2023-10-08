@@ -1,5 +1,5 @@
 module.exports = {
-  // prefix: 'tw-',
+  prefix: 'tw-',
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -48,6 +48,10 @@ module.exports = {
         'h2-sm': '1.4rem',
         'body-sm': '0.85rem',
         'footer-sm': '0.6rem',
+      },
+
+      width: {
+        'vw-minus-70': 'calc(100vw-70px)',
       },
     },
   },

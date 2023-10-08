@@ -92,7 +92,7 @@ function Dashboard() {
 
   return (
     <div>
-      <div class="pl-0 pr-3">
+      <div class="tw-pl-0 tw-pr-3">
     <DashboardCard title="Sales Overview" action={
       <Select
         labelId="month-dd"

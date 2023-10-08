@@ -5,7 +5,7 @@ import Coupons from '@/components/Coupons'
 export default function page() {
   return (
     <>
-      <div className='flex'>
+      <div className='tw-flex'>
           <Sidebar />
           <Coupons/>
       </div>

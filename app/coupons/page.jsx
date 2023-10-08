@@ -5,7 +5,7 @@ import CouponTable from '@/components/CouponTable'
 export default function page() {
   return (
     <>
-      <div className='flex'>
+      <div className='tw-flex'>
           <CouponTable/>
       </div>
     </>

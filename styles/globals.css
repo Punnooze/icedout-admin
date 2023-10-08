@@ -9,17 +9,17 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #1f1f1f;
+  background: #363535;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #58c6d4;
+  background: #1f1f1f;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #b7b8ba;
 }
 
 @layer base {
@@ -49,7 +49,7 @@
   img {
     max-height: 100%;
   }
-  @media only screen and (min-width: 1024px) {
+  /* @media only screen and (min-width: 1024px) {
     h1 {
       font-size: theme('fontSize.h1-xl');
     }
@@ -60,7 +60,7 @@
     p {
       font-size: theme('fontSize.body-xl');
     }
-  }
+  } */
 
   /* ... */
 }
@@ -73,6 +73,103 @@
   font-family: 'lato', sans-serif;
 } */
 
+/*  */
+/* App.css (or your preferred CSS/SCSS file) */
+
+/* Apply Poppins font to the entire DataGrid component */
+.MuiDataGrid-root {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Background and text color for the header */
+/* .headerStyles {
+  background-color: #363535;
+  color: #58c6d4;
+} */
+
+/* Text color for the cells */
+.MuiDataGrid-cell {
+  color: #b7b8ba;
+}
+
+/* Background color for selected rows */
+.selected-row {
+  background-color: #707070 !important;
+}
+
+/* Color for GridToolbar icons */
+
+.custom-header {
+  background-color: #363535 !important;
+  color: #03dac6 !important;
+}
+
+.custom-toolbar {
+  background-color: #363535 !important;
+  color: #ffffff !important; /* You can set the text color here if needed */
+}
+
+.custom-scrollbar {
+  /* Width and styles for WebKit browsers (Chrome, Safari) */
+  ::-webkit-scrollbar {
+    width: 12px; /* Adjust the width as needed */
+  }
+
+  /* Thumb (draggable part of the scrollbar) */
+  ::-webkit-scrollbar-thumb {
+    background-color: #bb86fc;
+    border-radius: 6px;
+  }
+
+  /* Background of the scroll wheel */
+  ::-webkit-scrollbar-track {
+    background-color: #1f1f1f;
+  }
+}
+
+body::-webkit-scrollbar {
+  width: 5px;
+  background-color: #1f1f1f;
+}
+
+/* Set the color of the thumb */
+body::-webkit-scrollbar-thumb {
+  background-color: #bb86fc;
+  border-radius: 2px; /* Make the thumb rounded */
+}
+
+/* Custom CSS for DataGrid
+.MuiDataGrid-root {
+  border: 1px solid #4f4f4f;
+  font-family: 'Poppins', sans-serif;
+}
+
+.MuiDataGrid-colCell {
+  background-color: #4f4f4f;
+  color: white;
+  font-weight: bold;
+}
+
+.MuiDataGrid-row {
+  border-bottom: 1px solid #b7b8ba;
+}
+
+.MuiDataGrid-window {
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #1f1f1f;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #9081e5;
+    border-radius: 6px;
+  }
+} */
+
+/*  */
 @font-face {
   font-family: 'syne';
   src: url('fonts/SyneMono-Regular.woff') format('woff');
@@ -110,7 +207,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 
 *,
 *::after,

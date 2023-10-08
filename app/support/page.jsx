@@ -4,7 +4,7 @@ import React from 'react';
 export default function page() {
   return (
     <>
-      <div className="ml-[70px]">Support</div>
+      <div className="tw-ml-[70px]">Support</div>
     </>
   );
 }

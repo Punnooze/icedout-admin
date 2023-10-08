@@ -55,12 +55,12 @@ function CustomersCard({ data }) {
 
   return (
     <>
-      <div className="ml-[70px] bg-background h-[100vh] overflow-y-auto flex flex-col">
-        <h1 className="pl-6">Customers</h1>
-        <div className="flex justify-center items-center h-[100vh]  w-[100%]">
-          <div className=" w-[95%] h-[95%] bg-darkergrey rounded-md shadow-md ">
-            <div className="grid grid-cols-2 gap-[20px] p-[10px]">
-              <div className="w-[200px]">
+      <div className="tw-ml-[70px] tw-bg-background tw-h-[100vh] tw-overflow-y-auto tw-flex tw-flex-col">
+        <h1 className="tw-pl-6">Customers</h1>
+        <div className="tw-flex tw-justify-center tw-items-center tw-h-[100vh]  tw-w-[100%]">
+          <div className=" tw-w-[95%] tw-h-[95%] tw-bg-darkergrey tw-rounded-md tw-shadow-md ">
+            <div className="tw-grid tw-grid-cols-2 tw-gap-[20px] tw-p-[10px]">
+              <div className="tw-w-[200px]">
                 <Select
                   options={['', 'id', 'name', 'email', 'whatsapp']}
                   value={filterColumn}
@@ -76,22 +76,22 @@ function CustomersCard({ data }) {
             </div>
             {selectedRow && click && (
               <button onClick={() => setDlt(!dlt)}>
-                <TrashIcon className="w-5 h-6" />
+                <TrashIcon className="tw-w-5 tw-h-6" />
               </button>
             )}
 
             {dlt && (
-              <div className="absolute z-30 bg-grey inset-[40%] w-[300px] h-[300px]">
+              <div className="tw-absolute tw-z-30 tw-bg-grey tw-inset-[40%] tw-w-[300px] tw-h-[300px]">
                 <p>Delete details of {selectedRow.name}</p>
                 <p>press to confirm</p>
                 <button>
-                  <TrashIcon className="w-5 h-5" />
+                  <TrashIcon className="tw-w-5 tw-h-5" />
                 </button>
               </div>
             )}
 
             <div
-              className="flex justify-center items-center mt-[10px]"
+              className="tw-flex tw-justify-center tw-items-center tw-mt-[10px]"
               // onClick={() => setSelectedRow(null)}
             >
               <div style={{ height: 500, width: '90%' }}>
@@ -122,7 +122,7 @@ function CustomersCard({ data }) {
                         // Set the selected row
                       }
                     }}
-                    className="border rounded shadow-md "
+                    className="tw-border tw-rounded tw-shadow-md "
                   />
                 ) : (
                   <div>Loading..</div>

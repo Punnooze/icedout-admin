@@ -16,7 +16,7 @@ import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
-import NoLayout from './Nolayout';
+// import NoLayout from './Nolayout';
 
 function Login() {
   const [name, setName] = useState('');
@@ -60,19 +60,19 @@ function Login() {
 
   return (
     <>
-      <NoLayout>
-        <div className="flex justify-center items-center bg-background h-[100vh] w-[100vw] inset-0 ">
-          <div
-            className="bg-darkgrey rounded-md flex items-center flex-col  p-[30px] shadow-md hover:shadow-lg duration-300 
+      {/* <NoLayout> */}
+      <div className="tw-flex tw-justify-center tw-items-center tw-bg-background tw-h-[100vh] tw-w-[100vw] tw-inset-0 ">
+        <div
+          className="tw-bg-darkgrey tw-rounded-md tw-flex tw-items-center tw-flex-col  tw-p-[30px] tw-shadow-md tw-hover:shadow-lg tw-duration-300 
     
-        inset-[-50%] md:inset-0 "
+            tw-inset-[-50%] tw-md:inset-0 "
+        >
+          <h1 className="tw-text-white tw-font-lato">Login</h1>
+          <form
+            className=" tw-mt-[10px] tw-flex tw-flex-col  tw-items-center "
+            onSubmit={handleSubmit}
           >
-            <h1 className="text-white font-lato">Login</h1>
-            <form
-              className=" mt-[10px] flex flex-col  items-center "
-              onSubmit={handleSubmit}
-            >
-              {/* <div className="flex flex-col mb-[20px]">
+            {/* <div className="flex flex-col mb-[20px]">
               <label className="text-[12px] font-medium text-lightgrey font-poppins">
                 Name
               </label>
@@ -83,7 +83,7 @@ function Login() {
                 placeholder="Name"
               />
             </div> */}
-              {/* <div className="flex flex-col mb-[20px]">
+            {/* <div className="flex flex-col mb-[20px]">
               <label className="text-[12px] font-medium text-lightgrey">
                 Password
               </label>
@@ -94,36 +94,36 @@ function Login() {
                 placeholder="Password"
               />
             </div> */}
-              {/* <FormControl
+            {/* <FormControl
               sx={{ m: 1, width: '25ch' }}
               variant="outlined"
               onSubmit={handleSubmit}
               className=""
             > */}
-              <TextField
-                id="outlined-basic"
-                label="Username"
-                variant="outlined"
-                className="shadow-sm hover:shadow-md mt-[20px]"
-                onChange={(e) => setName(e.target.value)}
-              />
-              <TextField
-                id="outlined-password-input"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                className="my-[20px]"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {/* </FormControl> */}
+            <TextField
+              id="outlined-basic"
+              label="Username"
+              variant="outlined"
+              className="tw-shadow-sm tw-hover:shadow-md tw-mt-[20px]"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <TextField
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              className="tw-my-[20px]"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {/* </FormControl> */}
 
-              <button className=" bg-lightgrey text-darkgrey hover:text-white w-[100px] text-[#ffff] rounded-md h-[30px] hover:bg-violet hover:shadow-sm ">
-                Submit
-              </button>
-            </form>
-          </div>
+            <button className=" tw-bg-lightgrey tw-text-darkgrey hover:tw-text-white tw-w-[100px] tw-text-[#ffff] tw-rounded-md tw-h-[30px] hover:tw-bg-violet tw-hover:shadow-sm ">
+              Submit
+            </button>
+          </form>
         </div>
-      </NoLayout>
+      </div>
+      {/* </NoLayout> */}
     </>
   );
 }
