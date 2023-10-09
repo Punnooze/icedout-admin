@@ -53,9 +53,10 @@ function ProductPage() {
   };
 
   return (
-    <div className="tw-h-[100vh] tw-ml-[70px] tw-overflow-y-auto tw-pl-5 tw-pr-5 ">
-      <h1 className="tw-font-medium tw-text-black tw-dark:text-white">Products Form</h1>
-      <div className="tw-bg-lightgrey tw-rounded-md tw-shadow-md tw-hover:shadow-lg tw-duration-200 tw-mb-[30px] ">
+    <div className="tw-h-[100vh] tw-bg-background tw-w-[100%]  tw-ml-[70px] tw-overflow-y-auto tw-pl-5 tw-pr-5 ">
+      <h1 className="tw-font-medium tw-text-black dark:tw-text-white">
+        Products Form</h1>
+      <div className="tw-bg-grey tw-rounded-md tw-shadow-md tw-hover:shadow-lg tw-duration-200 tw-mb-[30px] ">
         <form action="#" onSubmit={handleSubmit}>
           <div className="tw-p-6.5">
             <div className="tw-mb-4.5 tw-flex tw-space-x-4">
@@ -279,7 +280,7 @@ function ProductPage() {
             </div>
             <br/>
             
-            <button className="tw-flex tw-w-full tw-justify-center tw-rounded tw-bg-primary tw-p-3 tw-font-medium tw-text-gray">
+            <button className="tw-flex tw-w-full tw-justify-center tw-rounded tw-bg-bluepurple tw-p-3 tw-font-medium tw-text-gray">
               Add Product
             </button>
           </div>

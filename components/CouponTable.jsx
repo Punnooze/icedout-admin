@@ -37,11 +37,11 @@ function CouponTable({ data }) {
   return (
     <div className="tw-flex tw-flex-col tw-h-screen tw-ml-[70px] tw-w-[100%] tw-bg-background tw-justify-center tw-items-center tw-align-middle">
       <div className="tw-mt-4 tw-grid tw-grid-cols-2 tw-align-self tw-gap-4">
-        <h1 className="tw-col-span-1">COUPON TABLE</h1>
+        <h1 className="tw-col-span-1 tw-text-white">COUPON TABLE</h1>
         <div className="tw-col-span-1 tw-flex tw-justify-end">
           <button
             onClick={() => router.push('/couponinput')}
-            className="tw-btn tw-btn-primary tw-rounded"
+            className="tw-btn tw-bg-bluepurple tw-rounded"
           >
             Add coupon
           </button>
