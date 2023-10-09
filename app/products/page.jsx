@@ -1,4 +1,5 @@
-import ProductPage from '@/components/ProductPage';
+
+import ProductTable from '@/components/ProductTable';
 import Sidebar from '@/components/Sidebar';
 import React from 'react';
 
@@ -6,7 +7,7 @@ export default function page() {
   return (
     <>
 
-         <ProductPage />
+         <ProductTable />
 
     </>
   );
