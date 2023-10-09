@@ -446,13 +446,8 @@ const MyTable = ({ data }) => {
               </div>
             </ThemeProvider>
           )}
-          <Dialog
-            open={isEditModalOpen}
-            onClose={closeModals}
-            maxWidth="xs"
-            fullWidth
-          >
-            <div className="tw-bg-darkgrey tw-p-[15px]">
+          <Dialog open={isEditModalOpen} onClose={closeModals} maxWidth="xs">
+            <div className="tw-bg-darkgrey tw-p-[15px] tw-w-[300px] ">
               <h3 className="tw-text-[20px] tw-text-teal tw-mb-[10px]">
                 Edit Order Status
               </h3>
@@ -493,13 +488,8 @@ const MyTable = ({ data }) => {
             </div>
           </Dialog>
 
-          <Dialog
-            open={isDeleteModalOpen}
-            onClose={closeModals}
-            maxWidth="xs"
-            fullWidth
-          >
-            <div className="tw-bg-darkgrey tw-p-[15px]">
+          <Dialog open={isDeleteModalOpen} onClose={closeModals} maxWidth="xs">
+            <div className="tw-bg-darkgrey tw-p-[15px] tw-w-[300px]">
               <h3 className="tw-text-[20px] tw-text-teal tw-mb-[10px]">
                 Delete Order
               </h3>
@@ -540,13 +530,8 @@ const MyTable = ({ data }) => {
             </div>
           </Dialog>
 
-          <Dialog
-            open={isEmailModalOpen}
-            onClose={closeModals}
-            maxWidth="xs"
-            fullWidth
-          >
-            <div className="tw-bg-darkgrey tw-p-[15px]">
+          <Dialog open={isEmailModalOpen} onClose={closeModals} maxWidth="xs">
+            <div className="tw-bg-darkgrey tw-p-[15px] tw-w-[300px]">
               <h3 className="tw-text-[20px] tw-text-teal tw-mb-[10px]">
                 Email User
               </h3>
