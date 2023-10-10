@@ -47,22 +47,22 @@ const ProductStock = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>
-                                <Typography variant="subtitle2" fontWeight={600}>
+                                <Typography variant="subtitle2" fontWeight={1000}>
                                     Sr. No.
                                 </Typography>
                             </TableCell>
                             <TableCell>
-                                <Typography variant="subtitle2" fontWeight={600}>
+                                <Typography variant="subtitle2" fontWeight={1000}>
                                     Product
                                 </Typography>
                             </TableCell>
                             <TableCell>
-                                <Typography variant="subtitle2" fontWeight={600}>
+                                <Typography variant="subtitle2" fontWeight={1000}>
                                     Drop
                                 </Typography>
                             </TableCell>
                             <TableCell>
-                                <Typography variant="subtitle2" fontWeight={600}>
+                                <Typography variant="subtitle2" fontWeight={1000}>
                                     Stock Priority
                                 </Typography>
                             </TableCell>

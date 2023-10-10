@@ -46,10 +46,10 @@ const OrderDivision = () => {
       fillSeriesColor: false,
     },
     stroke: {
-      show: false,
+      show: true,
     },
     dataLabels: {
-      enabled: false,
+      enabled: true,
     },
     legend: {
       show: false,
