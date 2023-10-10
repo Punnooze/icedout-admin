@@ -24,7 +24,6 @@ export default function page() {
     };
     getData();
 
-    setData('hello');
   }, []);
   return (
     <>

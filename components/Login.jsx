@@ -18,6 +18,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 // import NoLayout from './Nolayout';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 function Login() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -25,11 +27,23 @@ function Login() {
 
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#bb86fc',
+        light: '#383d82', // Color for GridToolbar icons
+      },
+      secondary: {
+        main: '#363535', // Background color for column header
+      },
+    },
+  });
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  // const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  // const handleMouseDownPassword = (event) => {
+  //   event.preventDefault();
+  // };
 
   //   const toastOptions = {
   //     position: 'bottom-right',
@@ -67,54 +81,38 @@ function Login() {
     
             tw-inset-[-50%] tw-md:inset-0 "
         >
-          <h1 className="tw-text-white tw-font-lato">Login</h1>
+          <h1 className="tw-text-teal tw-font-lato">Login</h1>
           <form
             className=" tw-mt-[10px] tw-flex tw-flex-col  tw-items-center "
             onSubmit={handleSubmit}
           >
-            {/* <div className="flex flex-col mb-[20px]">
-              <label className="text-[12px] font-medium text-lightgrey font-poppins">
-                Name
-              </label>
-              <input
-                className="rounded-sm hover:shadow-md shadow-sm  outline-none md:w-[250px] h-[30px] p-[5px] focus:border-[2px] border-violet"
+            <ThemeProvider theme={theme}>
+              <TextField
+                id="outlined-basic"
+                label="Username"
+                variant="outlined"
+                className="tw-shadow-sm tw-hover:shadow-md tw-text-lightgrey tw-mt-[20px]"
                 onChange={(e) => setName(e.target.value)}
-                type="text"
-                placeholder="Name"
+                sx={{
+                  input: {
+                    color: '#b7b8ba',
+                  },
+                }}
               />
-            </div> */}
-            {/* <div className="flex flex-col mb-[20px]">
-              <label className="text-[12px] font-medium text-lightgrey">
-                Password
-              </label>
-              <input
-                className="rounded-sm hover:shadow-md shadow-sm  outline-none md:w-[250px] h-[30px] p-[5px] focus:border-[2px] border-violet"
-                onChange={(e) => setPassword(e.target.value)}
+              <TextField
+                id="outlined-password-input"
+                label="Password"
                 type="password"
-                placeholder="Password"
+                autoComplete="current-password"
+                className="tw-my-[20px]"
+                onChange={(e) => setPassword(e.target.value)}
+                sx={{
+                  input: {
+                    color: '#b7b8ba',
+                  },
+                }}
               />
-            </div> */}
-            {/* <FormControl
-              sx={{ m: 1, width: '25ch' }}
-              variant="outlined"
-              onSubmit={handleSubmit}
-              className=""
-            > */}
-            <TextField
-              id="outlined-basic"
-              label="Username"
-              variant="outlined"
-              className="tw-shadow-sm tw-hover:shadow-md tw-mt-[20px]"
-              onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              className="tw-my-[20px]"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            </ThemeProvider>
             {/* </FormControl> */}
 
             <button className=" tw-bg-lightgrey tw-text-darkgrey hover:tw-text-white tw-w-[100px] tw-text-[#ffff] tw-rounded-md tw-h-[30px] hover:tw-bg-violet tw-hover:shadow-sm ">

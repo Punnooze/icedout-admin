@@ -1,37 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import CssBaseline from '@mui/material/CssBaseline';
 import '../styles/globals.css';
 
-import {
-  IconButton,
-  Menu,
-  MenuItem,
-  TextField,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Button,
-  DialogContentText,
-  Select,
-  InputLabel,
-  FormControl,
-} from '@mui/material';
+import { IconButton, Menu, MenuItem, Dialog } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EmailIcon from '@mui/icons-material/Email';
-import { teal } from '@mui/material/colors';
-import { DialogBody } from '@material-tailwind/react';
-import { TrashIcon } from '@heroicons/react/24/solid';
 
-const rows = [
-  { id: 1, name: 'John Doe', email: 'john@example.com' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-  { id: 3, name: 'Alice Johnson', email: 'alice@example.com' },
-  { id: 4, name: 'Bob Williams', email: 'bob@example.com' },
-  // Add more rows as needed
-];
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 // const columns = [
 //   { field: 'id', headerName: 'Id', width: 100 },
@@ -149,59 +124,71 @@ const rows = [
 const columns = [
   {
     field: 'id',
-    headerName: 'Id',
+    headerName: 'ID',
     width: 100,
     headerClassName: 'custom-header',
   },
   {
-    field: 'firstName',
-    headerName: 'First Name',
+    field: '_id',
+    headerName: 'Order ID',
+    width: 150,
+    headerClassName: 'custom-header',
+  },
+
+  {
+    field: 'user',
+    headerName: 'User ID',
+    width: 150,
+    headerClassName: 'custom-header',
+  },
+  {
+    field: 'createdAt',
+    headerName: 'Date',
     width: 100,
     headerClassName: 'custom-header',
   },
   {
-    field: 'lastName',
-    headerName: 'Last Name',
+    field: 'paymentMethod',
+    headerName: 'Payment Method',
     width: 100,
     headerClassName: 'custom-header',
   },
   {
-    field: 'email',
-    headerName: 'Email',
-    width: 100,
-    headerClassName: 'custom-header',
-  },
-  // {
-  //   field: 'city',
-  //   headerName: 'City',
-  //   width: 100,
-  //   headerClassName: 'custom-header',
-  // },
-  {
-    field: 'state',
-    headerName: 'State',
+    field: 'isPaid',
+    headerName: 'Payment Status',
     width: 100,
     headerClassName: 'custom-header',
   },
   {
-    field: 'city',
-    headerName: 'City',
+    field: 'status',
+    headerName: 'Order Status',
     width: 100,
     headerClassName: 'custom-header',
   },
-  // {
-  //   field: 'city',
-  //   headerName: 'City',
-  //   width: 100,
-  //   headerClassName: 'custom-header',
-  // },
-  // {
-  //   field: 'actions',
-  //   headerName: 'Actions',
-  //   sortable: false,
-  //   width: 120,
-  //   renderCell: renderCell,
-  // },
+  {
+    field: 'shippingPrice',
+    headerName: 'Shipping Price',
+    width: 100,
+    headerClassName: 'custom-header',
+  },
+  {
+    field: 'couponDiscount',
+    headerName: 'Discount',
+    width: 100,
+    headerClassName: 'custom-header',
+  },
+  {
+    field: 'totalPrice',
+    headerName: 'Total Price',
+    width: 100,
+    headerClassName: 'custom-header',
+  },
+  {
+    field: 'trackingLink',
+    headerName: 'Tracking Link',
+    width: 100,
+    headerClassName: 'custom-header',
+  },
 ];
 
 const MyTable = ({ data }) => {
@@ -209,23 +196,79 @@ const MyTable = ({ data }) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [filter, setFilter] = useState('');
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
+
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [rowsa, setRowsa] = useState({
+    _id: null,
+    createdAt: null,
+    isPaid: null,
+    orderItems: [
+      {
+        image: null,
+        price: null,
+        quantity: null,
+        sku: null,
+        _id: null,
+      },
+    ],
+    paymentMethod: null,
+    paymentResult: {
+      id: null,
+      status: null,
+    },
+    shippingAddress: {
+      address: null,
+      city: null,
+      country: null,
+      email: null,
+      firstName: null,
+      lastName: null,
+      mobile: null,
+      pincode: null,
+      state: null,
+    },
+    shippingPrice: null,
+    status: null,
+    totalPrice: null,
+    updatedAt: null,
+    user: null,
+    couponDiscount: null,
+    trackingLink: null,
+  });
+  const [paymentStatus, setPaymentStatus] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [user, setUser] = useState(null);
   const [newName, setNewName] = useState(null);
   const [row, setRow] = useState(null);
   useEffect(() => {
+    // if (rowsa && selectedRow) {
+    //   console.log('both');
+    //   if (rowsa !== selectedRow) {
+    //     console.log('not equal');
+    //   } else {
+    //     console.log('equal');
+    //   }
+    // }
     if (selectedRow) {
-      setName(selectedRow.firstName);
-      setEmail(selectedRow.email);
-      console.log(selectedRow.firstName, selectedRow.email);
+      setRowsa(selectedRow);
+      if (selectedRow.paymentResult)
+        setPaymentStatus(selectedRow.paymentResult);
+      // setRowsa({
+      //   ...rowsa,
+      //   ...selectedRow,
+      //   createdAt: selectedRow.createdAt.slice(0, 10),
+      // });
+      // if (rowsa) console.log('rowsa ', rowsa);
     }
-  }, [selectedRow]);
+  }, [selectedRow, rowsa]);
 
-  useEffect(() => {
-    if (newName) console.log('name changed to : ', newName);
-  }, [newName]);
+  // useEffect(() => {
+  //   if (rowsa) console.log('rowsa  : ', rowsa);
+  // }, [rowsa]);
 
   // const headerStyles = {
   //   backgroundColor: '#4f4f4f',
@@ -323,6 +366,21 @@ const MyTable = ({ data }) => {
     handleMenuClose();
   };
 
+  const openDeleteConfirmation = () => {
+    setIsDeleteConfirmationOpen(true);
+    handleMenuClose();
+  };
+
+  const handleDeleteConfirmed = () => {
+    console.log('delete');
+
+    setIsDeleteConfirmationOpen(false);
+  };
+
+  const closeDeleteConfirmation = () => {
+    setIsDeleteConfirmationOpen(false);
+  };
+
   const handleFilterChange = (event) => {
     setFilter(event.target.value.toLowerCase());
   };
@@ -332,9 +390,11 @@ const MyTable = ({ data }) => {
     if (Array.isArray(data)) {
       const value = data.map((item) => {
         count++;
+        const created = item.createdAt.slice(0, 10);
         return {
           ...item,
           id: count,
+          createdAt: created,
         };
       });
       setRow(value);
@@ -356,9 +416,9 @@ const MyTable = ({ data }) => {
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={handleEditClick}>Edit</MenuItem>
-          <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
-          <MenuItem onClick={handleEmailClick}>Email</MenuItem>
+          <MenuItem onClick={handleEditClick}>View more</MenuItem>
+          {/* <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
+          <MenuItem onClick={handleEmailClick}>Email</MenuItem> */}
         </Menu>
       </div>
     );
@@ -367,40 +427,10 @@ const MyTable = ({ data }) => {
   return (
     <>
       {row ? (
-        <div className=" tw-bg-darkergrey tw-rounded-md tw-shadow-md tw-w-[80vw] tw-md:w-[90vw] tw-p-[5px] tw-md:p-[15px] ">
+        <div className=" tw-bg-darkergrey tw-rounded-md tw-shadow-md tw-w-[80vw] md:tw-w-[60-vw] tw-p-[5px] tw-overflow-y-auto tw-md:p-[15px] ">
           {row && (
-            // <ThemeProvider theme={theme}>
-            //   <CssBaseline />
-            //  <div className="tw-text-[12px]" style={{ height: 400 }}>
-            //   <DataGrid
-            //     components={{
-            //       Toolbar: GridToolbar,
-            //     }}
-            //     rows={row}
-            //     columns={[
-            //       ...columns,
-            //       {
-            //         field: 'actions',
-            //         headerName: 'Actions',
-            //         sortable: false,
-            //         width: 120,
-            //         renderCell: renderCell,
-            //       },
-            //     ]}
-            // className="border border-teal font-poppins"
-            // sx={{
-            //   boxShadow: 5,
-            //   border: 2,
-            //   borderColor: '#03dac6',
-            //   '$ .MuiDataGrid-Cell': {
-            //     backgroundColor: '#4f4f4f',
-            //     color: '#ffffff',
-            //   },
-            // }}
-            //   />
-            // </div> */}
             <ThemeProvider theme={theme}>
-              <div style={{ height: '75vh' }}>
+              <div className="tw-h-[75vh]">
                 <DataGrid
                   components={{
                     Toolbar: GridToolbar,
@@ -439,55 +469,219 @@ const MyTable = ({ data }) => {
                     // columnRuleColor: '#363535',
                   }}
                   onRowClick={(e) => {
-                    console.log(e.row);
+                    // console.log(e.row);
                     setSelectedRow(e.row);
                   }}
                 />
               </div>
             </ThemeProvider>
           )}
+
           <Dialog open={isEditModalOpen} onClose={closeModals} maxWidth="xs">
-            <div className="tw-bg-darkgrey tw-p-[15px] tw-w-[300px] ">
-              <h3 className="tw-text-[20px] tw-text-teal tw-mb-[10px]">
-                Edit Order Status
-              </h3>
-              <h5 className="tw-text-lightgrey">Change Status : </h5>
-              <div className="tw-bg-darkgrey ">
-                {name && email && (
-                  <div>
-                    <select
-                      className="tw-select tw-w-full tw-max-w-xs tw-border tw-border-violet focus:tw-border-[2px] tw-bg-darkergrey tw-shadow-sm hover:tw-shadow-md tw-duration-200 tw-text-lightgrey tw-my-[10px] "
-                      placeholder={name}
-                      onChange={(e) => setNewName(e.target.value)}
-                    >
-                      <option>{name}</option>
-                      <option>john</option>
-                      <option>Maggie</option>
-                    </select>
-                  </div>
-                )}
-              </div>
-              <div
-                className="tw-w-[100%] tw-flex tw-justify-around tw-bg-darkgrey"
-                style={{ padding: '16px', textAlign: 'center' }}
-              >
-                <button
-                  className="tw-border-2 tw-border-bluepurple tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+            {rowsa && (
+              <div className="tw-bg-darkgrey tw-p-[15px] tw-w-[300px] md:tw-w-[400px]  ">
+                <h3 className="tw-text-[20px] tw-text-teal tw-mb-[10px]">
+                  Order : {rowsa._id}
+                </h3>
+                <XMarkIcon
                   onClick={closeModals}
+                  className="tw-cursor-pointer tw-w-7 tw-h-7  tw-absolute tw-text-violet tw-font-medium tw-top-[15px] tw-right-[10px]"
+                />
+                <div>
+                  <p className="tw-text-bluepurple">
+                    User ID :
+                    <span className="tw-text-lightgrey">{rowsa.user}</span>
+                  </p>
+                  <p className="tw-text-bluepurple">
+                    Order Date :
+                    <span className="tw-text-lightgrey">{rowsa.createdAt}</span>
+                  </p>
+
+                  <div className="tw-mt-[20px]">
+                    <h4 className="tw-text-violet tw-mb-[10px]">
+                      Order Details
+                    </h4>
+                    <ul>
+                      {rowsa.orderItems.map((item, index) => (
+                        <li className="tw-mb-[10px]" key={index}>
+                          <p className="tw-text-bluepurple">
+                            Image:{' '}
+                            <span className="tw-text-lightgrey">
+                              /{item.slug}
+                            </span>
+                          </p>
+                          <p className="tw-text-bluepurple">
+                            SKU:{' '}
+                            <span className="tw-text-lightgrey">
+                              {item.sku}
+                            </span>
+                          </p>
+                          <p className="tw-text-bluepurple">
+                            Quantity:{' '}
+                            <span className="tw-text-lightgrey">
+                              {item.quantity}
+                            </span>
+                          </p>
+                          <p className="tw-text-bluepurple">
+                            Price:{' '}
+                            <span className="tw-text-lightgrey">
+                              {item.price}
+                            </span>
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <h4 className="tw-text-violet tw-mb-[10px]">
+                    Payment Details
+                  </h4>
+                  <p className="tw-text-bluepurple">
+                    Shipping Cost :{' '}
+                    <span className="tw-text-lightgrey">
+                      {rowsa.shippingPrice}
+                    </span>
+                  </p>
+                  <p className="tw-text-bluepurple">
+                    Coupon Discount :{' '}
+                    <span className="tw-text-lightgrey">
+                      {rowsa.couponDiscount}
+                    </span>
+                  </p>
+                  <p className="tw-text-bluepurple">
+                    Payment Method :{' '}
+                    <span className="tw-text-lightgrey">
+                      {rowsa.paymentMethod}
+                    </span>
+                  </p>
+                  {paymentStatus && (
+                    <p className="tw-text-bluepurple">
+                      Payment Status :{' '}
+                      <span className="tw-text-lightgrey">
+                        {paymentStatus.status}
+                      </span>
+                    </p>
+                  )}
+
+                  <h4 className="tw-text-violet tw-mt-[10px]">Order Status</h4>
+                  <select
+                    className="tw-select tw-w-full tw-max-w-xs tw-bg-darkgrey  tw-border-violet tw-shadow-sm hover:tw-shadow-md tw-duration-200 tw-text-lightgrey tw-my-[10px] "
+                    placeholder={rowsa.status}
+                    onChange={(e) =>
+                      setRowsa({ ...rowsa, status: e.target.value })
+                    }
+                  >
+                    <option>Confirmed</option>
+                    <option>Shipped</option>
+                    <option>Out for delivery</option>
+                    <option>Delivered</option>
+                    <option>Failed</option>
+                  </select>
+
+                  <div>
+                    <h4 className="tw-text-violet tw-my-[10px]">
+                      Delivery Address
+                    </h4>
+                    <div className="tw-flex tw-flex-col">
+                      <p className="tw-text-lightgrey">
+                        {rowsa.shippingAddress.firstName}
+                        {rowsa.shippingAddress.lastName}
+                      </p>
+                      <p className="tw-text-lightgrey">
+                        {rowsa.shippingAddress.address},
+                      </p>
+                      <p className="tw-text-lightgrey">
+                        {rowsa.shippingAddress.city},
+                      </p>
+                      <p className="tw-text-lightgrey">
+                        {rowsa.shippingAddress.state},
+                      </p>
+                      <p className="tw-text-lightgrey">
+                        {rowsa.shippingAddress.country} -
+                        {rowsa.shippingAddress.pincode}
+                      </p>
+                      <p className="tw-text-lightgrey">
+                        {rowsa.shippingAddress.mobile}
+                      </p>
+                      <p className="tw-text-lightgrey">
+                        {rowsa.shippingAddress.email}
+                      </p>
+                    </div>
+                  </div>
+                  <h4 className="tw-text-violet tw-my-[10px]">
+                    Order Tracking Link
+                  </h4>
+                  <input
+                    onChange={(e) =>
+                      setRowsa({ ...rowsa, trackingLink: e.target.value })
+                    }
+                    className="tw-p-[7px] tw-w-[100%] tw-text-lightgrey tw-bg-darkergrey tw-rounded-md tw-outline-none tw-border tw-border-violet tw-shadow-sm hover:tw-shadow-md tw-duration-200 tw-text-[16px]"
+                    type="text"
+                    placeholder="Paste Tracking Link"
+                  />
+                </div>
+
+                <div
+                  className="tw-w-[100%] tw-mt-[15px] tw-flex tw-justify-around tw-bg-darkgrey"
+                  style={{ padding: '16px', textAlign: 'center' }}
                 >
-                  Close
+                  {/* <button
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                    onClick={closeModals}
+                  >
+                    Close
+                  </button> */}
+                  <button
+                    // onClick={handleSave}
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={openDeleteConfirmation}
+                    // onClick={handleSave}
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                  >
+                    Delete
+                  </button>
+                  <button
+                    // onClick={handleSave}
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                  >
+                    Email
+                  </button>
+                </div>
+              </div>
+            )}
+          </Dialog>
+
+          <Dialog
+            open={isDeleteConfirmationOpen}
+            onClose={closeDeleteConfirmation}
+            maxWidth="xs"
+          >
+            <div className="tw-bg-darkgrey tw-p-[15px]">
+              <h2 className="tw-text-bluepurple">Confirm Deletion</h2>
+              <h4 className="tw-text-lightgrey tw-mb-[30px]">
+                Are you sure you want to delete this order?
+              </h4>
+              <div className="tw-w-[100%] tw-mt-[15px] tw-flex tw-justify-around ">
+                <button
+                  onClick={closeDeleteConfirmation}
+                  className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                >
+                  Cancel
                 </button>
                 <button
-                  className={`tw-border-2 tw-border-bluepurple tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px]  ${
-                    newName === null ? 'tw-hidden' : 'tw-visible'
-                  }`}
+                  onClick={handleDeleteConfirmed}
+                  className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
                 >
-                  Save
+                  Confirm
                 </button>
               </div>
             </div>
           </Dialog>
 
+          {/* 
           <Dialog open={isDeleteModalOpen} onClose={closeModals} maxWidth="xs">
             <div className="tw-bg-darkgrey tw-p-[15px] tw-w-[300px]">
               <h3 className="tw-text-[20px] tw-text-teal tw-mb-[10px]">
@@ -496,20 +690,20 @@ const MyTable = ({ data }) => {
               {name && email && (
                 <div>
                   <h6 className="tw-text-lightgrey tw-font">User Details :</h6>
-                  <p className="tw-text-grey">
-                    Name : <span className="tw-text-bluepurple">{name}</span>
+                  <p className="tw-text-bluepurple">
+                    Name : <span className="tw-text-lightgrey">{name}</span>
                   </p>
-                  <p className="tw-text-grey">
-                    Email : <span className="tw-text-bluepurple">{email}</span>
+                  <p className="tw-text-bluepurple">
+                    Email : <span className="tw-text-lightgrey">{email}</span>
                   </p>
                   <h6 className="tw-text-lightgrey tw-font">Order Details :</h6>
-                  <p className="tw-text-grey">
+                  <p className="tw-text-bluepurple">
                     Order id :{' '}
-                    <span className="tw-text-bluepurple">6ZerFrj</span>
+                    <span className="tw-text-lightgrey">6ZerFrj</span>
                   </p>
-                  <p className="tw-text-grey">
+                  <p className="tw-text-bluepurple">
                     Order Status :{' '}
-                    <span className="tw-text-bluepurple">Delivered</span>
+                    <span className="tw-text-lightgrey">Delivered</span>
                   </p>
                 </div>
               )}
@@ -538,11 +732,11 @@ const MyTable = ({ data }) => {
               {name && email && (
                 <div>
                   <h6 className="tw-text-lightgrey tw-font">User Details :</h6>
-                  <p className="tw-text-grey">
-                    Name : <span className="tw-text-bluepurple">{name}</span>
+                  <p className="tw-text-bluepurple">
+                    Name : <span className="tw-text-lightgrey">{name}</span>
                   </p>
-                  <p className="tw-text-grey">
-                    Email : <span className="tw-text-bluepurple">{email}</span>
+                  <p className="tw-text-bluepurple">
+                    Email : <span className="tw-text-lightgrey">{email}</span>
                   </p>
                 </div>
               )}
@@ -561,7 +755,7 @@ const MyTable = ({ data }) => {
                 </button>
               </div>
             </div>
-          </Dialog>
+          </Dialog> */}
 
           {/* <Dialog
             open={isDeleteModalOpen}

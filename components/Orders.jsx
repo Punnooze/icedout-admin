@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   DataGrid,
   GridToolbarFilterButton,
@@ -48,6 +48,59 @@ function Orders({ data }) {
   const [searchText, setSearchText] = useState('');
   const [enter, setEnter] = useState(false);
 
+  const [Confirmed, setConfirmedCount] = useState(0);
+  const [Shipped, setShippedCount] = useState(0);
+  const [Outfordelivery, setOutfordeliveryCount] = useState(0);
+  const [Delivered, setDeliveredCount] = useState(0);
+  const [Failed, setFailedCount] = useState(0);
+  const [liveOrders, setLiveOrders] = useState(0);
+
+  // Assuming you fetch or set the data into the "data" state variable
+
+  // useEffect(() => {
+  // Calculate the counts when the "data" state changes
+  useEffect(() => {
+    // Count the number of each status type
+    if (Array.isArray(data)) {
+      let Confirmed = 0;
+      let Shipped = 0;
+      let Outfordelivery = 0;
+      let Delivered = 0;
+      let Failed = 0;
+
+      data.forEach((item) => {
+        switch (item.status) {
+          case 'Confirmed':
+            Confirmed++;
+            break;
+          case 'Shipped':
+            Shipped++;
+            break;
+          case 'Out for delivery':
+            Outfordelivery++;
+            break;
+          case 'Delivered':
+            Delivered++;
+            break;
+          case 'Failed':
+            Failed++;
+            break;
+          default:
+            break;
+        }
+      });
+
+      // Update state variables
+      console.log(Confirmed, Shipped, Outfordelivery, Delivered, Failed);
+      setLiveOrders(Confirmed + Shipped + Outfordelivery);
+      setConfirmedCount(Confirmed);
+      setShippedCount(Shipped);
+      setOutfordeliveryCount(Outfordelivery);
+      setDeliveredCount(Delivered);
+      setFailedCount(Failed);
+    }
+  }, [data]);
+
   const filteredRows = rows.filter((row) => {
     return (
       (!filterStatus || row.status === filterStatus) &&
@@ -58,27 +111,7 @@ function Orders({ data }) {
     );
   });
 
-  const handleEditCellChange = (params) => {
-    const { id, field, props } = params;
-    if (field === 'status') {
-      // Validate the edited status value
-      const editedValue = props.value.toLowerCase();
-      if (statusOptions.includes(editedValue)) {
-        // Update the status in the row
-        const updatedRows = rows.map((row) =>
-          row.id === id ? { ...row, status: editedValue } : row
-        );
-        // Update the rows
-        // Note: In a real app, you would typically send this data to a server for persistence.
-        rows = updatedRows;
-      } else {
-        // Show an alert for an invalid status value
-        alert(
-          'Invalid status value. Please enter "paid," "failed," or "return."'
-        );
-      }
-    }
-  };
+
 
   return (
     <div className="tw-h-[100vh] tw-ml-[70px] tw-bg-background tw-flex tw-flex-col tw-items-center tw-align-middle">
@@ -87,34 +120,38 @@ function Orders({ data }) {
       </div> */}
       <div className=" tw-grid md:tw-grid-cols-7 tw-grid-cols-2 tw-gap-[20px] md:tw-gap-0 tw-ml-[70px] tw-mr-[70px] md:tw-mr-0 md:tw-ml-0 tw-p-[20px] tw-w-[90vw] md:tw-w-[95vw] ">
         <div className="tw-col-start-1 md:tw-col-start-2">
-          <NumberCard header="Total Sales" number="3000" />
+          <NumberCard header="Total Orders" number={data.length} />
         </div>
 
         <div className="tw-col-start-2 md:tw-col-start-4">
-          <NumberCard header="Live orders" number="120" />
+          <NumberCard header="Live Orders" number={liveOrders} />
         </div>
         {/* <PieChartCard /> */}
         <div
           className="tw-hidden md:tw-visible tw-row-start-2 md:tw-row-start-1 md:tw-col-start-6 tw-w-[200px] tw-h-[110px] tw-bg-darkergrey md:tw-flex tw-justify-center tw-items-center tw-align-middle tw-p-[10px] tw-rounded-md"
           tw-
         >
+          {/* {Confirmed && Shipped && Outfordelivery && Delivered && Failed && ( */}
           <PieChart
             series={[
               {
                 data: [
-                  { id: 0, value: 100, label: 'Dispatchd' },
-                  { id: 1, value: 250, label: 'Processng' },
-                  { id: 2, value: 200, label: 'Failed' },
+                  { id: 0, value: Confirmed, label: 'Confirmed' },
+                  { id: 1, value: Shipped, label: 'Shipped' },
+                  { id: 2, value: Outfordelivery, label: 'Delivery' },
+                  { id: 3, value: Delivered, label: 'Delivered' },
+                  { id: 4, value: Failed, label: 'Failed' },
                 ],
               },
             ]}
             width={350}
             height={175}
           />
+          {/* )} */}
         </div>
       </div>
 
-      <div className="  tw-bg-darkergrey tw-rounded-md tw-tw-shadmd tw- tw-flex tw-justify-center tw-items-center tw-align-middle">
+      <div className="  tw-bg-darkergrey tw-rounded-md tw-tw-shadmd tw- tw-flex tw-justify-center tw-items-center tw-align-middle ">
         {/* <div className='w-[100%] h-[100%] bg-lightpurple'>hello</div> */}
         <MyTable data={data} />
       </div>
