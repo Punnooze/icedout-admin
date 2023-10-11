@@ -7,120 +7,6 @@ import { IconButton, Menu, MenuItem, Dialog } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { XMarkIcon } from '@heroicons/react/24/solid';
-
-// const columns = [
-//   { field: 'id', headerName: 'Id', width: 100 },
-//   { field: 'firstName', headerName: 'First Name', width: 100 },
-//   { field: 'lastName', headerName: 'Last Name', width: 100 },
-//   { field: 'email', headerName: 'Email', width: 100 },
-//   { field: 'city', headerName: 'City', width: 100 },
-//   { field: 'state', headerName: 'State', width: 100 },
-//   { field: 'city', headerName: 'City', width: 100 },
-//   { field: 'city', headerName: 'City', width: 100 },
-// ];
-
-// const columns = [
-//   {
-//     field: 'id',
-//     headerName: 'Id',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header bg-gray-700',
-//   },
-//   {
-//     field: 'firstName',
-//     headerName: 'First Name',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header bg-gray-700',
-//   },
-//   {
-//     field: 'lastName',
-//     headerName: 'Last Name',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header bg-gray-700',
-//   },
-//   {
-//     field: 'email',
-//     headerName: 'Email',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header bg-gray-700',
-//   },
-//   {
-//     field: 'city',
-//     headerName: 'City',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header bg-gray-700',
-//   },
-//   {
-//     field: 'state',
-//     headerName: 'State',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header bg-gray-700',
-//   },
-//   {
-//     field: 'city',
-//     headerName: 'City',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header bg-gray-700',
-//   },
-//   {
-//     field: 'city',
-//     headerName: 'City',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header bg-gray-700',
-//   },
-// ];
-
-// const columns = [
-//   {
-//     field: 'id',
-//     headerName: 'Id',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header',
-//   },
-//   {
-//     field: 'firstName',
-//     headerName: 'First Name',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header',
-//   },
-//   {
-//     field: 'lastName',
-//     headerName: 'Last Name',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header',
-//   },
-//   {
-//     field: 'email',
-//     headerName: 'Email',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header',
-//   },
-//   {
-//     field: 'city',
-//     headerName: 'City',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header',
-//   },
-//   {
-//     field: 'state',
-//     headerName: 'State',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header',
-//   },
-//   {
-//     field: 'city',
-//     headerName: 'City',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header',
-//   },
-//   {
-//     field: 'city',
-//     headerName: 'City',
-//     width: 100,
-//     headerClassName: 'super-app-theme--header',
-//   },
-// ];
-
 const columns = [
   {
     field: 'id',
@@ -194,14 +80,9 @@ const columns = [
 const MyTable = ({ data }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
-  const [filter, setFilter] = useState('');
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
-
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [rowsa, setRowsa] = useState({
     _id: null,
     createdAt: null,
@@ -240,40 +121,15 @@ const MyTable = ({ data }) => {
     trackingLink: null,
   });
   const [paymentStatus, setPaymentStatus] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [user, setUser] = useState(null);
-  const [newName, setNewName] = useState(null);
   const [row, setRow] = useState(null);
+
   useEffect(() => {
-    // if (rowsa && selectedRow) {
-    //   console.log('both');
-    //   if (rowsa !== selectedRow) {
-    //     console.log('not equal');
-    //   } else {
-    //     console.log('equal');
-    //   }
-    // }
     if (selectedRow) {
       setRowsa(selectedRow);
       if (selectedRow.paymentResult)
         setPaymentStatus(selectedRow.paymentResult);
-      // setRowsa({
-      //   ...rowsa,
-      //   ...selectedRow,
-      //   createdAt: selectedRow.createdAt.slice(0, 10),
-      // });
-      // if (rowsa) console.log('rowsa ', rowsa);
     }
   }, [selectedRow, rowsa]);
-
-  // useEffect(() => {
-  //   if (rowsa) console.log('rowsa  : ', rowsa);
-  // }, [rowsa]);
-
-  // const headerStyles = {
-  //   backgroundColor: '#4f4f4f',
-  //   color: 'white',
-  // };
 
   const theme = createTheme({
     palette: {
@@ -286,44 +142,7 @@ const MyTable = ({ data }) => {
     },
   });
 
-  // const theme = createTheme({
-  //   palette: {
-  //     primary: {
-  //       main: '#bb86fc', // Set the DataGrid toolbar color
-  //     },
-  //   },
-  // overrides: {
-  //   MuiDataGrid: {
-  //     root: {
-  //       border: '1px solid #4f4f4f',
-  //       fontFamily: 'Poppins, sans-serif',
-  //     },
-  //     colCell: {
-  //       backgroundColor: '#4f4f4f',
-  //       color: 'white',
-  //       fontWeight: 'bold',
-  //     },
-  //     row: {
-  //       borderBottom: '1px solid #b7b8ba',
-  //     },
-  //     window: {
-  //       '&::-webkit-scrollbar': {
-  //         width: '12px',
-  //       },
-  //       '&::-webkit-scrollbar-track': {
-  //         background: '#1f1f1f',
-  //       },
-  //       '&::-webkit-scrollbar-thumb': {
-  //         backgroundColor: '#9081e5',
-  //         borderRadius: '6px',
-  //       },
-  //     },
-  //   },
-  // },
-  // });
-
   const handleMenuOpen = (event, row) => {
-    // console.log(row);
     setAnchorEl(event.currentTarget);
     setSelectedRow(row);
   };
@@ -337,32 +156,12 @@ const MyTable = ({ data }) => {
     setIsEditModalOpen(true);
   };
 
-  const openDeleteModal = () => {
-    setIsDeleteModalOpen(true);
-  };
-
-  const openEmailModal = () => {
-    setIsEmailModalOpen(true);
-  };
-
   const closeModals = () => {
     setIsEditModalOpen(false);
-    setIsDeleteModalOpen(false);
-    setIsEmailModalOpen(false);
   };
 
   const handleEditClick = () => {
     openEditModal();
-    handleMenuClose();
-  };
-
-  const handleDeleteClick = () => {
-    openDeleteModal();
-    handleMenuClose();
-  };
-
-  const handleEmailClick = () => {
-    openEmailModal();
     handleMenuClose();
   };
 
@@ -371,18 +170,55 @@ const MyTable = ({ data }) => {
     handleMenuClose();
   };
 
-  const handleDeleteConfirmed = () => {
-    console.log('delete');
-
-    setIsDeleteConfirmationOpen(false);
-  };
-
   const closeDeleteConfirmation = () => {
     setIsDeleteConfirmationOpen(false);
   };
 
-  const handleFilterChange = (event) => {
-    setFilter(event.target.value.toLowerCase());
+  const handleSave = async () => {
+    try {
+      const res = await fetch('/api/updateOrder', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: rowsa }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.data) {
+          window.location.reload();
+        }
+      } else {
+        console.log('Error:', res.statusText);
+      }
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const res = await fetch('/api/deleteOrder', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: rowsa }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.message === 'Successfully Deleted') {
+          window.location.reload();
+        }
+      } else {
+        // Handle errors when the response is not OK
+        console.log('Error:', res.statusText);
+      }
+    } catch (error) {
+      console.log('Error', error);
+    }
   };
 
   let count = 0;
@@ -400,7 +236,6 @@ const MyTable = ({ data }) => {
       setRow(value);
     }
   }, [data, count]);
-  // console.log(row);
 
   const renderCell = (params) => {
     return (
@@ -417,8 +252,6 @@ const MyTable = ({ data }) => {
           onClose={handleMenuClose}
         >
           <MenuItem onClick={handleEditClick}>View more</MenuItem>
-          {/* <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
-          <MenuItem onClick={handleEmailClick}>Email</MenuItem> */}
         </Menu>
       </div>
     );
@@ -447,11 +280,10 @@ const MyTable = ({ data }) => {
                       renderCell: renderCell,
                     },
                   ]}
-                  //columns={columns}
                   className="data-grid"
                   toolbarClassName="custom-toolbar"
                   classes={{
-                    selected: 'selected-row', // Apply the row selection color
+                    selected: 'selected-row',
                     scrollArea: 'custom-scrollbar',
                   }}
                   sx={{
@@ -466,10 +298,8 @@ const MyTable = ({ data }) => {
                       borderColor: '#363535',
                     },
                     borderColor: '#363535',
-                    // columnRuleColor: '#363535',
                   }}
                   onRowClick={(e) => {
-                    // console.log(e.row);
                     setSelectedRow(e.row);
                   }}
                 />
@@ -565,7 +395,7 @@ const MyTable = ({ data }) => {
                   <h4 className="tw-text-violet tw-mt-[10px]">Order Status</h4>
                   <select
                     className="tw-select tw-w-full tw-max-w-xs tw-bg-darkgrey  tw-border-violet tw-shadow-sm hover:tw-shadow-md tw-duration-200 tw-text-lightgrey tw-my-[10px] "
-                    placeholder={rowsa.status}
+                    value={rowsa.status}
                     onChange={(e) =>
                       setRowsa({ ...rowsa, status: e.target.value })
                     }
@@ -611,6 +441,7 @@ const MyTable = ({ data }) => {
                     Order Tracking Link
                   </h4>
                   <input
+                    value={rowsa.trackingLink}
                     onChange={(e) =>
                       setRowsa({ ...rowsa, trackingLink: e.target.value })
                     }
@@ -624,29 +455,19 @@ const MyTable = ({ data }) => {
                   className="tw-w-[100%] tw-mt-[15px] tw-flex tw-justify-around tw-bg-darkgrey"
                   style={{ padding: '16px', textAlign: 'center' }}
                 >
-                  {/* <button
-                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
-                    onClick={closeModals}
-                  >
-                    Close
-                  </button> */}
                   <button
-                    // onClick={handleSave}
+                    onClick={handleSave}
                     className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
                   >
                     Save
                   </button>
                   <button
                     onClick={openDeleteConfirmation}
-                    // onClick={handleSave}
                     className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
                   >
                     Delete
                   </button>
-                  <button
-                    // onClick={handleSave}
-                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
-                  >
+                  <button className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] ">
                     Email
                   </button>
                 </div>
@@ -672,7 +493,7 @@ const MyTable = ({ data }) => {
                   Cancel
                 </button>
                 <button
-                  onClick={handleDeleteConfirmed}
+                  onClick={handleDelete}
                   className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
                 >
                   Confirm
@@ -680,140 +501,6 @@ const MyTable = ({ data }) => {
               </div>
             </div>
           </Dialog>
-
-          {/* 
-          <Dialog open={isDeleteModalOpen} onClose={closeModals} maxWidth="xs">
-            <div className="tw-bg-darkgrey tw-p-[15px] tw-w-[300px]">
-              <h3 className="tw-text-[20px] tw-text-teal tw-mb-[10px]">
-                Delete Order
-              </h3>
-              {name && email && (
-                <div>
-                  <h6 className="tw-text-lightgrey tw-font">User Details :</h6>
-                  <p className="tw-text-bluepurple">
-                    Name : <span className="tw-text-lightgrey">{name}</span>
-                  </p>
-                  <p className="tw-text-bluepurple">
-                    Email : <span className="tw-text-lightgrey">{email}</span>
-                  </p>
-                  <h6 className="tw-text-lightgrey tw-font">Order Details :</h6>
-                  <p className="tw-text-bluepurple">
-                    Order id :{' '}
-                    <span className="tw-text-lightgrey">6ZerFrj</span>
-                  </p>
-                  <p className="tw-text-bluepurple">
-                    Order Status :{' '}
-                    <span className="tw-text-lightgrey">Delivered</span>
-                  </p>
-                </div>
-              )}
-              <div
-                className="tw-w-[100%] tw-flex tw-justify-around tw-bg-darkgrey"
-                style={{ padding: '16px', textAlign: 'center' }}
-              >
-                <button
-                  className="tw-border-2 tw-border-bluepurple tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
-                  onClick={closeModals}
-                >
-                  Close
-                </button>
-                <button className="tw-border-2 tw-border-bluepurple tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px]">
-                  Delete
-                </button>
-              </div>
-            </div>
-          </Dialog>
-
-          <Dialog open={isEmailModalOpen} onClose={closeModals} maxWidth="xs">
-            <div className="tw-bg-darkgrey tw-p-[15px] tw-w-[300px]">
-              <h3 className="tw-text-[20px] tw-text-teal tw-mb-[10px]">
-                Email User
-              </h3>
-              {name && email && (
-                <div>
-                  <h6 className="tw-text-lightgrey tw-font">User Details :</h6>
-                  <p className="tw-text-bluepurple">
-                    Name : <span className="tw-text-lightgrey">{name}</span>
-                  </p>
-                  <p className="tw-text-bluepurple">
-                    Email : <span className="tw-text-lightgrey">{email}</span>
-                  </p>
-                </div>
-              )}
-              <div
-                className="tw-w-[100%] tw-flex tw-justify-around tw-bg-darkgrey"
-                style={{ padding: '16px', textAlign: 'center' }}
-              >
-                <button
-                  className="tw-border-2 tw-border-bluepurple tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
-                  onClick={closeModals}
-                >
-                  Close
-                </button>
-                <button className="tw-border-2 tw-border-bluepurple tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px]">
-                  Email
-                </button>
-              </div>
-            </div>
-          </Dialog> */}
-
-          {/* <Dialog
-            open={isDeleteModalOpen}
-            onClose={closeModals}
-            maxWidth="xs"
-            fullWidth
-          >
-            <DialogTitle>Delete Row</DialogTitle>
-            <DialogContent>
-              {name && email && (
-                <div>
-                  <p>Name: {name}</p>
-                  <p>Email: {email}</p>
-                </div>
-              )}
-              <Button
-                variant="contained"
-                color="secondary"
-                startIcon={<DeleteIcon />}
-                onClick={() => {
-                  // Implement delete logic here
-                  console.log('Delete clicked for row:', selectedRow);
-                  closeModals();
-                }}
-              >
-                Delete
-              </Button>
-            </DialogContent>
-          </Dialog> */}
-
-          {/* <Dialog
-            open={isEmailModalOpen}
-            onClose={closeModals}
-            maxWidth="xs"
-            fullWidth
-          >
-            <DialogTitle>Email Row Details</DialogTitle>
-            <DialogContent>
-              {selectedRow && (
-                <div>
-                  <p>Name: {selectedRow.name}</p>
-                  <p>Email: {selectedRow.email}</p>
-                </div>
-              )}
-
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<EmailIcon />}
-                onClick={() => {
-                  console.log('Email clicked for row:', selectedRow);
-                  closeModals();
-                }}
-              >
-                Email
-              </Button>
-            </DialogContent>
-          </Dialog> */}
         </div>
       ) : null}
     </>

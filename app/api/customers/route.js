@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    await connectMongoDB();
+    //await connectMongoDB();
     const data = await User.find();
     return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
