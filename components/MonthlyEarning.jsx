@@ -1,10 +1,16 @@
 'use client';
 import React, { useEffect } from 'react';
 import dynamic from "next/dynamic";
-import { useTheme } from '@mui/material/styles';
 import { Stack, Typography, Avatar, Fab } from '@mui/material';
 import { IconArrowUpRight, IconCurrencyDollar } from '@tabler/icons-react';
 import DashboardCard from './DashboardCard';
+import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -44,7 +50,7 @@ const MonthlyEarnings = () => {
       opacity: 0.05,
     },
     markers: {
-      size: 0,
+      size: 2,
     },
     tooltip: {
       theme: isDarkMode ? 'dark' : 'light', // Use the isDarkMode variable
@@ -59,6 +65,8 @@ const MonthlyEarnings = () => {
   ];
 
   return (
+    <>
+    <ThemeProvider theme={darkTheme}>
     <div class="tw-pr-3">
     <DashboardCard
       title="Monthly Earnings"
@@ -83,6 +91,8 @@ const MonthlyEarnings = () => {
       </>
     </DashboardCard>
     </div>
+    </ThemeProvider>
+    </>
   );
 };
 

@@ -2,10 +2,16 @@
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-const { useTheme } = require('@mui/material/styles');
 const { Grid, Stack, Typography, Avatar } = require('@mui/material');
 const { IconArrowUpRight } = require('@tabler/icons-react');
 import DashboardCard from "./DashboardCard";
+import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const OrderDivision = () => {
   // Initialize the theme using useTheme
@@ -15,7 +21,7 @@ const OrderDivision = () => {
   const isDarkMode = theme.palette && theme.palette.mode === "dark";
 
   // chart color
-  const primary = '#04122A';
+  const primary = '#9081e5';
   const primarylight = "#58B6C3";
   const successlight = theme.palette.success.light;
 
@@ -43,13 +49,13 @@ const OrderDivision = () => {
     },
     tooltip: {
       theme: isDarkMode ? "dark" : "light", // Use the isDarkMode variable
-      fillSeriesColor: false,
+      fillSeriesColor: true,
     },
     stroke: {
       show: true,
     },
     dataLabels: {
-      enabled: true,
+      enabled: false,
     },
     legend: {
       show: false,
@@ -68,6 +74,8 @@ const OrderDivision = () => {
   const seriescolumnchart = [2000,1000];
 
   return (
+    <>
+    <ThemeProvider  theme={darkTheme}>
     <div className="tw-pr-3">
     <DashboardCard title="Total Orders">
       <Grid container spacing={3}>
@@ -119,6 +127,8 @@ const OrderDivision = () => {
       </Grid>
     </DashboardCard>
     </div>
+    </ThemeProvider>
+    </>
   );
 };
 

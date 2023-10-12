@@ -2,6 +2,13 @@
 import React from 'react';
 import { Typography, Box, Table, TableBody, TableCell, TableHead, TableRow, Chip } from '@mui/material';
 import DashboardCard from './DashboardCard';
+import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 const products = [
     {
@@ -39,7 +46,13 @@ const products = [
 ];
 
 const ProductStock = () => {
+    const theme = useTheme();
+
+  // Check if theme.palette exists before accessing the mode property
+    const isDarkMode = theme.palette && theme.palette.mode === 'dark';
     return (
+        <>
+        <ThemeProvider theme={darkTheme}>
         <div class="tw-pr-3">
         <DashboardCard title="Product Stock">
             <Box sx={{ overflow: 'auto', width: { xs: '280px', sm: 'auto' }, height:'325px'}}>
@@ -126,6 +139,8 @@ const ProductStock = () => {
             </Box>
         </DashboardCard>
         </div>
+        </ThemeProvider>
+        </>
     );
 };
 

@@ -61,7 +61,7 @@ function CustomersCard({ data }) {
           <div className=" tw-w-[95%] tw-h-[95%] tw-bg-darkergrey tw-rounded-md tw-shadow-md ">
             <div className="tw-grid tw-grid-cols-2 tw-gap-[20px] tw-p-[10px]">
               <div className="tw-w-[200px]">
-                <p>Filter by:</p>
+                <h4 className="tw-pl-4 tw-text-white">Filter by:</h4>
                 <Select
                   options={["", "id", "name", "email", "whatsapp"]}
                   value={filterColumn}
