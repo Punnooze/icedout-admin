@@ -11,7 +11,7 @@ function DashboardLayout() {
   return (
     <div>
       <div className="tw-ml-[70px] tw-pl-6 tw-h-[100vh] tw-overflow-y-auto tw-bg-background">
-        <h1 className="tw-text-white">DASHBOARD</h1>
+        <h1 className="tw-text-darkergrey">DASHBOARD</h1>
         <Grid container spacing={3}>
           {/* Row containing Traffic, Followers, Monthly Earnings, and Order Division */}
           <Grid item xs={12} sm={6} lg={4}>

@@ -1,17 +1,103 @@
-import React, { useEffect, useState } from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import SearchBar from "./SearchBar";
-import Select from "./Select";
-import { TrashIcon } from "@heroicons/react/24/solid";
+import React, { useEffect, useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import '../styles/globals.css';
+import { IconButton, Menu, MenuItem, Dialog } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+const columns = [
+  {
+    field: 'id',
+    headerName: 'ID',
+    headerClassName: 'custom-header',
+    width: 100,
+  },
+  {
+    field: '_id',
+    headerName: 'User ID',
+    headerClassName: 'custom-header',
+    width: 150,
+  },
+  {
+    field: 'name',
+    headerName: 'Name',
+    width: 150,
+    headerClassName: 'custom-header',
+  },
+  {
+    field: 'mobile',
+    headerName: 'Mobile Number',
+    width: 100,
+    headerClassName: 'custom-header',
+  },
+  {
+    field: 'whatsapp',
+    headerName: 'Whatsapp Number',
+    width: 100,
+    headerClassName: 'custom-header',
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+    width: 100,
+    headerClassName: 'custom-header',
+  },
+];
 
 function CustomersCard({ data }) {
-  const [searchText, setSearchText] = useState("");
-  const [filterColumn, setFilterColumn] = useState("");
-  const [filteredRows, setFilteredRows] = useState("");
-  const [rows, setRows] = useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
-  const [click, setClick] = useState(true);
-  const [dlt, setDlt] = useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
+  const [rowsa, setRowsa] = useState({
+    _id: null,
+    createdAt: null,
+    email: null,
+    mobile: null,
+    name: null,
+    password: null,
+    updatedAt: null,
+    whatsapp: null,
+    whishlist: [null],
+    _v: null,
+  });
+  const [row, setRow] = useState(null);
+
+  useEffect(() => {
+    if (selectedRow) {
+      setRowsa(selectedRow);
+    }
+  }, [selectedRow, rowsa]);
+
+  const handleMenuOpen = (event, row) => {
+    setAnchorEl(event.currentTarget);
+    setSelectedRow(row);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    setSelectedRow(null);
+  };
+
+  const openDeleteConfirmation = () => {
+    setIsDeleteConfirmationOpen(true);
+    handleMenuClose();
+  };
+
+  const closeDeleteConfirmation = () => {
+    setIsDeleteConfirmationOpen(false);
+  };
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#bb86fc', // Color for GridToolbar icons
+      },
+      secondary: {
+        main: '#363535', // Background color for column header
+      },
+    },
+  });
 
   let count = 0;
   useEffect(() => {
@@ -23,123 +109,138 @@ function CustomersCard({ data }) {
           id: count,
         };
       });
-      setRows(value);
+      setRow(value);
+      console.log(value);
     }
   }, [data, count]);
 
-  const columns = [
-    { field: "id", headerName: "ID", width: 100 },
-    {
-      field: "name",
-      headerName: "Name",
-      width: 200,
-      editable: true,
-    },
-    { field: "email", headerName: "email", width: 200 },
-    { field: "whatsapp", headerName: "Mobile Number", width: 200 },
-  ];
-
-  useEffect(() => {
-    if (Array.isArray(rows)) {
-      const filteredRows = rows.filter((row) => {
-        return (
-          !filterColumn ||
-          String(row[filterColumn])
-            .toLowerCase()
-            .includes(searchText.toLowerCase())
-        );
+  const handleDelete = async () => {
+    try {
+      const res = await fetch('/api/deleteCustomer', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: rowsa }),
       });
-      if (filteredRows) setFilteredRows(filteredRows);
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.message === 'Successfully Deleted') {
+          window.location.reload();
+        }
+      } else {
+        console.log('Error:', res.statusText);
+      }
+    } catch (error) {
+      console.log('Error', error);
     }
-  }, [rows, filterColumn, searchText]);
+  };
+
+  const renderCell = (params) => {
+    return (
+      <div className="tw-w-[100%] tw-h-[100%]">
+        <IconButton
+          aria-label="actions"
+          onClick={(e) => handleMenuOpen(e, params.row)}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+        >
+          <MenuItem onClick={openDeleteConfirmation}>Delete</MenuItem>
+        </Menu>
+      </div>
+    );
+  };
 
   return (
     <>
-      <div className="tw-ml-[70px] tw-bg-background tw-h-[100vh] tw-overflow-y-auto tw-flex tw-flex-col">
-        <h1 className="tw-pl-6 tw-text-white">CUSTOMER INFORMATION</h1>
-        <div className="tw-flex tw-justify-center tw-items-center tw-h-[100vh]  tw-w-[100%]">
-          <div className=" tw-w-[95%] tw-h-[95%] tw-bg-darkergrey tw-rounded-md tw-shadow-md ">
-            <div className="tw-grid tw-grid-cols-2 tw-gap-[20px] tw-p-[10px]">
-              <div className="tw-w-[200px]">
-                <p>Filter by:</p>
-                <Select
-                  options={["", "id", "name", "email", "whatsapp"]}
-                  value={filterColumn}
-                  onChange={(value) => setFilterColumn(value)}
-                />
-              </div>
-
-              <SearchBar
-                value={searchText}
-                onChange={(value) => setSearchText(value)}
-                placeholder={`Search`}
-              />
-            </div>
-            {selectedRow && click && (
-              <button onClick={() => setDlt(!dlt)}>
-                <TrashIcon
-                  className="tw-w-5 tw-h-6"
-                  style={{ width: "40px", height: "40px" }}
-                />
-              </button>
-            )}
-
-            {dlt && (
-              <div className="tw-pt-5  tw-border tw-rounded tw-shadow-md tw-absolute tw-z-30 tw-bg-background tw-text-center tw-text-white tw-inset-[40%] tw-w-[300px] tw-h-[300px]">
-                <h2>Delete details of </h2>
-                <br />
-                <h2>{selectedRow.name}</h2>
-                <br />
-                <h2>Click Icon to Confirm</h2>
-                <br />
-                <button>
-                  <TrashIcon
-                    className="tw-w-5 tw-h-5"
-                    style={{ width: "40px", height: "40px" }}
-                  />
-                </button>
-              </div>
-            )}
-
-            <div
-              className="tw-flex tw-justify-center tw-items-center tw-mt-[10px]"
-              // onClick={() => setSelectedRow(null)}
-            >
-              <div style={{ height: 500, width: "90%" }}>
-                {filteredRows ? (
+      <div className="tw-h-[100vh] tw-ml-[70px] tw-bg-background tw-overflow-y-auto tw-overflow-x-hidden">
+        <div className="tw-h-[90vh] tw-flex tw-flex-col tw-items-center tw-align-middle">
+          <div className=" tw-ml-[70px] tw-w-[100%]">
+            <h1 className=" tw-text-darkergrey md:tw-ml-[20px] tw-[10vh]">
+              CUSTOMERS 
+            </h1>
+          </div>
+          <div className="tw-flex tw-justify-center tw-items-center tw-h-[100vh]  tw-w-[100%]">
+            <div className=" tw-w-[80vw] lg:tw-w-[50vw] tw-h-[85vh] tw-bg-darkergrey tw-rounded-md tw-shadow-md tw-p-[5px] tw-flex tw-justify-center tw-items-center tw-align-middle ">
+              {row && (
+                <ThemeProvider theme={theme}>
                   <DataGrid
+                    components={{
+                      Toolbar: GridToolbar,
+                    }}
+                    rows={row}
+                    columns={[
+                      ...columns,
+                      {
+                        field: 'actions',
+                        headerName: 'Actions',
+                        sortable: false,
+                        width: 100,
+                        headerClassName: 'custom-header',
+                        renderCell: renderCell,
+                      },
+                    ]}
+                    // columns={columns}
+                    className="data-grid"
+                    toolbarClassName="custom-toolbar"
+                    classes={{
+                      selected: 'selected-row',
+                      scrollArea: 'custom-scrollbar',
+                    }}
                     sx={{
-                      boxShadow: 2,
                       border: 2,
-                      backgroundColor: "#363535",
-                      borderRadius: 2,
-                      borderColor: "primary.light",
-                      "& .MuiDataGrid-cell": {
+                      '& .MuiDataGrid-cell:hover': {
+                        color: 'primary.main',
+                      },
+                      '& .MuiDataGrid-cell': {
                         border: 1,
-                        borderColor: "primary.main",
+                        borderRight: 0,
+                        borderTop: 0,
+                        borderColor: '#363535',
                       },
-                      "& .MuiDataGrid-cell:hover": {
-                        color: "primary.main",
-                      },
+                      borderColor: '#363535',
                     }}
-                    rows={filteredRows}
-                    columns={columns}
                     onRowClick={(e) => {
-                      if (selectedRow === e.row) {
-                        setClick(!click);
-                      } else {
-                        setSelectedRow(e.row);
-                        setClick(true);
-                        // Set the selected row
-                      }
+                      setSelectedRow(e.row);
                     }}
-                    className="tw-border tw-rounded tw-shadow-md "
                   />
-                ) : (
-                  <div>Loading..</div>
-                )}
-              </div>
+                </ThemeProvider>
+              )}
             </div>
+
+            <Dialog
+              open={isDeleteConfirmationOpen}
+              onClose={closeDeleteConfirmation}
+              maxWidth="xs"
+            >
+              <div className="tw-bg-darkgrey tw-p-[15px]">
+                <h2 className="tw-text-bluepurple">Confirm Deletion</h2>
+                <h4 className="tw-text-lightgrey tw-mb-[30px]">
+                  Are you sure you want to delete customer details of{' '}
+                  <span className="tw-text-violet">{rowsa.name}</span>?
+                </h4>
+                <div className="tw-w-[100%] tw-mt-[15px] tw-flex tw-justify-around ">
+                  <button
+                    onClick={closeDeleteConfirmation}
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleDelete}
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            </Dialog>
           </div>
         </div>
       </div>

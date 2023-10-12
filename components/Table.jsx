@@ -262,8 +262,8 @@ const MyTable = ({ data }) => {
       {row ? (
         <div className=" tw-bg-darkergrey tw-rounded-md tw-shadow-md tw-w-[80vw] md:tw-w-[60-vw] tw-p-[5px] tw-overflow-y-auto tw-md:p-[15px] ">
           {row && (
-            <ThemeProvider theme={theme}>
-              <div className="tw-h-[75vh]">
+            <div className="tw-h-[65vh]">
+              <ThemeProvider theme={theme}>
                 <DataGrid
                   components={{
                     Toolbar: GridToolbar,
@@ -303,8 +303,8 @@ const MyTable = ({ data }) => {
                     setSelectedRow(e.row);
                   }}
                 />
-              </div>
-            </ThemeProvider>
+              </ThemeProvider>
+            </div>
           )}
 
           <Dialog open={isEditModalOpen} onClose={closeModals} maxWidth="xs">
