@@ -111,7 +111,7 @@ function ProductPage() {
         const data = await res.json();
         if (data.data == 'Successfully Created') {
           setIsDeleteConfirmationOpen(true);
-        }
+        } else alert(data.data);
       } else {
         console.log('Error:', res.statusText);
       }
@@ -453,7 +453,6 @@ function ProductPage() {
           <button className=" tw-flex tw-w-full tw-justify-center tw-rounded tw-bg-bluepurple tw-p-3 tw-font-medium tw-text-gray">
             Add Product
           </button>
-   
         </form>
         <Dialog
           open={isDeleteConfirmationOpen}
