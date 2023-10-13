@@ -19,6 +19,8 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChatBubbleLeftRightIcon,
+  TagIcon,
+  Square3Stack3DIcon,
 } from '@heroicons/react/24/solid';
 import logo from '../public/logo.png';
 import { signOut } from 'next-auth/react';
@@ -48,7 +50,9 @@ function Sidebar() {
 
         <Typography
           variant="h2"
-          className={`tw-lg:text-[18px] ${click ? 'tw-invisible' : 'tw-visible'} `}
+          className={`tw-lg:text-[18px] ${
+            click ? 'tw-invisible' : 'tw-visible'
+          } `}
           color="blue-gray"
         >
           <Image src={logo} alt="logo" width={200} height={100} />
@@ -67,8 +71,14 @@ function Sidebar() {
         >
           <ListItemPrefix>
             <PresentationChartBarIcon
-              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} 
-              ${pathname === '/dashboard' ? 'tw-text-teal' : 'tw-text-bluepurple'}`}
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } 
+              ${
+                pathname === '/dashboard'
+                  ? 'tw-text-teal'
+                  : 'tw-text-bluepurple'
+              }`}
             />
           </ListItemPrefix>
           <Typography
@@ -94,7 +104,9 @@ function Sidebar() {
         >
           <ListItemPrefix>
             <ShoppingBagIcon
-              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } ${
                 pathname === '/order' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
@@ -121,8 +133,12 @@ function Sidebar() {
         >
           <ListItemPrefix>
             <UserCircleIcon
-              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
-                pathname === '/customers' ? 'tw-text-teal' : 'tw-text-bluepurple'
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } ${
+                pathname === '/customers'
+                  ? 'tw-text-teal'
+                  : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
@@ -148,73 +164,25 @@ function Sidebar() {
         >
           <ListItemPrefix>
             <Cog6ToothIcon
-              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
-                pathname === '/products' ? 'tw-text-teal' : 'tw-text-bluepurple'
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } ${
+                pathname === '/products' || pathname === '/productinput'
+                  ? 'tw-text-teal'
+                  : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
             className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
-              pathname === '/products' ? 'tw-text-teal' : 'tw-text-bluepurple'
+              pathname === '/products' || pathname === '/productinput'
+                ? 'tw-text-teal'
+                : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
             Products
-          </Typography>
-        </ListItem>
-        <br />
-        <ListItem
-          onClick={() => router.push('/support')}
-          className={` tw-flex ${
-            click ? 'tw-justify-center' : 'tw-justify-between'
-          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
-           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
-           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
-           `}
-        >
-          <ListItemPrefix>
-            <UserGroupIcon
-              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
-                pathname === '/support' ? 'tw-text-teal' : 'tw-text-bluepurple'
-              }`}
-            />
-          </ListItemPrefix>
-          <Typography
-            variant="h2"
-            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
-              pathname === '/support' ? 'tw-text-teal' : 'tw-text-bluepurple'
-            }`}
-            color="blue-gray"
-          >
-            Support
-          </Typography>
-        </ListItem>
-        <br />
-        <ListItem
-          onClick={() => router.push('/marketing')}
-          className={` tw-flex ${
-            click ? 'tw-justify-center' : 'tw-justify-between'
-          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
-           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
-           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
-           `}
-        >
-          <ListItemPrefix>
-            <ChatBubbleLeftRightIcon
-              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
-                pathname === '/marketing' ? 'tw-text-teal' : 'tw-text-bluepurple'
-              }`}
-            />
-          </ListItemPrefix>
-          <Typography
-            variant="h2"
-            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
-              pathname === '/marketing' ? 'tw-text-teal' : 'tw-text-bluepurple'
-            }`}
-            color="blue-gray"
-          >
-            Marketing
           </Typography>
         </ListItem>
         <br />
@@ -228,8 +196,10 @@ function Sidebar() {
            `}
         >
           <ListItemPrefix>
-            <ChatBubbleLeftRightIcon
-              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+            <Square3Stack3DIcon
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } ${
                 pathname === '/banners' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
@@ -255,8 +225,10 @@ function Sidebar() {
            `}
         >
           <ListItemPrefix>
-            <ChatBubbleLeftRightIcon
-              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${click ? 'tw-w-6' : 'tw-w-5'} ${
+            <TagIcon
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } ${
                 pathname === '/coupons' ? 'tw-text-teal' : 'tw-text-bluepurple'
               }`}
             />
@@ -271,6 +243,68 @@ function Sidebar() {
             Coupons
           </Typography>
         </ListItem>
+        <br />
+
+        <ListItem
+          onClick={() => router.push('/marketing')}
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
+           `}
+        >
+          <ListItemPrefix>
+            <ChatBubbleLeftRightIcon
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } ${
+                pathname === '/marketing'
+                  ? 'tw-text-teal'
+                  : 'tw-text-bluepurple'
+              }`}
+            />
+          </ListItemPrefix>
+          <Typography
+            variant="h2"
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/marketing' ? 'tw-text-teal' : 'tw-text-bluepurple'
+            }`}
+            color="blue-gray"
+          >
+            Marketing
+          </Typography>
+        </ListItem>
+        <br />
+        <ListItem
+          onClick={() => router.push('/support')}
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
+           `}
+        >
+          <ListItemPrefix>
+            <UserGroupIcon
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } ${
+                pathname === '/support' ? 'tw-text-teal' : 'tw-text-bluepurple'
+              }`}
+            />
+          </ListItemPrefix>
+          <Typography
+            variant="h2"
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/support' ? 'tw-text-teal' : 'tw-text-bluepurple'
+            }`}
+            color="blue-gray"
+          >
+            Support
+          </Typography>
+        </ListItem>
+
         {/* <br /> */}
         {/* <br />
         <br />

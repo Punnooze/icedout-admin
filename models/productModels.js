@@ -24,7 +24,7 @@ const ProductsSchema = new mongoose.Schema(
         },
         images: {
             type: Array,
-            required: true 
+            // required: true 
         },
         price: {
             type: Number,
@@ -54,7 +54,7 @@ const ProductsSchema = new mongoose.Schema(
             required: true
         },
         isFeatured:{
-            type: String,
+            type: Boolean,
             required: true 
         },
         featuremsg:{
