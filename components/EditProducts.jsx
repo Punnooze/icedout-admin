@@ -265,7 +265,7 @@ function EditProducts({ data }) {
                             })
                           }
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
                       </div>
 
@@ -284,7 +284,7 @@ function EditProducts({ data }) {
                           value={formValues.name}
                           // style={{ textTransform: 'uppercase' }}
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
                       </div>
                     </div>
@@ -304,7 +304,7 @@ function EditProducts({ data }) {
                             })
                           }
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
                       </div>
 
@@ -323,7 +323,7 @@ function EditProducts({ data }) {
                             })
                           }
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
                       </div>
                     </div>
@@ -343,7 +343,7 @@ function EditProducts({ data }) {
                           }
                           value={formValues.drop}
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
                       </div>
 
@@ -362,7 +362,7 @@ function EditProducts({ data }) {
                             })
                           }
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
                       </div>
                     </div>
@@ -426,7 +426,7 @@ function EditProducts({ data }) {
                             })
                           }
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
                       </div>
                       <div className="tw-w-1/2 tw-mb-[20px]">
@@ -436,14 +436,14 @@ function EditProducts({ data }) {
                         <input
                           type="file"
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                           accept="image/jpeg, image/png, image/jpg"
                         />
                         <output></output>
                       </div>
                     </div>
 
-                    <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+                    <div className="tw-hidden tw-mb-4.5 md:tw-flex tw-space-x-4 ">
                       <div className="tw-w-1/2 tw-flex tw-mb-[20px] tw-pr-2">
                         <div className="tw-w-1/3 ">
                           <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
@@ -461,7 +461,7 @@ function EditProducts({ data }) {
                                 className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
                                 value="true"
                                 control={<Radio />}
-                                label="YES"
+                                label="Yes"
                                 onChange={() =>
                                   setFormValues({
                                     ...formValues,
@@ -475,7 +475,7 @@ function EditProducts({ data }) {
                                 className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
                                 value="false"
                                 control={<Radio />}
-                                label="NO"
+                                label="No"
                                 onChange={() =>
                                   setFormValues({
                                     ...formValues,
@@ -500,7 +500,7 @@ function EditProducts({ data }) {
                               onChange={handleInputChange}
                               placeholder="Enter feature Message"
                               className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                  tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                              tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                             />
                           </div>
                         )}
@@ -520,11 +520,116 @@ function EditProducts({ data }) {
                             })
                           }
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
                       </div>
                     </div>
 
+                    {/*  */}
+
+                    {/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */}
+
+                    <div className="md:tw-hidden">
+                      <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+                        <div className="tw-w-1/2">
+                          <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                            Featured?
+                          </label>
+
+                          <ThemeProvider theme={theme}>
+                            <RadioGroup
+                              aria-labelledby="demo-controlled-radio-buttons-group"
+                              name="controlled-radio-buttons-group"
+                            >
+                              <FormControlLabel
+                                checked={formValues.isFeatured === true}
+                                name="isFeatured"
+                                className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                                value="true"
+                                control={<Radio />}
+                                label="Yes"
+                                onChange={() =>
+                                  setFormValues({
+                                    ...formValues,
+                                    isFeatured: true,
+                                  })
+                                }
+                              />
+                              <FormControlLabel
+                                checked={formValues.isFeatured === false}
+                                name="isFeatured"
+                                className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                                value="false"
+                                control={<Radio />}
+                                label="No"
+                                onChange={() =>
+                                  setFormValues({
+                                    ...formValues,
+                                    isFeatured: false,
+                                  })
+                                }
+                              />
+                            </RadioGroup>
+                          </ThemeProvider>
+                        </div>
+
+                        <div className="tw-w-1/2 tw-mb-[20px]">
+                          <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                            SEO
+                          </label>
+                          <input
+                            required
+                            type="text"
+                            value={formValues.seo}
+                            onChange={(e) =>
+                              setFormValues({
+                                ...formValues,
+                                seo: e.target.value,
+                              })
+                            }
+                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          />
+                        </div>
+                      </div>
+                      {formValues.isFeatured === true && (
+                        <div className="tw-mb-[20px] ">
+                          <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                            Feature Message
+                          </label>
+                          <input
+                            required
+                            type="text"
+                            name="featuremsg"
+                            value={formValues.featuremsg}
+                            onChange={handleInputChange}
+                            placeholder="Enter feature Message"
+                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                              tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* </div> */}
+
+                    {/*  */}
                     <div className="tw-mb-4.5 tw-flex tw-space-x-4">
                       <div className="tw-w-1/2 tw-mb-[20px]">
                         <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
@@ -540,8 +645,7 @@ function EditProducts({ data }) {
                               handleDescriptionChange(index, e.target.value)
                             }
                             placeholder={`Enter Description ${index + 1}`}
-                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-mb-[10px] tw-text-[12px] md:tw-text-[16px]"
+                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-mb-[10px] tw-text-[12px] md:tw-text-[16px]"
                           />
                         ))}
                         {descriptionCount < 5 && (
@@ -584,8 +688,7 @@ function EditProducts({ data }) {
                               handleDetailsChange(index, e.target.value)
                             }
                             placeholder={`Enter Details ${index + 1}`}
-                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-mb-[10px] tw-text-[12px] md:tw-text-[16px]"
+                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-mb-[10px] tw-text-[12px] md:tw-text-[16px]"
                           />
                         ))}
                         {detailsCount < 5 && (
@@ -671,7 +774,7 @@ function EditProducts({ data }) {
                             onChange={handleInputChange}
                             placeholder="Enter feature Message"
                             className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                           />
                         </div>
                       )}

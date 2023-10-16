@@ -367,7 +367,7 @@ function ProductPage() {
             </div>
           </div>
 
-          <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+          {/* <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-flex tw-mb-[20px] tw-pr-2">
               <div className="tw-w-1/3 ">
                 <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
@@ -422,7 +422,7 @@ function ProductPage() {
                     name="featuremsg"
                     value={formValues.featuremsg}
                     onChange={handleInputChange}
-                    placeholder="Enter feature Message"
+                    placeholder="Enter Feature Message"
                     className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                   tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                   />
@@ -444,6 +444,168 @@ function ProductPage() {
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
+          </div> */}
+
+          <div className="tw-hidden tw-mb-4.5 md:tw-flex tw-space-x-4 ">
+            <div className="tw-w-1/2 tw-flex tw-mb-[20px] tw-pr-2">
+              <div className="tw-w-1/3 ">
+                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                  Featured?
+                </label>
+
+                <ThemeProvider theme={theme}>
+                  <RadioGroup
+                    aria-labelledby="demo-controlled-radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      checked={formValues.isFeatured === true}
+                      name="isFeatured"
+                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                      value="true"
+                      control={<Radio />}
+                      label="Yes"
+                      onChange={() =>
+                        setFormValues({
+                          ...formValues,
+                          isFeatured: true,
+                        })
+                      }
+                    />
+                    <FormControlLabel
+                      checked={formValues.isFeatured === false}
+                      name="isFeatured"
+                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                      value="false"
+                      control={<Radio />}
+                      label="No"
+                      onChange={() =>
+                        setFormValues({
+                          ...formValues,
+                          isFeatured: false,
+                        })
+                      }
+                    />
+                  </RadioGroup>
+                </ThemeProvider>
+              </div>
+
+              {formValues.isFeatured === true && (
+                <div className="tw-w-2/3 ">
+                  <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                    Feature Message
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="featuremsg"
+                    onChange={handleInputChange}
+                    placeholder="Enter Feature Message"
+                    className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                              tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                  />
+                </div>
+              )}
+            </div>
+            <div className="tw-w-1/2 tw-mb-[20px]">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                SEO
+              </label>
+              <input
+                required
+                type="text"
+                placeholder="Enter SEO"
+                onChange={(e) =>
+                  setFormValues({
+                    ...formValues,
+                    seo: e.target.value,
+                  })
+                }
+                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+              />
+            </div>
+          </div>
+
+          <div className="md:tw-hidden">
+            <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+              <div className="tw-w-1/2">
+                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                  Featured?
+                </label>
+
+                <ThemeProvider theme={theme}>
+                  <RadioGroup
+                    aria-labelledby="demo-controlled-radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      checked={formValues.isFeatured === true}
+                      name="isFeatured"
+                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                      value="true"
+                      control={<Radio />}
+                      label="Yes"
+                      onChange={() =>
+                        setFormValues({
+                          ...formValues,
+                          isFeatured: true,
+                        })
+                      }
+                    />
+                    <FormControlLabel
+                      checked={formValues.isFeatured === false}
+                      name="isFeatured"
+                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                      value="false"
+                      control={<Radio />}
+                      label="No"
+                      onChange={() =>
+                        setFormValues({
+                          ...formValues,
+                          isFeatured: false,
+                        })
+                      }
+                    />
+                  </RadioGroup>
+                </ThemeProvider>
+              </div>
+
+              <div className="tw-w-1/2 tw-mb-[20px]">
+                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                  SEO
+                </label>
+                <input
+                  required
+                  type="text"
+                  placeholder="Enter SEO"
+                  onChange={(e) =>
+                    setFormValues({
+                      ...formValues,
+                      seo: e.target.value,
+                    })
+                  }
+                  className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                />
+              </div>
+            </div>
+            {formValues.isFeatured === true && (
+              <div className="tw-mb-[20px] ">
+                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                  Feature Message
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="featuremsg"
+                  onChange={handleInputChange}
+                  placeholder="Enter Feature Message"
+                  className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                              tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                />
+              </div>
+            )}
           </div>
 
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
