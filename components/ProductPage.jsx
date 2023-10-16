@@ -1,5 +1,12 @@
 'use client';
 import {
+  MinusIcon,
+  PencilIcon,
+  PlusIcon,
+  ShoppingBagIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/solid';
+import {
   Dialog,
   FormControlLabel,
   Radio,
@@ -16,6 +23,7 @@ function ProductPage() {
     sku: null,
     name: null,
     slug: null,
+    seo: null,
     category: null,
     drop: null,
     images: null,
@@ -26,7 +34,7 @@ function ProductPage() {
       M: 9999,
       L: 9999,
       XL: 9999,
-      '2XL': 9999,
+      XXL: 9999,
     },
     unavailable: false,
     description: [''],
@@ -38,6 +46,8 @@ function ProductPage() {
   const [detailsCount, setDetailsCount] = useState(1);
   const [selectedcountInStock, setSelectedcountInStock] = useState('S');
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
+  const [isCancelConfirmationOpen, setIsCancelConfirmationOpen] =
     useState(false);
 
   const theme = createTheme({
@@ -80,6 +90,18 @@ function ProductPage() {
     }
   };
 
+  const handleRemoveDescriptionField = () => {
+    const { description } = formValues;
+    if (descriptionCount < 9) {
+      description.pop('');
+      setFormValues({
+        ...formValues,
+        description,
+      });
+      setDescriptionCount(descriptionCount - 1);
+    }
+  };
+
   const handleAddDetailsField = () => {
     const { details } = formValues;
     if (detailsCount < 9) {
@@ -92,8 +114,24 @@ function ProductPage() {
     }
   };
 
+  const handleRemoveDetailsField = () => {
+    const { details } = formValues;
+    if (detailsCount < 9) {
+      details.pop('');
+      setFormValues({
+        ...formValues,
+        details,
+      });
+      setDetailsCount(detailsCount - 1);
+    }
+  };
+
   const closeDeleteConfirmation = () => {
     setIsDeleteConfirmationOpen(false);
+  };
+
+  const closeCancelConfirmation = () => {
+    setIsCancelConfirmationOpen(false);
   };
 
   const handleSubmit = async (e) => {
@@ -162,112 +200,112 @@ function ProductPage() {
           </div>
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 SKU
               </label>
               <input
+                required
                 type="text"
                 placeholder="Enter SKU"
-                style={{ textTransform: 'uppercase' }}
                 onChange={(e) =>
                   setFormValues({ ...formValues, sku: e.target.value })
                 }
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
 
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Name
               </label>
               <input
+                required
                 type="text"
                 onChange={(e) =>
                   setFormValues({ ...formValues, name: e.target.value })
                 }
                 placeholder="Enter product name"
-                style={{ textTransform: 'uppercase' }}
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
           </div>
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Slug
               </label>
               <input
+                required
                 type="text"
                 placeholder="Enter slug"
-                style={{ textTransform: 'uppercase' }}
                 onChange={(e) =>
                   setFormValues({ ...formValues, slug: e.target.value })
                 }
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
 
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Category
               </label>
               <input
+                required
                 type="text"
                 placeholder="Enter Category"
-                style={{ textTransform: 'uppercase' }}
                 onChange={(e) =>
                   setFormValues({ ...formValues, category: e.target.value })
                 }
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
           </div>
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Drop
               </label>
               <input
+                required
                 type="text"
-                style={{ textTransform: 'uppercase' }}
                 onChange={(e) =>
                   setFormValues({ ...formValues, drop: e.target.value })
                 }
                 placeholder="Enter Drop"
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
 
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Price
               </label>
               <input
+                required
                 type="number"
                 placeholder="Enter Product Price"
-                style={{ textTransform: 'uppercase' }}
                 onChange={(e) =>
                   setFormValues({ ...formValues, price: e.target.value })
                 }
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
           </div>
 
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
-                Select countInStock
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                Select Size
               </label>
               <select
-                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                  tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]
+                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
                 onChange={(e) => setSelectedcountInStock(e.target.value)}
                 value={selectedcountInStock}
               >
@@ -281,19 +319,19 @@ function ProductPage() {
 
             <div className="tw-w-1/2 relative z-20 bg-transparent dark:bg-form-input">
               <div>
-                <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
-                  Stock for countInStock :{' '}
+                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                  Stock for :{' '}
                   <span className="tw-text-violet tw-font-medium">
                     {selectedcountInStock}
                   </span>
                 </label>
                 <input
+                  required
                   type="number"
                   value={formValues.countInStock[selectedcountInStock]}
-                  style={{ textTransform: 'uppercase' }}
                   onChange={handleStockChange}
                   className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                  tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                  tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                 />
               </div>
             </div>
@@ -301,28 +339,28 @@ function ProductPage() {
 
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Discount
               </label>
               <input
+                required
                 type="number"
                 placeholder="Enter Discount (if any)"
-                style={{ textTransform: 'uppercase' }}
                 onChange={(e) =>
                   setFormValues({ ...formValues, discount: e.target.value })
                 }
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Attached Image
               </label>
               <input
                 type="file"
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                 accept="image/jpeg, image/png, image/jpg"
               />
               <output></output>
@@ -330,8 +368,87 @@ function ProductPage() {
           </div>
 
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+            <div className="tw-w-1/2 tw-flex tw-mb-[20px] tw-pr-2">
+              <div className="tw-w-1/3 ">
+                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                  Featured?
+                </label>
+
+                <ThemeProvider theme={theme}>
+                  <RadioGroup
+                    aria-labelledby="demo-controlled-radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      checked={formValues.isFeatured === true}
+                      name="isFeatured"
+                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                      value="true"
+                      control={<Radio />}
+                      label="YES"
+                      onChange={() =>
+                        setFormValues({
+                          ...formValues,
+                          isFeatured: true,
+                        })
+                      }
+                    />
+                    <FormControlLabel
+                      checked={formValues.isFeatured === false}
+                      name="isFeatured"
+                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                      value="false"
+                      control={<Radio />}
+                      label="NO"
+                      onChange={() =>
+                        setFormValues({
+                          ...formValues,
+                          isFeatured: false,
+                        })
+                      }
+                    />
+                  </RadioGroup>
+                </ThemeProvider>
+              </div>
+
+              {formValues.isFeatured === true && (
+                <div className="tw-w-2/3 ">
+                  <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                    Feature Message
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="featuremsg"
+                    value={formValues.featuremsg}
+                    onChange={handleInputChange}
+                    placeholder="Enter feature Message"
+                    className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                  tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                  />
+                </div>
+              )}
+            </div>
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                SEO
+              </label>
+              <input
+                required
+                type="text"
+                placeholder="Enter SEO"
+                onChange={(e) =>
+                  setFormValues({ ...formValues, seo: e.target.value })
+                }
+                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+              />
+            </div>
+          </div>
+
+          <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+            <div className="tw-w-1/2 tw-mb-[20px]">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Description
               </label>
               {formValues.description.map((description, index) => (
@@ -339,28 +456,42 @@ function ProductPage() {
                   key={index}
                   type="text"
                   value={description}
-                  style={{ textTransform: 'uppercase' }}
                   onChange={(e) =>
                     handleDescriptionChange(index, e.target.value)
                   }
                   placeholder={`Enter Description ${index + 1}`}
                   className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-mb-[10px]"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-mb-[10px] tw-text-[12px] md:tw-text-[16px]"
                 />
               ))}
               {descriptionCount < 5 && (
-                <button
-                  type="button"
-                  onClick={handleAddDescriptionField}
-                  className="tw-text-primary tw-hover:underline"
-                >
-                  Add Description Field
-                </button>
+                <div className="tw-flex tw-w-[100%] tw-justify-around">
+                  <button
+                    type="button"
+                    onClick={handleAddDescriptionField}
+                    className="tw-text-primary tw-hover:underline tw-flex tw-items-center"
+                  >
+                    <PlusIcon className=" tw-w-6 tw-h-7 md:tw-mr-[5px]" />
+                    <p className="tw-text-[15px] tw-hidden md:tw-block">
+                      Add Field
+                    </p>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleRemoveDescriptionField}
+                    className="tw-text-primary tw-hover:underline tw-flex tw-items-center"
+                  >
+                    <MinusIcon className=" tw-w-6 tw-h-7 md:tw-mr-[5px]" />
+                    <p className="tw-text-[15px] tw-hidden md:tw-block">
+                      Remove Field
+                    </p>
+                  </button>
+                </div>
               )}
             </div>
 
             <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Details
               </label>
               {formValues.details.map((details, index) => (
@@ -368,113 +499,112 @@ function ProductPage() {
                   key={index}
                   type="text"
                   value={details}
-                  style={{ textTransform: 'uppercase' }}
                   onChange={(e) => handleDetailsChange(index, e.target.value)}
                   placeholder={`Enter Details ${index + 1}`}
                   className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-mb-[10px]"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-mb-[10px] tw-text-[12px] md:tw-text-[16px]"
                 />
               ))}
               {detailsCount < 5 && (
-                <button
-                  type="button"
-                  onClick={handleAddDetailsField}
-                  className="tw-text-primary tw-hover:underline"
-                >
-                  Add Another Detail
-                </button>
+                <div className="tw-flex tw-w-[100%] tw-justify-around">
+                  <button
+                    type="button"
+                    onClick={handleAddDetailsField}
+                    className="tw-text-primary tw-hover:underline tw-flex tw-items-center"
+                  >
+                    <PlusIcon className=" tw-w-6 tw-h-7 md:tw-mr-[5px]" />
+                    <p className="tw-text-[15px] tw-hidden md:tw-block">
+                      Add Field
+                    </p>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleRemoveDetailsField}
+                    className="tw-text-primary tw-hover:underline tw-flex tw-items-center"
+                  >
+                    <MinusIcon className=" tw-w-6 tw-h-7 md:tw-mr-[5px]" />
+                    <p className="tw-text-[15px] tw-hidden md:tw-block">
+                      Remove Field
+                    </p>
+                  </button>
+                </div>
               )}
             </div>
           </div>
 
-          <div className="tw-mb-4.5 tw-flex tw-space-x-4">
-            <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple">
-                Featured?
-              </label>
-
-              <ThemeProvider theme={theme}>
-                <RadioGroup
-                  aria-labelledby="demo-controlled-radio-buttons-group"
-                  name="controlled-radio-buttons-group"
-                >
-                  <FormControlLabel
-                    checked={formValues.isFeatured === true}
-                    name="isFeatured"
-                    className="tw-text-lightgrey"
-                    value="true"
-                    control={<Radio />}
-                    label="YES"
-                    onChange={() =>
-                      setFormValues({
-                        ...formValues,
-                        isFeatured: true,
-                      })
-                    }
-                  />
-                  <FormControlLabel
-                    checked={formValues.isFeatured === false}
-                    name="isFeatured"
-                    className="tw-text-lightgrey"
-                    value="false"
-                    control={<Radio />}
-                    label="NO"
-                    onChange={() =>
-                      setFormValues({
-                        ...formValues,
-                        isFeatured: false,
-                      })
-                    }
-                  />
-                </RadioGroup>
-              </ThemeProvider>
-            </div>
-
-            {formValues.isFeatured === true && (
-              <div className="tw-w-1/2 ">
-                <label className="tw-mb-2.5 tw-block tw-text-[16px] tw-text-bluepurple">
-                  Feature Message
-                </label>
-                <input
-                  type="text"
-                  name="featuremsg"
-                  value={formValues.featuremsg}
-                  style={{ textTransform: 'uppercase' }}
-                  onChange={handleInputChange}
-                  placeholder="Enter feature Message"
-                  className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
-                />
-              </div>
-            )}
-          </div>
           <br />
-
-          <button className=" tw-flex tw-w-full tw-justify-center tw-rounded tw-bg-bluepurple tw-p-3 tw-font-medium tw-text-gray">
-            Add Product
-          </button>
+          <div className="tw-flex tw-justify-around ">
+            <div
+              onClick={() => setIsCancelConfirmationOpen(true)}
+              className=" tw-flex tw-items-center  tw-justify-center tw-rounded tw-bg-bluepurple tw-p-[10px] tw-font-medium tw-text-gray tw-px-[30px]"
+            >
+              <XMarkIcon className="tw-h-5 tw-w-5" />
+              <p className="tw-font-medium tw-text-[15px] ">Cancel</p>
+            </div>
+            <button
+              type="submit"
+              className=" tw-flex tw-items-center  tw-justify-center tw-rounded tw-bg-bluepurple tw-p-[10px] tw-font-medium tw-text-gray tw-px-[30px]"
+            >
+              <PlusIcon className="tw-h-5 tw-w-5" />
+              <p className="tw-font-medium ">Add</p>
+            </button>
+          </div>
         </form>
+
         <Dialog
           open={isDeleteConfirmationOpen}
           onClose={closeDeleteConfirmation}
           maxWidth="xs"
         >
           <div className="tw-bg-darkgrey tw-p-[15px]">
-            <br />
-            <h2 className="tw-text-bluepurple">Product Created Successfuly</h2>
+            <h2 className="tw-text-bluepurple">Product created successfuly!</h2>
             <br />
             <div className="tw-w-[100%] tw-mt-[15px] tw-flex tw-justify-around ">
               <button
                 onClick={closeDeleteConfirmation}
-                className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                className=" tw-p-[10px]   tw-rounded-md hover:tw-text-darkgrey hover:tw-bg-violet tw-duration-200 tw-flex tw-justify-center tw-items-center tw-bg-darkgrey tw-text-violet tw-border-[2px]"
               >
-                Create Product
+                <PlusIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
+                <p className="tw-text-[16px] tw-font-medium]">Create</p>
               </button>
               <button
                 onClick={() => router.push('/products')}
-                className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                className=" tw-p-[10px]   tw-rounded-md hover:tw-text-darkgrey hover:tw-bg-violet tw-duration-200 tw-flex tw-justify-center tw-items-center tw-bg-darkgrey tw-text-violet tw-border-[2px]"
               >
-                View Products
+                <ShoppingBagIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
+                <p className="tw-text-[16px] tw-font-medium]">Products</p>
+              </button>
+            </div>
+          </div>
+        </Dialog>
+
+        <Dialog
+          open={isCancelConfirmationOpen}
+          onClose={closeCancelConfirmation}
+          maxWidth="xs"
+        >
+          <div className="tw-bg-darkgrey tw-p-[15px]">
+            <h2 className="tw-text-violet tw-mb-[5px]">
+              Are you sure you want to cancel creation of this product?
+            </h2>
+            <h4 className="tw-text-bluepurple tw-my-[10px] tw-text-[18px]">
+              All changes will be lost
+            </h4>
+            <br />
+            <div className="tw-w-[100%] tw-mt-[15px] tw-flex tw-justify-around ">
+              <button
+                onClick={closeCancelConfirmation}
+                className=" tw-p-[10px]   tw-rounded-md hover:tw-text-darkgrey hover:tw-bg-violet tw-duration-200 tw-flex tw-justify-center tw-items-center tw-bg-darkgrey tw-text-violet tw-border-[2px]"
+              >
+                <PencilIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
+                <p className="tw-text-[16px] tw-font-medium]">Continue Edit</p>
+              </button>
+              <button
+                onClick={() => router.push('/products')}
+                className=" tw-p-[10px]   tw-rounded-md hover:tw-text-darkgrey hover:tw-bg-violet tw-duration-200 tw-flex tw-justify-center tw-items-center tw-bg-darkgrey tw-text-violet tw-border-[2px]"
+              >
+                <ShoppingBagIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
+                <p className="tw-text-[16px] tw-font-medium]">View Products</p>
               </button>
             </div>
           </div>
