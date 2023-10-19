@@ -55,6 +55,7 @@ export async function PUT(request) {
         couponName: data.couponName,
         expiry: data.expiry,
         percentage: data.percentage,
+        flatDiscount: data.flatDiscount,
         minPurchase: data.minPurchase,
         deliverFee: data.deliverFee,
         percentageDiscount: data.percentageDiscount,

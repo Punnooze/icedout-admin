@@ -230,14 +230,22 @@ function Sidebar() {
               className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
                 click ? 'tw-w-6' : 'tw-w-5'
               } ${
-                pathname === '/coupons' ? 'tw-text-teal' : 'tw-text-bluepurple'
+                pathname === '/coupons' ||
+                pathname === '/couponinput' ||
+                pathname === '/couponEdit'
+                  ? 'tw-text-teal'
+                  : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
             className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
-              pathname === '/coupons' ? 'tw-text-teal' : 'tw-text-bluepurple'
+              pathname === '/coupons' ||
+              pathname === '/couponinput' ||
+              pathname === '/couponEdit'
+                ? 'tw-text-teal'
+                : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >

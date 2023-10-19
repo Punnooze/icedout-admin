@@ -20,7 +20,7 @@ function Coupons({ data }) {
     expiry: '',
     percentage: false,
     percentageDiscount: '',
-    flatDiscout: '',
+    flatDiscount: '',
     minPurchase: '',
     deliveryFee: true,
   });
@@ -204,7 +204,7 @@ function Coupons({ data }) {
               type="number"
               value={formValues.flatDiscout}
               onChange={(e) =>
-                setFormValues({ ...formValues, flatDiscout: e.target.value })
+                setFormValues({ ...formValues, flatDiscount: e.target.value })
               }
               placeholder="Enter Discount Amount"
               min="0"

@@ -67,7 +67,7 @@ const columns = [
   },
   {
     field: 'percentageDiscount',
-    headerName: 'Percentage discount',
+    headerName: 'Perc Discount',
     width: 100,
     headerClassName: 'custom-header',
   },
@@ -79,7 +79,7 @@ const columns = [
   },
   {
     field: 'minPurchase',
-    headerName: 'Minimum Purchase',
+    headerName: 'Min Purchase',
     width: 100,
     headerClassName: 'custom-header',
   },
@@ -148,6 +148,7 @@ function CouponTable({ data }) {
         return {
           ...item,
           id: count,
+          expiry: item.expiry.slice(0, 10),
         };
       });
       setRow(value);
@@ -192,7 +193,6 @@ function CouponTable({ data }) {
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
-          
         >
           <MenuItem>
             <Link
@@ -231,8 +231,12 @@ function CouponTable({ data }) {
                 onClick={() => router.push('/couponinput')}
               >
                 <PlusIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
-                <p className="md:tw-hidden tw-text-[14px] md:tw-text-[16px]">Create</p>
-                <p className="tw-hidden md:tw-block tw-text-[14px] md:tw-text-[16px]">Create Coupon</p>
+                <p className="md:tw-hidden tw-text-[14px] md:tw-text-[16px]">
+                  Create
+                </p>
+                <p className="tw-hidden md:tw-block tw-text-[14px] md:tw-text-[16px]">
+                  Create Coupon
+                </p>
               </button>
             </div>
           </div>
