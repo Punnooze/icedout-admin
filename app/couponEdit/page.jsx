@@ -1,41 +1,31 @@
 'use client';
-import EditProducts from '@/components/EditProducts';
-import ProductCard from '@/components/ProductCard';
+
+import Coupons from '@/components/Coupons';
+import EditCoupons from '@/components/EditCoupons';
 import React, { useState, useEffect } from 'react';
-export default function ProductEdit({ searchParams }) {
-  const sku = searchParams.sku;
+export default function CouponEdit({ searchParams }) {
+  const idCoupon = searchParams.id;
+  console.log(idCoupon);
   const [data, setData] = useState({
-    category: '',
-    countInStock: {
-      S: '',
-      M: '',
-      L: '',
-      XL: '',
-      XXL: '',
-    },
-    createdAt: '',
-    description: [''],
-    details: [''],
-    discount: '',
-    drop: '',
-    featuremsg: '',
-    name: '',
-    price: '',
-    sku: '',
-    slug: '',
-    unavailable: '',
-    updatedAt: '',
+    couponName: '',
+    couponID: '',
+    expiry: '',
+    percentage: false,
+    percentageDiscount: '',
+    flatDiscout: '',
+    minPurchase: '',
+    deliveryFee: true,
     _id: '',
     _v: '',
   });
   // const countInStock = searchParams.countInStock;
 
-  // console.log(sku);
+  // console.log(id);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch(`api/productEdit?sku=${sku}`, {
+        const res = await fetch(`api/couponEdit?id=${idCoupon}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -57,8 +47,8 @@ export default function ProductEdit({ searchParams }) {
         console.log('Error', error);
       }
     };
-    if (sku) getData();
-  }, [sku]);
+    if (idCoupon) getData();
+  }, [idCoupon]);
 
   useEffect(() => {
     if (data) console.log(data);
@@ -66,7 +56,7 @@ export default function ProductEdit({ searchParams }) {
 
   return (
     <div className="tw-h-[100vh] tw-bg-background tw-ml-[70px]">
-      {data && <EditProducts data={data} />}
+      {data && <Coupons data={data} />}
     </div>
   );
 }

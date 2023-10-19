@@ -14,14 +14,14 @@ const userSchema = new mongoose.Schema(
         password: {
             type: String,
         },
-        mobile:{
-            type:String,
-            default:""
-        },
         whatsapp:{
             type:String,
             default:""
         },
+        wishlist:{
+            type:Array,
+            default:[]
+        }
     },
     {
         timestamps:true,

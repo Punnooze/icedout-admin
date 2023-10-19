@@ -4,8 +4,8 @@ import ProductPage from '@/components/ProductPage';
 
 export default function page() {
   return (
-    <>
+    <div>
       <ProductPage />
-    </>
+    </div>
   );
 }

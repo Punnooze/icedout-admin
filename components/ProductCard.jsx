@@ -64,7 +64,7 @@ function ProductCard({ data, edit }) {
     <div
       onMouseEnter={() => setToggle(true)}
       onMouseLeave={() => setToggle(false)}
-      className="tw-bg-darkgrey tw-w-[250px] tw-h-[420px] tw-rounded-md  tw-overflow-y-clip tw-shadow-md hover:tw-shadow-lg"
+      className="tw-bg-darkgrey tw-w-[250px] tw-h-[420px] tw-rounded-md  tw-shadow-md hover:tw-shadow-lg tw-overflow-y-auto"
     >
       {/* <div className="tw-flex tw-justify-around tw-mb-[5px] tw-h-[20px] tw-mt-[5px]">
         <p className="tw-text-violet tw-font-medium tw-text-[15px] ">{data.sku}</p>
@@ -109,7 +109,7 @@ function ProductCard({ data, edit }) {
                 }}
               >
                 <PencilIcon className="tw-w-4 tw-h-4 tw-mr-[5px]" />
-                <p className="tw-text-[13px] tw-font-medium]">Edit</p>
+                <p className="tw-text-[13px] tw-font-medium">Edit</p>
               </Link>
             </button>
             {/* <button className="md:tw-hidden tw-p-[2px] tw-rounded-md tw-text-violet hover:tw-text-darkgrey hover:tw-bg-violet tw-duration-200">
@@ -147,6 +147,23 @@ function ProductCard({ data, edit }) {
                 {Number(data.price) - Number(data.discount)}
               </span>
             </p>
+
+            {/* <div className="tw-w-[100%] tw-flex tw-justify-around tw-mt-[5px]">
+              {Object.entries(data.countInStock).map(([size, value]) => (
+                <div key={size}>
+                  {value !== null && (
+                    <button
+                      className={` tw-p-[3px] tw-px-[10px] tw-text-[12px] tw-rounded-md ${
+                        value === 0 ? 'tw-bg-darkergrey tw-text-lightgrey' : 'tw-bg-bluepurple tw-text-darkgrey'
+                      }
+                      `}
+                    >
+                      {size}
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div> */}
           </div>
         )}
       </div>

@@ -33,12 +33,13 @@ function EditProducts({ data }) {
     price: '',
     discount: '',
     countInStock: {
-      S: 9999,
-      M: 9999,
-      L: 9999,
-      XL: 9999,
-      XXL: 9999,
+      S: null,
+      M: null,
+      L: null,
+      XL: null,
+      XXL: null,
     },
+    gender: '',
     unavailable: '',
     description: [''],
     details: [''],
@@ -149,13 +150,28 @@ function EditProducts({ data }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const countInStock = {};
+
+    // Iterate through the sizes and include only those with non-null values
+    for (const size in formValues.countInStock) {
+      if (formValues.countInStock[size] !== null) {
+        countInStock[size] = formValues.countInStock[size];
+      }
+    }
+
+    // Create a new formValues object with the filtered countInStock
+    const updatedFormValues = {
+      ...formValues,
+      countInStock,
+    };
+
     try {
       const res = await fetch('/api/productUpdate', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: formValues }),
+        body: JSON.stringify({ data: updatedFormValues }),
       });
 
       if (res.ok) {
@@ -373,8 +389,7 @@ function EditProducts({ data }) {
                           Select Size
                         </label>
                         <select
-                          className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]
-                  tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                          className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-text-[12px] md:tw-text-[16px] tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
                           onChange={(e) =>
                             setSelectedcountInStock(e.target.value)
                           }
@@ -397,14 +412,16 @@ function EditProducts({ data }) {
                             </span>
                           </label>
                           <input
+                            required
                             type="number"
                             value={
-                              formValues.countInStock[selectedcountInStock]
+                              formValues.countInStock[selectedcountInStock] !==
+                              null
+                                ? formValues.countInStock[selectedcountInStock]
+                                : ''
                             }
-                            // style={{ textTransform: 'uppercase' }}
                             onChange={handleStockChange}
-                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]
-                  tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                           />
                         </div>
                       </div>
@@ -443,68 +460,7 @@ function EditProducts({ data }) {
                       </div>
                     </div>
 
-                    <div className="tw-hidden tw-mb-4.5 md:tw-flex tw-space-x-4 ">
-                      <div className="tw-w-1/2 tw-flex tw-mb-[20px] tw-pr-2">
-                        <div className="tw-w-1/3 ">
-                          <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                            Featured?
-                          </label>
-
-                          <ThemeProvider theme={theme}>
-                            <RadioGroup
-                              aria-labelledby="demo-controlled-radio-buttons-group"
-                              name="controlled-radio-buttons-group"
-                            >
-                              <FormControlLabel
-                                checked={formValues.isFeatured === true}
-                                name="isFeatured"
-                                className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                                value="true"
-                                control={<Radio />}
-                                label="Yes"
-                                onChange={() =>
-                                  setFormValues({
-                                    ...formValues,
-                                    isFeatured: true,
-                                  })
-                                }
-                              />
-                              <FormControlLabel
-                                checked={formValues.isFeatured === false}
-                                name="isFeatured"
-                                className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                                value="false"
-                                control={<Radio />}
-                                label="No"
-                                onChange={() =>
-                                  setFormValues({
-                                    ...formValues,
-                                    isFeatured: false,
-                                  })
-                                }
-                              />
-                            </RadioGroup>
-                          </ThemeProvider>
-                        </div>
-
-                        {formValues.isFeatured === true && (
-                          <div className="tw-w-2/3 ">
-                            <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                              Feature Message
-                            </label>
-                            <input
-                              required
-                              type="text"
-                              name="featuremsg"
-                              value={formValues.featuremsg}
-                              onChange={handleInputChange}
-                              placeholder="Enter feature Message"
-                              className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                              tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                            />
-                          </div>
-                        )}
-                      </div>
+                    <div className="tw-mb-4.5 tw-flex tw-space-x-4">
                       <div className="tw-w-1/2 tw-mb-[20px]">
                         <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                           SEO
@@ -520,96 +476,75 @@ function EditProducts({ data }) {
                             })
                           }
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
+                      </div>
+                      <div className="tw-w-1/2 tw-mb-[20px]">
+                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                          Select Gender
+                        </label>
+                        <select
+                          required
+                          className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-text-[12px] md:tw-text-[16px] tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                          onChange={(e) =>
+                            setFormValues({
+                              ...formValues,
+                              gender: e.target.value,
+                            })
+                          }
+                          value={formValues.gender}
+                        >
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="unisex">Unisex</option>
+                        </select>
                       </div>
                     </div>
 
-                    {/*  */}
+                    <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+                      <div className="tw-w-1/2 tw-mb-[20px]">
+                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                          Featured?
+                        </label>
 
-                    {/* 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- */}
-
-                    <div className="md:tw-hidden">
-                      <div className="tw-mb-4.5 tw-flex tw-space-x-4">
-                        <div className="tw-w-1/2">
-                          <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                            Featured?
-                          </label>
-
-                          <ThemeProvider theme={theme}>
-                            <RadioGroup
-                              aria-labelledby="demo-controlled-radio-buttons-group"
-                              name="controlled-radio-buttons-group"
-                            >
-                              <FormControlLabel
-                                checked={formValues.isFeatured === true}
-                                name="isFeatured"
-                                className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                                value="true"
-                                control={<Radio />}
-                                label="Yes"
-                                onChange={() =>
-                                  setFormValues({
-                                    ...formValues,
-                                    isFeatured: true,
-                                  })
-                                }
-                              />
-                              <FormControlLabel
-                                checked={formValues.isFeatured === false}
-                                name="isFeatured"
-                                className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                                value="false"
-                                control={<Radio />}
-                                label="No"
-                                onChange={() =>
-                                  setFormValues({
-                                    ...formValues,
-                                    isFeatured: false,
-                                  })
-                                }
-                              />
-                            </RadioGroup>
-                          </ThemeProvider>
-                        </div>
-
-                        <div className="tw-w-1/2 tw-mb-[20px]">
-                          <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                            SEO
-                          </label>
-                          <input
-                            required
-                            type="text"
-                            value={formValues.seo}
-                            onChange={(e) =>
-                              setFormValues({
-                                ...formValues,
-                                seo: e.target.value,
-                              })
-                            }
-                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                          />
-                        </div>
+                        <ThemeProvider theme={theme}>
+                          <RadioGroup
+                            aria-labelledby="demo-controlled-radio-buttons-group"
+                            name="controlled-radio-buttons-group"
+                          >
+                            <FormControlLabel
+                              checked={formValues.isFeatured === true}
+                              name="isFeatured"
+                              className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                              value="true"
+                              control={<Radio />}
+                              label="Yes"
+                              onChange={() =>
+                                setFormValues({
+                                  ...formValues,
+                                  isFeatured: true,
+                                })
+                              }
+                            />
+                            <FormControlLabel
+                              checked={formValues.isFeatured === false}
+                              name="isFeatured"
+                              className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                              value="false"
+                              control={<Radio />}
+                              label="No"
+                              onChange={() =>
+                                setFormValues({
+                                  ...formValues,
+                                  isFeatured: false,
+                                })
+                              }
+                            />
+                          </RadioGroup>
+                        </ThemeProvider>
                       </div>
                       {formValues.isFeatured === true && (
-                        <div className="tw-mb-[20px] ">
+                        <div className="tw-w-1/2 ">
                           <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                             Feature Message
                           </label>
@@ -617,9 +552,8 @@ function EditProducts({ data }) {
                             required
                             type="text"
                             name="featuremsg"
-                            value={formValues.featuremsg}
                             onChange={handleInputChange}
-                            placeholder="Enter feature Message"
+                            value={formValues.featuremsg}
                             className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                               tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                           />
@@ -627,9 +561,6 @@ function EditProducts({ data }) {
                       )}
                     </div>
 
-                    {/* </div> */}
-
-                    {/*  */}
                     <div className="tw-mb-4.5 tw-flex tw-space-x-4">
                       <div className="tw-w-1/2 tw-mb-[20px]">
                         <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">

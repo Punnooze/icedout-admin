@@ -30,12 +30,13 @@ function ProductPage() {
     price: null,
     discount: null,
     countInStock: {
-      S: 9999,
-      M: 9999,
-      L: 9999,
-      XL: 9999,
-      XXL: 9999,
+      S: null,
+      M: null,
+      L: null,
+      XL: null,
+      XXL: null,
     },
+    gender: 'male',
     unavailable: false,
     description: [''],
     details: [''],
@@ -136,13 +137,30 @@ function ProductPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const countInStock = {};
+
+    // Iterate through the sizes and include only those with non-null values
+    for (const size in formValues.countInStock) {
+      if (formValues.countInStock[size] !== null) {
+        countInStock[size] = formValues.countInStock[size];
+      }
+    }
+
+    // Create a new formValues object with the filtered countInStock
+    const updatedFormValues = {
+      ...formValues,
+      countInStock,
+    };
+
+    // Log the updated formValues
     try {
       const res = await fetch('/api/product', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: formValues }),
+        body: JSON.stringify({ data: updatedFormValues }),
       });
 
       if (res.ok) {
@@ -158,12 +176,30 @@ function ProductPage() {
     }
   };
 
+  // const handleStockChange = (event) => {
+  //   console.log(
+  //     event.target.value,
+  //     formValues.countInStock[selectedcountInStock]
+  //   );
+  //   setFormValues((prevFormValues) => ({
+  //     ...prevFormValues,
+  //     countInStock: {
+  //       ...prevFormValues.countInStock,
+  //       [selectedcountInStock]: event.target.value,
+  //     },
+  //   }));
+  // };
+
   const handleStockChange = (event) => {
+    const selectedSize = selectedcountInStock;
+    const stockValue = event.target.value;
+
+    // Only update the selected size
     setFormValues((prevFormValues) => ({
       ...prevFormValues,
       countInStock: {
         ...prevFormValues.countInStock,
-        [selectedcountInStock]: event.target.value,
+        [selectedSize]: stockValue,
       },
     }));
   };
@@ -317,7 +353,7 @@ function ProductPage() {
               </select>
             </div>
 
-            <div className="tw-w-1/2 relative z-20 bg-transparent dark:bg-form-input">
+            {/* <div className="tw-w-1/2 relative z-20 bg-transparent dark:bg-form-input">
               <div>
                 <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                   Stock for :{' '}
@@ -332,6 +368,29 @@ function ProductPage() {
                   onChange={handleStockChange}
                   className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                   tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                />
+              </div>
+            </div> */}
+
+            <div className="tw-w-1/2 relative z-20 bg-transparent dark:bg-form-input">
+              <div>
+                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                  Stock for :{' '}
+                  <span className="tw-text-violet tw-font-medium">
+                    {selectedcountInStock}
+                  </span>
+                </label>
+                <input
+                  required
+                  type="number"
+                  value={
+                    formValues.countInStock[selectedcountInStock] !== null
+                      ? formValues.countInStock[selectedcountInStock]
+                      : ''
+                  }
+                  onChange={handleStockChange}
+                  className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+      tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                 />
               </div>
             </div>
@@ -367,68 +426,7 @@ function ProductPage() {
             </div>
           </div>
 
-          {/* <div className="tw-mb-4.5 tw-flex tw-space-x-4">
-            <div className="tw-w-1/2 tw-flex tw-mb-[20px] tw-pr-2">
-              <div className="tw-w-1/3 ">
-                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                  Featured?
-                </label>
-
-                <ThemeProvider theme={theme}>
-                  <RadioGroup
-                    aria-labelledby="demo-controlled-radio-buttons-group"
-                    name="controlled-radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      checked={formValues.isFeatured === true}
-                      name="isFeatured"
-                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                      value="true"
-                      control={<Radio />}
-                      label="YES"
-                      onChange={() =>
-                        setFormValues({
-                          ...formValues,
-                          isFeatured: true,
-                        })
-                      }
-                    />
-                    <FormControlLabel
-                      checked={formValues.isFeatured === false}
-                      name="isFeatured"
-                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                      value="false"
-                      control={<Radio />}
-                      label="NO"
-                      onChange={() =>
-                        setFormValues({
-                          ...formValues,
-                          isFeatured: false,
-                        })
-                      }
-                    />
-                  </RadioGroup>
-                </ThemeProvider>
-              </div>
-
-              {formValues.isFeatured === true && (
-                <div className="tw-w-2/3 ">
-                  <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                    Feature Message
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="featuremsg"
-                    value={formValues.featuremsg}
-                    onChange={handleInputChange}
-                    placeholder="Enter Feature Message"
-                    className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                  tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                  />
-                </div>
-              )}
-            </div>
+          <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 SEO
@@ -444,9 +442,85 @@ function ProductPage() {
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
-          </div> */}
+            <div className="tw-w-1/2 tw-mb-[20px]">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                Select Gender
+              </label>
+              <select
+                required
+                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-text-[12px] md:tw-text-[16px] tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple"
+                onChange={(e) =>
+                  setFormValues({ ...formValues, gender: e.target.value })
+                }
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="unisex">Unisex</option>
+              </select>
+            </div>
+          </div>
 
-          <div className="tw-hidden tw-mb-4.5 md:tw-flex tw-space-x-4 ">
+          <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+            <div className="tw-w-1/2 tw-mb-[20px]">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                Featured?
+              </label>
+
+              <ThemeProvider theme={theme}>
+                <RadioGroup
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    checked={formValues.isFeatured === true}
+                    name="isFeatured"
+                    className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                    value="true"
+                    control={<Radio />}
+                    label="Yes"
+                    onChange={() =>
+                      setFormValues({
+                        ...formValues,
+                        isFeatured: true,
+                      })
+                    }
+                  />
+                  <FormControlLabel
+                    checked={formValues.isFeatured === false}
+                    name="isFeatured"
+                    className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
+                    value="false"
+                    control={<Radio />}
+                    label="No"
+                    onChange={() =>
+                      setFormValues({
+                        ...formValues,
+                        isFeatured: false,
+                      })
+                    }
+                  />
+                </RadioGroup>
+              </ThemeProvider>
+            </div>
+            {formValues.isFeatured === true && (
+              <div className="tw-w-1/2 ">
+                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                  Feature Message
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="featuremsg"
+                  onChange={handleInputChange}
+                  placeholder="Enter Feature Message"
+                  className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                              tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* <div className="tw-hidden tw-mb-4.5 md:tw-flex tw-space-x-4 ">
             <div className="tw-w-1/2 tw-flex tw-mb-[20px] tw-pr-2">
               <div className="tw-w-1/3 ">
                 <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
@@ -525,9 +599,9 @@ function ProductPage() {
                           tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
-          </div>
+          </div> */}
 
-          <div className="md:tw-hidden">
+          {/* <div className="md:tw-hidden">
             <div className="tw-mb-4.5 tw-flex tw-space-x-4">
               <div className="tw-w-1/2">
                 <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
@@ -606,7 +680,7 @@ function ProductPage() {
                 />
               </div>
             )}
-          </div>
+          </div> */}
 
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">
