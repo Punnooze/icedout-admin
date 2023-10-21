@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/24/solid';
 // import { TrashIcon } from '@heroicons/react/24/outline';
 import { Dialog } from '@mui/material';
+import { CldImage } from 'next-cloudinary';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -64,12 +65,13 @@ function ProductCard({ data, edit }) {
     <div
       onMouseEnter={() => setToggle(true)}
       onMouseLeave={() => setToggle(false)}
-      className="tw-bg-darkgrey tw-w-[250px] tw-h-[420px] tw-rounded-md  tw-shadow-md hover:tw-shadow-lg tw-overflow-y-auto"
+      className="tw-bg-darkgrey tw-w-[250px] tw-h-[420px] tw-rounded-md  tw-shadow-md hover:tw-shadow-lg tw-overflow-y-auto "
     >
       {/* <div className="tw-flex tw-justify-around tw-mb-[5px] tw-h-[20px] tw-mt-[5px]">
         <p className="tw-text-violet tw-font-medium tw-text-[15px] ">{data.sku}</p>
   */}
-      <p className="tw-w-[100%]  tw-relative tw-top-[5px] tw-right-[5px] tw-flex tw-justify-end">
+
+      <p className="tw-w-[100%]  tw-relative tw-top-[5px] tw-right-[5px] tw-flex tw-justify-end tw-z-40">
         {data.unavailable ? (
           <NoSymbolIcon className=" tw-w-[25px] tw-h-[25px] tw-font-medium tw-text-teal tw-stroke-teal " />
         ) : (
@@ -77,20 +79,39 @@ function ProductCard({ data, edit }) {
         )}
       </p>
       {/* </div> */}
-      <div className="tw-w-[100%] tw-h-[300px] tw-mt-[-25px] tw-bg-bluepurple tw-rounded-t-md ">
+      <div className="tw-w-[100%] tw-h-[300px] tw-mt-[-25px] tw-bg-bluepurple tw-rounded-t-md tw-relative ">
         {data.isFeatured && (
-          <div className="tw-bg-lightgrey tw-relative tw-top-[30px] tw-w-[65px] tw-pl-[3px]  tw-rounded-r-sm">
+          <div className="tw-absolute tw-bg-lightgrey tw-top-[30px] tw-w-[65px] tw-pl-[3px]  tw-rounded-r-sm">
             <p className="tw-text-darkgrey">{data.featuremsg}</p>
           </div>
         )}
-        {/* {data.images[0] && (
-          <Image
-            src={data.images[0]}
-            width={500}
-            height={500}
-            alt={data.name}
-          />
-        )} */}
+        {
+          data.images && (
+            // data.images.map((img, index) => {
+            //   return (
+            <div className="tw-h-[300px] tw-w-[250px]">
+              {console.log('images', data.images[0])}
+              <Image
+                width="250"
+                height="300"
+                src={toggle ? data.images[1] : data.images[0]}
+                alt="image"
+              />
+              {/*               
+               <CldImage
+               // key={index}
+                width="250"
+                height="300"
+                src={data.images[0]}
+                alt={data.images[0]}
+               /> */}
+            </div>
+          )
+          // );
+          // })
+        }
+        {/* 
+        {console.log('img', data.images[0].url)} */}
       </div>
       <div
       // onMouseEnter={() => setToggle(true)}

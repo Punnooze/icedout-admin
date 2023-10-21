@@ -14,6 +14,7 @@ import {
   Switch,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CldImage, CldUploadButton } from 'next-cloudinary';
 import { useRouter } from 'next/navigation';
 import { React, useState } from 'react';
 
@@ -26,7 +27,12 @@ function ProductPage() {
     seo: null,
     category: null,
     drop: null,
-    images: null,
+    images: [
+      {
+        url: null,
+        public_id: null,
+      },
+    ],
     price: null,
     discount: null,
     countInStock: {
@@ -50,6 +56,15 @@ function ProductPage() {
     useState(false);
   const [isCancelConfirmationOpen, setIsCancelConfirmationOpen] =
     useState(false);
+  const [imgUrls, setImgUrls] = useState([]);
+  const handleUpload = (result) => {
+    // const newUrls = [
+    //   ...imgUrls,
+    //   { url: result.info.secure_url, public_id: result.info.public_id },
+    // ];
+    const newUrls = [...imgUrls, result.info.secure_url];
+    setImgUrls(newUrls);
+  };
 
   const theme = createTheme({
     palette: {
@@ -151,7 +166,10 @@ function ProductPage() {
     const updatedFormValues = {
       ...formValues,
       countInStock,
+      images: imgUrls,
     };
+
+    console.log(updatedFormValues);
 
     // Log the updated formValues
     try {
@@ -175,21 +193,6 @@ function ProductPage() {
       console.log('Error', error);
     }
   };
-
-  // const handleStockChange = (event) => {
-  //   console.log(
-  //     event.target.value,
-  //     formValues.countInStock[selectedcountInStock]
-  //   );
-  //   setFormValues((prevFormValues) => ({
-  //     ...prevFormValues,
-  //     countInStock: {
-  //       ...prevFormValues.countInStock,
-  //       [selectedcountInStock]: event.target.value,
-  //     },
-  //   }));
-  // };
-
   const handleStockChange = (event) => {
     const selectedSize = selectedcountInStock;
     const stockValue = event.target.value;
@@ -353,25 +356,6 @@ function ProductPage() {
               </select>
             </div>
 
-            {/* <div className="tw-w-1/2 relative z-20 bg-transparent dark:bg-form-input">
-              <div>
-                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                  Stock for :{' '}
-                  <span className="tw-text-violet tw-font-medium">
-                    {selectedcountInStock}
-                  </span>
-                </label>
-                <input
-                  required
-                  type="number"
-                  value={formValues.countInStock[selectedcountInStock]}
-                  onChange={handleStockChange}
-                  className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                  tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                />
-              </div>
-            </div> */}
-
             <div className="tw-w-1/2 relative z-20 bg-transparent dark:bg-form-input">
               <div>
                 <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
@@ -416,12 +400,35 @@ function ProductPage() {
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Attached Image
               </label>
-              <input
+              {/* <input
                 type="file"
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                 accept="image/jpeg, image/png, image/jpg"
+              /> */}
+              <CldUploadButton
+                uploadPreset="ti9avygr"
+                onUpload={handleUpload}
               />
+              <div className="tw-flex">
+                {imgUrls.map((img, index) => (
+                  <div
+                    key={index}
+                    className="tw-w-[200px] tw-h-[200px] tw-mx-2"
+                  >
+                    <CldImage
+                      width="200"
+                      height="200"
+                      src={img.url}
+                      sizes="100vw"
+                      alt={`Image ${index}`}
+                    />
+                    <div onClick={() => handleDelete(img.public_id)}>
+                      Delete
+                    </div>
+                  </div>
+                ))}
+              </div>
               <output></output>
             </div>
           </div>
