@@ -22,6 +22,7 @@ import {
   TagIcon,
   Square3Stack3DIcon,
   ShoppingCartIcon,
+  TicketIcon,
 } from '@heroicons/react/24/solid';
 import logo from '../public/logo.png';
 import { signOut } from 'next-auth/react';
@@ -226,7 +227,7 @@ function Sidebar() {
            `}
         >
           <ListItemPrefix>
-            <TagIcon
+            <TicketIcon
               className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
                 click ? 'tw-w-6' : 'tw-w-5'
               } ${

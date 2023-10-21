@@ -1,4 +1,5 @@
 'use client';
+import { TrashIcon } from '@heroicons/react/24/outline';
 import {
   MinusIcon,
   PencilIcon,
@@ -15,8 +16,9 @@ import {
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CldImage, CldUploadButton } from 'next-cloudinary';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 function ProductPage() {
   const router = useRouter();
@@ -27,12 +29,7 @@ function ProductPage() {
     seo: null,
     category: null,
     drop: null,
-    images: [
-      {
-        url: null,
-        public_id: null,
-      },
-    ],
+    images: [''],
     price: null,
     discount: null,
     countInStock: {
@@ -57,13 +54,54 @@ function ProductPage() {
   const [isCancelConfirmationOpen, setIsCancelConfirmationOpen] =
     useState(false);
   const [imgUrls, setImgUrls] = useState([]);
+  const [picture, setPicture] = useState(false);
+  const [selectedPicture, setSelectedPicture] = useState('');
+
+  useEffect(() => {
+    const handleDeletePicture = async () => {
+      console.log('selected', selectedPicture);
+
+      const parts = selectedPicture.split('/');
+      const publicIdWithExtension = parts[parts.length - 1];
+      const publicId = publicIdWithExtension.split('.')[0];
+      console.log('publicid', publicId);
+      try {
+        const res = await fetch('/api/cloudinary', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ public_id: publicId }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.message == 'Successfully Deleted') {
+            const updatedUrls = formValues.images.filter(
+              (img) => img !== selectedPicture
+            );
+            setFormValues({ ...formValues, images: updatedUrls });
+          } else alert(data.message);
+        } else {
+          console.log('Error:', res.statusText);
+        }
+      } catch (error) {
+        console.log('Error', error);
+      }
+    };
+    handleDeletePicture();
+  }, [selectedPicture]);
+
   const handleUpload = (result) => {
-    // const newUrls = [
-    //   ...imgUrls,
-    //   { url: result.info.secure_url, public_id: result.info.public_id },
-    // ];
-    const newUrls = [...imgUrls, result.info.secure_url];
-    setImgUrls(newUrls);
+    const { images } = formValues;
+    images.push(result.info.secure_url);
+    setFormValues({
+      ...formValues,
+      images,
+    });
+    // const newImages = [...formValues.images, result.info.secure_url];
+    // setFormValues({ ...formValues, images: newImages });
+    console.log('upload', formValues);
   };
 
   const theme = createTheme({
@@ -166,7 +204,6 @@ function ProductPage() {
     const updatedFormValues = {
       ...formValues,
       countInStock,
-      images: imgUrls,
     };
 
     console.log(updatedFormValues);
@@ -386,7 +423,6 @@ function ProductPage() {
                 Discount
               </label>
               <input
-                required
                 type="number"
                 placeholder="Enter Discount (if any)"
                 onChange={(e) =>
@@ -396,16 +432,16 @@ function ProductPage() {
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
-            <div className="tw-w-1/2 tw-mb-[20px]">
+            {/* <div className="tw-w-1/2 tw-mb-[20px]">
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Attached Image
               </label>
-              {/* <input
-                type="file"
-                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                accept="image/jpeg, image/png, image/jpg"
-              /> */}
+              //  <input
+              //   type="file"
+              //   className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+              //   tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+              //   accept="image/jpeg, image/png, image/jpg"
+              // /> 
               <CldUploadButton
                 uploadPreset="ti9avygr"
                 onUpload={handleUpload}
@@ -431,6 +467,91 @@ function ProductPage() {
               </div>
               <output></output>
             </div>
+          </div> */}
+            <div className="tw-w-1/2 tw-mb-[20px]">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                Attached Image
+              </label>
+              {/* <input
+                type="file"
+                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                accept="image/jpeg, image/png, image/jpg"
+              /> */}
+              <div className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px] tw-flex tw-justify-center">
+                <CldUploadButton
+                  uploadPreset="ti9avygr"
+                  onUpload={handleUpload}
+                />
+              </div>
+              {/* <div className="tw-flex">
+                          {imgUrls.map((img, index) => (
+                            <div
+                              key={index}
+                              className="tw-w-[200px] tw-h-[200px] tw-mx-2"
+                            >
+                              <CldImage
+                                width="200"
+                                height="200"
+                                src={img.url}
+                                sizes="100vw"
+                                alt={`Image ${index}`}
+                              />
+                              <div onClick={() => handleDelete(img.public_id)}>
+                                Delete
+                              </div>
+                            </div>
+                          ))}
+                        </div> */}
+              <output></output>
+            </div>
+            {/* <div className="tw-w-1/2 tw-mb-[20px]">
+                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                          Attached Image
+                        </label>
+                        <input
+                          type="file"
+                          className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                          accept="image/jpeg, image/png, image/jpg"
+                        />
+                        <output></output>
+                      </div> */}
+          </div>
+          {formValues.images[0] != null && (
+            <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+              Images
+            </label>
+          )}
+          <div className="tw-mb-4.5 tw-flex tw-space-x-4  tw-justify-around">
+            {formValues.images &&
+              formValues.images.map((img, index) => {
+                return (
+                  <div
+                    className="tw-relative tw-my-4"
+                    onMouseEnter={() => setPicture(true)}
+                    onMouseLeave={() => setPicture(false)}
+                    key={index}
+                  >
+                    {picture && (
+                      <div
+                        onClick={() => setSelectedPicture(img)}
+                        className="tw-absolute tw-bottom-0 tw-flex tw-justify-center tw-w-[100%] tw-items-center tw-bg-lightgrey tw-py-[10px]  tw-rounded-b-md tw-cursor-pointer"
+                      >
+                        <TrashIcon className="tw-w-4 tw-h-4" />
+                        <p>Delete</p>
+                      </div>
+                    )}
+                    <Image
+                      height="200"
+                      width="100"
+                      src={img}
+                      alt="Image"
+                      className=" tw-rounded-md tw-shadow-md hover:tw-shadow-lg"
+                    />
+                  </div>
+                );
+              })}
           </div>
 
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">

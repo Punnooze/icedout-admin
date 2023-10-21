@@ -1,5 +1,4 @@
 import { connectMongoDB } from '@/lib/mongodb';
-import Order from '@/models/ordersModel';
 import Products from '@/models/productModels';
 import { NextResponse } from 'next/server';
 
@@ -8,8 +7,8 @@ await connectMongoDB();
 export async function POST(request) {
   try {
     const { data } = await request.json();
+    console.log(data);
     const product = await Products.create(data);
-
     if (product)
       return NextResponse.json(
         { data: 'Successfully Created' },
@@ -31,9 +30,32 @@ export async function GET() {
   }
 }
 
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+  api_secret: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET,
+});
+
 export async function DELETE(request) {
   try {
     const { data } = await request.json();
+    data.images.forEach((image) => {
+      const parts = image.split('/');
+      const publicIdWithExtension = parts[parts.length - 1];
+      const public_id = publicIdWithExtension.split('.')[0];
+
+      cloudinary.uploader.destroy(public_id, async function (error, result) {
+        if (error) {
+          return NextResponse.json(
+            { message: 'Error Deleting from Cloudinary' },
+            { status: 200 }
+          );
+        }
+      });
+    });
+
     const product = await Products.findByIdAndDelete(data._id);
     if (product)
       return NextResponse.json(

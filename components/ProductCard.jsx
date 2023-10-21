@@ -73,16 +73,16 @@ function ProductCard({ data, edit }) {
 
       <p className="tw-w-[100%]  tw-relative tw-top-[5px] tw-right-[5px] tw-flex tw-justify-end tw-z-40">
         {data.unavailable ? (
-          <NoSymbolIcon className=" tw-w-[25px] tw-h-[25px] tw-font-medium tw-text-teal tw-stroke-teal " />
+          <NoSymbolIcon className=" tw-w-[20px] tw-h-[20px] tw-font-medium tw-text-darkgrey tw-stroke-darkgrey  " />
         ) : (
-          <CheckIcon className=" tw-w-[25px] tw-h-[25px] tw-font-medium tw-text-teal tw-stroke-teal " />
+          <CheckIcon className=" tw-w-[20px] tw-h-[20px] tw-font-medium tw-text-darkgrey tw-stroke-darkgrey  " />
         )}
       </p>
       {/* </div> */}
       <div className="tw-w-[100%] tw-h-[300px] tw-mt-[-25px] tw-bg-bluepurple tw-rounded-t-md tw-relative ">
         {data.isFeatured && (
-          <div className="tw-absolute tw-bg-lightgrey tw-top-[30px] tw-w-[65px] tw-pl-[3px]  tw-rounded-r-sm">
-            <p className="tw-text-darkgrey">{data.featuremsg}</p>
+          <div className="tw-absolute tw-bg-darkgrey tw-top-[30px]  tw-rounded-r-sm">
+            <p className="tw-text-lightgrey tw-py-[3px] tw-px-[5px]">{data.featuremsg}</p>
           </div>
         )}
         {

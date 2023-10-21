@@ -20,6 +20,8 @@ import {
 import { BookmarkIcon, TrashIcon } from '@heroicons/react/24/outline';
 import logo from '../public/logo.png';
 import Image from 'next/image';
+import { images } from '@/next.config';
+import { CldImage, CldUploadButton } from 'next-cloudinary';
 function EditProducts({ data }) {
   const router = useRouter();
   const [formValues, setFormValues] = useState({
@@ -29,7 +31,7 @@ function EditProducts({ data }) {
     seo: '',
     category: '',
     drop: '',
-    images: '',
+    images: [''],
     price: '',
     discount: '',
     countInStock: {
@@ -54,6 +56,9 @@ function EditProducts({ data }) {
   const [isCancelConfirmationOpen, setIsCancelConfirmationOpen] =
     useState(false);
   const [isSaveConfirmationOpen, setIsSaveConfirmationOpen] = useState(false);
+
+  const [picture, setPicture] = useState(false);
+  const [selectedPicture, setSelectedPicture] = useState('');
 
   const theme = createTheme({
     palette: {
@@ -148,6 +153,39 @@ function EditProducts({ data }) {
     setIsSaveConfirmationOpen(false);
   };
 
+  useEffect(() => {
+    const handleDeletePicture = async () => {
+      const parts = selectedPicture.split('/');
+      const publicIdWithExtension = parts[parts.length - 1];
+      const publicId = publicIdWithExtension.split('.')[0];
+      console.log('publicid', publicId);
+      try {
+        const res = await fetch('/api/cloudinary', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ public_id: publicId }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.message == 'Successfully Deleted') {
+            const updatedUrls = formValues.images.filter(
+              (img) => img !== selectedPicture
+            );
+            setFormValues({ ...formValues, images: updatedUrls });
+          } else alert(data.message);
+        } else {
+          console.log('Error:', res.statusText);
+        }
+      } catch (error) {
+        console.log('Error', error);
+      }
+    };
+    handleDeletePicture();
+  }, [selectedPicture]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const countInStock = {};
@@ -164,6 +202,8 @@ function EditProducts({ data }) {
       ...formValues,
       countInStock,
     };
+
+    console.log(formValues);
 
     try {
       const res = await fetch('/api/productUpdate', {
@@ -209,6 +249,19 @@ function EditProducts({ data }) {
     } catch (error) {
       console.log('Error', error);
     }
+  };
+
+  // const handleUpload = (result) => {
+  //   // const newUrls = [
+  //   //   ...imgUrls,
+  //   //   { url: result.info.secure_url, public_id: result.info.public_id },
+  //   // ];
+  //   setFormValues({ ...formValues, images: result.info.secure_url });
+  // };
+  const handleUpload = (result) => {
+    const newImages = [...formValues.images, result.info.secure_url];
+    setFormValues({ ...formValues, images: newImages });
+    console.log('upload', formValues);
   };
 
   const handleStockChange = (event) => {
@@ -450,6 +503,43 @@ function EditProducts({ data }) {
                         <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                           Attached Image
                         </label>
+                        {/* <input
+                type="file"
+                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                accept="image/jpeg, image/png, image/jpg"
+              /> */}
+                        <div className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px] tw-flex tw-justify-center">
+                          <CldUploadButton
+                            uploadPreset="ti9avygr"
+                            onUpload={handleUpload}
+                          />
+                        </div>
+                        {/* <div className="tw-flex">
+                          {imgUrls.map((img, index) => (
+                            <div
+                              key={index}
+                              className="tw-w-[200px] tw-h-[200px] tw-mx-2"
+                            >
+                              <CldImage
+                                width="200"
+                                height="200"
+                                src={img.url}
+                                sizes="100vw"
+                                alt={`Image ${index}`}
+                              />
+                              <div onClick={() => handleDelete(img.public_id)}>
+                                Delete
+                              </div>
+                            </div>
+                          ))}
+                        </div> */}
+                        <output></output>
+                      </div>
+                      {/* <div className="tw-w-1/2 tw-mb-[20px]">
+                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                          Attached Image
+                        </label>
                         <input
                           type="file"
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
@@ -457,7 +547,40 @@ function EditProducts({ data }) {
                           accept="image/jpeg, image/png, image/jpg"
                         />
                         <output></output>
-                      </div>
+                      </div> */}
+                    </div>
+                    <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                      Images
+                    </label>
+                    <div className="tw-mb-4.5 tw-flex tw-space-x-4  tw-justify-around">
+                      {formValues.images &&
+                        formValues.images.map((img, index) => {
+                          return (
+                            <div
+                              className="tw-relative tw-my-4"
+                              onMouseEnter={() => setPicture(true)}
+                              onMouseLeave={() => setPicture(false)}
+                              key={index}
+                            >
+                              {picture && (
+                                <div
+                                  onClick={() => setSelectedPicture(img)}
+                                  className="tw-absolute tw-bottom-0 tw-flex tw-justify-center tw-w-[100%] tw-items-center tw-bg-lightgrey tw-py-[10px]  tw-rounded-b-md tw-cursor-pointer"
+                                >
+                                  <TrashIcon className="tw-w-4 tw-h-4" />
+                                  <p>Delete</p>
+                                </div>
+                              )}
+                              <Image
+                                height="200"
+                                width="100"
+                                src={img}
+                                alt="Image"
+                                className=" tw-rounded-md tw-shadow-md hover:tw-shadow-lg"
+                              />
+                            </div>
+                          );
+                        })}
                     </div>
 
                     <div className="tw-mb-4.5 tw-flex tw-space-x-4">
@@ -649,67 +772,6 @@ function EditProducts({ data }) {
                       </div>
                     </div>
 
-                    <div className="tw-mb-4.5 tw-flex tw-space-x-4">
-                      <div className="tw-w-1/2 tw-mb-[20px]">
-                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                          Featured?
-                        </label>
-
-                        <ThemeProvider theme={theme}>
-                          <RadioGroup
-                            aria-labelledby="demo-controlled-radio-buttons-group"
-                            name="controlled-radio-buttons-group"
-                          >
-                            <FormControlLabel
-                              checked={formValues.isFeatured === true}
-                              name="isFeatured"
-                              className="tw-text-lightgrey"
-                              value="true"
-                              control={<Radio />}
-                              label="YES"
-                              onChange={() =>
-                                setFormValues({
-                                  ...formValues,
-                                  isFeatured: true,
-                                })
-                              }
-                            />
-                            <FormControlLabel
-                              checked={formValues.isFeatured === false}
-                              name="isFeatured"
-                              className="tw-text-lightgrey"
-                              value="false"
-                              control={<Radio />}
-                              label="NO"
-                              onChange={() =>
-                                setFormValues({
-                                  ...formValues,
-                                  isFeatured: false,
-                                })
-                              }
-                            />
-                          </RadioGroup>
-                        </ThemeProvider>
-                      </div>
-
-                      {formValues.isFeatured === true && (
-                        <div className="tw-w-1/2 ">
-                          <label className="tw-mb-2.5 tw-block tw-text-[16px] tw-text-bluepurple">
-                            Feature Message
-                          </label>
-                          <input
-                            type="text"
-                            name="featuremsg"
-                            value={formValues.featuremsg}
-                            // style={{ textTransform: 'uppercase' }}
-                            onChange={handleInputChange}
-                            placeholder="Enter feature Message"
-                            className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                          />
-                        </div>
-                      )}
-                    </div>
                     <br />
                   </form>
                   <div className="tw-flex tw-justify-around ">

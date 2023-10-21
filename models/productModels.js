@@ -1,80 +1,79 @@
 import mongoose from 'mongoose';
 
 const ProductsSchema = new mongoose.Schema(
-    {
-        sku: {
-            type: String,
-            required: true
-        },
-        name:{
-            type: String, 
-            required: true
-        },
-        slug:{
-            type: String, 
-            required: true
-        },
-        gender: {
-            type: String,
-            enum: ['male', 'female','unisex'],
-        },
-        category: {
-            type: String,
-            required: true 
-        },
-        drop: {
-            type: String,
-            required: true 
-        },
-        images: {
-            type: Array,
-            required: true 
-        },
-        price: {
-            type: Number,
-            required: true 
-        },
-        discount: {
-            type: Number,
-            required: true 
-        },
-        countInStock: {
-            'S':{type: Number},
-            'M':{type: Number},
-            'L':{type: Number},
-            'XL':{type: Number},
-            'XXL':{type: Number},
-        },
-        unavailable:{
-            type:Boolean,
-            default:false
-        },
-        description:{
-            type:Array,
-            required: true 
-        },
-        details:{
-            type:Array,
-            required: true
-        },
-        isFeatured:{
-            type: Boolean,
-            required: true 
-        },
-        featuremsg:{
-            type: String,
-            default:"" 
-        },
-        seo:{
-            type: String
-        }
-        
+  {
+    sku: {
+      type: String,
+      required: true,
     },
-    {
-        timestamps:true,
-    }
-
+    name: {
+      type: String,
+      required: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+    },
+    gender: {
+      type: String,
+      enum: ['male', 'female', 'unisex'],
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    drop: {
+      type: String,
+      required: true,
+    },
+    images: {
+      type: Array,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    discount: {
+      type: Number,
+      required: true,
+    },
+    countInStock: {
+      S: { type: Number },
+      M: { type: Number },
+      L: { type: Number },
+      XL: { type: Number },
+      XXL: { type: Number },
+    },
+    unavailable: {
+      type: Boolean,
+      default: false,
+    },
+    description: {
+      type: Array,
+      required: true,
+    },
+    details: {
+      type: Array,
+      required: true,
+    },
+    isFeatured: {
+      type: Boolean,
+      required: true,
+    },
+    featuremsg: {
+      type: String,
+      default: '',
+    },
+    seo: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-const Products = mongoose.models.Products || mongoose.model('Products', ProductsSchema);
+const Products =
+  mongoose.models.Products || mongoose.model('Products', ProductsSchema);
 export default Products;

@@ -21,6 +21,7 @@ export async function PUT(request) {
         isFeatured: data.isFeatured,
         featuremsg: data.featuremsg,
         seo: data.seo,
+        images: data.images,
       },
       { new: true }
     );
