@@ -26,17 +26,14 @@ import { NextResponse } from 'next/server';
 const generateSHA1 = (data) => {
   const hash = crypto.createHash('sha1');
   hash.update(data);
-  console.log('fene', data);
   return hash.digest('hex');
 };
 
 const generateSignature = (timestamp, apiSecret) => {
-  console.log('signature', timestamp);
   return `timestamp=${timestamp}${apiSecret}`;
 };
 export async function GET() {
   try {
-    console.log('GET');
     const timestamp = Math.round(new Date().getTime() / 1000);
     const signature = generateSHA1(
       generateSignature(

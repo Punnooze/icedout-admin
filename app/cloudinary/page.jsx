@@ -24,27 +24,20 @@ export default function FileUploadPage() {
     try {
       const response = await axios.get('/api/sign');
       if (response.data && response.data.data) {
-        const timestamp = response.data.data[1];
-        const signature = response.data.data[0];
+        const timestamp = response.data.data[0];
+        const signature = response.data.data[1];
 
         let Resources = [];
 
         for (let i = 0; i < images.length; i++) {
           const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`;
-          const formData = {
-            file: images[0],
-            api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-            timestamp: timestamp,
-            signature: signature,
-          };
-          console.log('formData', formData);
-          const config = {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          };
-
-          const { data } = await axios.post(url, formData, config);
+          const formData= new FormData();
+          formData.append('file', images[i]);
+          formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY);
+          formData.append('timestamp', timestamp);
+          formData.append('signature', signature);
+          const { data } = await axios.post(url, formData);
+          console.log(data.secure_url)
           Resources.push({
             ResourceName: images[i].name,
             ResourceLink: data.secure_url,
