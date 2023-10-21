@@ -169,7 +169,9 @@ function Sidebar() {
               className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
                 click ? 'tw-w-6' : 'tw-w-5'
               } ${
-                pathname === '/products' || pathname === '/productinput'
+                pathname === '/products' ||
+                pathname === '/productinput' ||
+                pathname === '/productEdit'
                   ? 'tw-text-teal'
                   : 'tw-text-bluepurple'
               }`}
@@ -178,7 +180,9 @@ function Sidebar() {
           <Typography
             variant="h2"
             className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
-              pathname === '/products' || pathname === '/productinput'
+              pathname === '/products' ||
+              pathname === '/productinput' ||
+              pathname === '/productEdit'
                 ? 'tw-text-teal'
                 : 'tw-text-bluepurple'
             }`}
