@@ -31,7 +31,7 @@ function ProductPage() {
     drop: null,
     images: [''],
     price: null,
-    discount: null,
+    discount: 0,
     countInStock: {
       S: null,
       M: null,
@@ -53,7 +53,6 @@ function ProductPage() {
     useState(false);
   const [isCancelConfirmationOpen, setIsCancelConfirmationOpen] =
     useState(false);
-  const [imgUrls, setImgUrls] = useState([]);
   const [picture, setPicture] = useState(false);
   const [selectedPicture, setSelectedPicture] = useState('');
 
@@ -99,9 +98,6 @@ function ProductPage() {
       ...formValues,
       images,
     });
-    // const newImages = [...formValues.images, result.info.secure_url];
-    // setFormValues({ ...formValues, images: newImages });
-    console.log('upload', formValues);
   };
 
   const theme = createTheme({
