@@ -1,22 +1,13 @@
 import { connectMongoDB } from '@/lib/mongodb';
-import Banner from '@/models/bannersModels';
+import Misc from '@/models/miscModels';
 import { NextResponse } from 'next/server';
-
-export async function GET() {
-  try {
-    await connectMongoDB();
-    const banner = await Banner.find();
-    return NextResponse.json({ data: banner }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json({ data: 'Could Not Fetch' }, { status: 500 });
-  }
-}
 
 export async function POST(request) {
   try {
     const { data } = await request.json();
-    const product = await Banner.create(data);
-    if (product)
+    // console.log(data);
+    const misc = await Misc.create(data);
+    if (misc)
       return NextResponse.json(
         { data: 'Successfully Created' },
         { status: 200 }
@@ -31,14 +22,21 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const { data } = await request.json();
- 
-    const product = await Banner.findByIdAndUpdate(data._id, {
-      bannerName: data.bannerName,
-      images: data.images,
-    });
-    if (product)
-    return NextResponse.json({ data: 'Successfully Created' }, { status: 200 });
-    else
+    console.log(data);
+    const misc = await Misc.findOne({ miscName: data.miscName });
+    console.log(misc);
+    if (misc) {
+      const miscelleneous = await Misc.findByIdAndUpdate(misc._id, {
+        miscData: data.miscData,
+      });
+      if (miscelleneous)
+        return NextResponse.json(
+          { data: 'Successfully Created' },
+          { status: 200 }
+        );
+      else
+        return NextResponse.json({ data: 'Could Not Create' }, { status: 200 });
+    } else
       return NextResponse.json({ data: 'Could Not Create' }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ data: 'Could Not Create' }, { status: 500 });

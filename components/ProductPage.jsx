@@ -188,23 +188,15 @@ function ProductPage() {
     e.preventDefault();
 
     const countInStock = {};
-
-    // Iterate through the sizes and include only those with non-null values
     for (const size in formValues.countInStock) {
       if (formValues.countInStock[size] !== null) {
         countInStock[size] = formValues.countInStock[size];
       }
     }
-
-    // Create a new formValues object with the filtered countInStock
     const updatedFormValues = {
       ...formValues,
       countInStock,
     };
-
-    console.log(updatedFormValues);
-
-    // Log the updated formValues
     try {
       const res = await fetch('/api/product', {
         method: 'POST',
@@ -428,91 +420,18 @@ function ProductPage() {
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
-            {/* <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                Attached Image
-              </label>
-              //  <input
-              //   type="file"
-              //   className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-              //   tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-              //   accept="image/jpeg, image/png, image/jpg"
-              // /> 
-              <CldUploadButton
-                uploadPreset="ti9avygr"
-                onUpload={handleUpload}
-              />
-              <div className="tw-flex">
-                {imgUrls.map((img, index) => (
-                  <div
-                    key={index}
-                    className="tw-w-[200px] tw-h-[200px] tw-mx-2"
-                  >
-                    <CldImage
-                      width="200"
-                      height="200"
-                      src={img.url}
-                      sizes="100vw"
-                      alt={`Image ${index}`}
-                    />
-                    <div onClick={() => handleDelete(img.public_id)}>
-                      Delete
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <output></output>
-            </div>
-          </div> */}
             <div className="tw-w-1/2 tw-mb-[20px]">
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Attached Image
               </label>
-              {/* <input
-                type="file"
-                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                accept="image/jpeg, image/png, image/jpg"
-              /> */}
               <div className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px] tw-flex tw-justify-center">
                 <CldUploadButton
                   uploadPreset="ti9avygr"
                   onUpload={handleUpload}
                 />
               </div>
-              {/* <div className="tw-flex">
-                          {imgUrls.map((img, index) => (
-                            <div
-                              key={index}
-                              className="tw-w-[200px] tw-h-[200px] tw-mx-2"
-                            >
-                              <CldImage
-                                width="200"
-                                height="200"
-                                src={img.url}
-                                sizes="100vw"
-                                alt={`Image ${index}`}
-                              />
-                              <div onClick={() => handleDelete(img.public_id)}>
-                                Delete
-                              </div>
-                            </div>
-                          ))}
-                        </div> */}
               <output></output>
             </div>
-            {/* <div className="tw-w-1/2 tw-mb-[20px]">
-                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                          Attached Image
-                        </label>
-                        <input
-                          type="file"
-                          className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                          accept="image/jpeg, image/png, image/jpg"
-                        />
-                        <output></output>
-                      </div> */}
           </div>
           {formValues.images[0] != null && (
             <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
@@ -643,168 +562,6 @@ function ProductPage() {
               </div>
             )}
           </div>
-
-          {/* <div className="tw-hidden tw-mb-4.5 md:tw-flex tw-space-x-4 ">
-            <div className="tw-w-1/2 tw-flex tw-mb-[20px] tw-pr-2">
-              <div className="tw-w-1/3 ">
-                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                  Featured?
-                </label>
-
-                <ThemeProvider theme={theme}>
-                  <RadioGroup
-                    aria-labelledby="demo-controlled-radio-buttons-group"
-                    name="controlled-radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      checked={formValues.isFeatured === true}
-                      name="isFeatured"
-                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                      value="true"
-                      control={<Radio />}
-                      label="Yes"
-                      onChange={() =>
-                        setFormValues({
-                          ...formValues,
-                          isFeatured: true,
-                        })
-                      }
-                    />
-                    <FormControlLabel
-                      checked={formValues.isFeatured === false}
-                      name="isFeatured"
-                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                      value="false"
-                      control={<Radio />}
-                      label="No"
-                      onChange={() =>
-                        setFormValues({
-                          ...formValues,
-                          isFeatured: false,
-                        })
-                      }
-                    />
-                  </RadioGroup>
-                </ThemeProvider>
-              </div>
-
-              {formValues.isFeatured === true && (
-                <div className="tw-w-2/3 ">
-                  <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                    Feature Message
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="featuremsg"
-                    onChange={handleInputChange}
-                    placeholder="Enter Feature Message"
-                    className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                              tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                  />
-                </div>
-              )}
-            </div>
-            <div className="tw-w-1/2 tw-mb-[20px]">
-              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                SEO
-              </label>
-              <input
-                required
-                type="text"
-                placeholder="Enter SEO"
-                onChange={(e) =>
-                  setFormValues({
-                    ...formValues,
-                    seo: e.target.value,
-                  })
-                }
-                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-              />
-            </div>
-          </div> */}
-
-          {/* <div className="md:tw-hidden">
-            <div className="tw-mb-4.5 tw-flex tw-space-x-4">
-              <div className="tw-w-1/2">
-                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                  Featured?
-                </label>
-
-                <ThemeProvider theme={theme}>
-                  <RadioGroup
-                    aria-labelledby="demo-controlled-radio-buttons-group"
-                    name="controlled-radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      checked={formValues.isFeatured === true}
-                      name="isFeatured"
-                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                      value="true"
-                      control={<Radio />}
-                      label="Yes"
-                      onChange={() =>
-                        setFormValues({
-                          ...formValues,
-                          isFeatured: true,
-                        })
-                      }
-                    />
-                    <FormControlLabel
-                      checked={formValues.isFeatured === false}
-                      name="isFeatured"
-                      className="tw-text-lightgrey tw-text-[12px] md:tw-text-[16px]"
-                      value="false"
-                      control={<Radio />}
-                      label="No"
-                      onChange={() =>
-                        setFormValues({
-                          ...formValues,
-                          isFeatured: false,
-                        })
-                      }
-                    />
-                  </RadioGroup>
-                </ThemeProvider>
-              </div>
-
-              <div className="tw-w-1/2 tw-mb-[20px]">
-                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                  SEO
-                </label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Enter SEO"
-                  onChange={(e) =>
-                    setFormValues({
-                      ...formValues,
-                      seo: e.target.value,
-                    })
-                  }
-                  className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                          tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                />
-              </div>
-            </div>
-            {formValues.isFeatured === true && (
-              <div className="tw-mb-[20px] ">
-                <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                  Feature Message
-                </label>
-                <input
-                  required
-                  type="text"
-                  name="featuremsg"
-                  onChange={handleInputChange}
-                  placeholder="Enter Feature Message"
-                  className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                              tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                />
-              </div>
-            )}
-          </div> */}
 
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">

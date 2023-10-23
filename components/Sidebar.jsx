@@ -23,6 +23,7 @@ import {
   Square3Stack3DIcon,
   ShoppingCartIcon,
   TicketIcon,
+  WrenchScrewdriverIcon,
 } from '@heroicons/react/24/solid';
 import logo from '../public/logo.png';
 import { signOut } from 'next-auth/react';
@@ -206,14 +207,18 @@ function Sidebar() {
               className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
                 click ? 'tw-w-6' : 'tw-w-5'
               } ${
-                pathname === '/banners' ? 'tw-text-teal' : 'tw-text-bluepurple'
+                pathname === '/banners' || pathname === '/bannerInput'
+                  ? 'tw-text-teal'
+                  : 'tw-text-bluepurple'
               }`}
             />
           </ListItemPrefix>
           <Typography
             variant="h2"
             className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
-              pathname === '/banners' ? 'tw-text-teal' : 'tw-text-bluepurple'
+              pathname === '/banners' || pathname === '/bannerInput'
+                ? 'tw-text-teal'
+                : 'tw-text-bluepurple'
             }`}
             color="blue-gray"
           >
@@ -316,6 +321,37 @@ function Sidebar() {
             color="blue-gray"
           >
             Support
+          </Typography>
+        </ListItem>
+        <br />
+        <ListItem
+          onClick={() => router.push('/misc')}
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
+           `}
+        >
+          <ListItemPrefix>
+            <WrenchScrewdriverIcon
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } ${
+                pathname === '/misc'
+                  ? 'tw-text-teal'
+                  : 'tw-text-bluepurple'
+              }`}
+            />
+          </ListItemPrefix>
+          <Typography
+            variant="h2"
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/misc' ? 'tw-text-teal' : 'tw-text-bluepurple'
+            }`}
+            color="blue-gray"
+          >
+            Miscellaneous
           </Typography>
         </ListItem>
 

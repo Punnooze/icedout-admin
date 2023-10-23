@@ -1,13 +1,48 @@
+'use client';
 import BannersInput from '@/components/BannersInput';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function page() {
+export default function BannerInput({ searchParams }) {
+  const id = searchParams.id;
+  console.log('id', id);
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await fetch(`api/bannerEdit?id=${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const response = await res.json();
+        console.log(response);
+        if (res.ok) {
+          setData((prevState) => {
+            return {
+              ...prevState,
+              ...response.data,
+            };
+          });
+        } else {
+          console.log('Error:', res.statusText);
+        }
+      } catch (error) {
+        console.log('Error', error);
+      }
+    };
+    if (id) getData();
+  }, [id]);
+
+  useEffect(() => {
+    if (data) console.log('dataI', data);
+  }, [data]);
+
   return (
-    <div className="tw-ml-[70px] tw-bg-background tw-h-[100vh] tw-overflow-y-auto ">
-      <h1 className="tw-ml-[20px] tw-font-medium tw-text-darkgrey">
-        BANNER CREATION
-      </h1>
-      <BannersInput />
+    <div className="tw-ml-[70px] tw-bg-background tw-h-[100vh] ">
+      <BannersInput data={data} />
     </div>
   );
 }
