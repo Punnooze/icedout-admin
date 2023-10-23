@@ -35,7 +35,6 @@ export default function BannersInput({ data }) {
 
   useEffect(() => {
     if (data)
-      // console.log('data', data);
       setFormValues(data);
   }, [data]);
 
@@ -75,7 +74,6 @@ export default function BannersInput({ data }) {
             formData.append('timestamp', timestamp);
             formData.append('signature', signature);
             const { data } = await axios.post(url, formData);
-            console.log(data.secure_url);
             Resources.push({
               ResourceName: images[i].name,
               ResourceLink: data.secure_url,
@@ -100,7 +98,6 @@ export default function BannersInput({ data }) {
               });
             });
           }
-          console.log('formvalues', formValues);
         } else {
           console.error('Error: Unable to obtain timestamp and signature');
         }
@@ -149,12 +146,9 @@ export default function BannersInput({ data }) {
 
   useEffect(() => {
     const handleDeletePicture = async () => {
-      console.log('selected', selectedPicture);
-
       const parts = selectedPicture.split('/');
       const publicIdWithExtension = parts[parts.length - 1];
       const publicId = publicIdWithExtension.split('.')[0];
-      console.log('publicid', publicId);
       try {
         const res = await fetch('/api/cloudinary', {
           method: 'DELETE',

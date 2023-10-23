@@ -95,12 +95,9 @@ function ProductPage({ data, misc }) {
 
   useEffect(() => {
     const handleDeletePicture = async () => {
-      console.log('selected', selectedPicture);
-
       const parts = selectedPicture.split('/');
       const publicIdWithExtension = parts[parts.length - 1];
       const publicId = publicIdWithExtension.split('.')[0];
-      console.log('publicid', publicId);
       try {
         const res = await fetch('/api/cloudinary', {
           method: 'DELETE',
@@ -139,10 +136,6 @@ function ProductPage({ data, misc }) {
     else setFiles(true);
   }, [images]);
 
-  useEffect(() => {
-    console.log('image values', formValues);
-  }, [formValues]);
-
   const handleFilesSubmit = async (e) => {
     e.preventDefault();
     if (images.length === 0) {
@@ -168,7 +161,6 @@ function ProductPage({ data, misc }) {
             formData.append('timestamp', timestamp);
             formData.append('signature', signature);
             const { data } = await axios.post(url, formData);
-            console.log(data.secure_url);
             Resources.push({
               ResourceName: images[i].name,
               ResourceLink: data.secure_url,
@@ -185,8 +177,6 @@ function ProductPage({ data, misc }) {
               formValues.images.push(item.ResourceLink);
             });
           }
-
-          console.log('formvalues', formValues);
         } else {
           console.error('Error: Unable to obtain timestamp and signature');
         }

@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react';
 
 export default function BannerInput({ searchParams }) {
   const id = searchParams.id;
-  console.log('id', id);
-
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -18,7 +16,6 @@ export default function BannerInput({ searchParams }) {
           },
         });
         const response = await res.json();
-        console.log(response);
         if (res.ok) {
           setData((prevState) => {
             return {
@@ -35,10 +32,6 @@ export default function BannerInput({ searchParams }) {
     };
     if (id) getData();
   }, [id]);
-
-  useEffect(() => {
-    if (data) console.log('dataI', data);
-  }, [data]);
 
   return (
     <div className="tw-ml-[70px] tw-bg-background tw-h-[100vh] ">

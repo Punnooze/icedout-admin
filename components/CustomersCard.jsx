@@ -4,6 +4,8 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import '../styles/globals.css';
 import { IconButton, Menu, MenuItem, Dialog } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { XMarkIcon } from '@heroicons/react/24/solid';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 const columns = [
   {
@@ -110,7 +112,6 @@ function CustomersCard({ data }) {
         };
       });
       setRow(value);
-      console.log(value);
     }
   }, [data, count]);
 
@@ -163,7 +164,7 @@ function CustomersCard({ data }) {
         <div className="tw-h-[90vh] tw-flex tw-flex-col tw-items-center tw-align-middle">
           <div className=" tw-ml-[70px] tw-w-[100%]">
             <h1 className=" tw-text-darkergrey md:tw-ml-[20px] tw-[10vh]">
-              CUSTOMERS 
+              CUSTOMERS
             </h1>
           </div>
           <div className="tw-flex tw-justify-center tw-items-center tw-h-[100vh]  tw-w-[100%]">
@@ -228,15 +229,17 @@ function CustomersCard({ data }) {
                 <div className="tw-w-[100%] tw-mt-[15px] tw-flex tw-justify-around ">
                   <button
                     onClick={closeDeleteConfirmation}
-                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] tw-flex "
                   >
-                    Cancel
+                    <XMarkIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
+                    <p>Cancel</p>
                   </button>
                   <button
                     onClick={handleDelete}
-                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] tw-flex"
                   >
-                    Confirm
+                    <TrashIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
+                    <p>Confirm</p>
                   </button>
                 </div>
               </div>

@@ -152,7 +152,6 @@ function CouponTable({ data }) {
         };
       });
       setRow(value);
-      console.log(value);
     }
   }, [data, count]);
 

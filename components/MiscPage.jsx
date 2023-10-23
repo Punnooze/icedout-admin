@@ -165,30 +165,25 @@ export default function MiscPage({ data }) {
     if (p === 3) setFormValues(headers);
     if (p === 4) setFormValues(shippingCost);
   };
-
-  // useEffect(() => {
-  //   console.log(formValues);
-  // }, [formValues]);
-
   useEffect(() => {
-    if (data) setCategories;
-    console.log(data);
-    data.map((item) => {
-      if (item.miscName === 'categories') {
-        setCategories({ ...categories, miscData: item.miscData });
-        setCategoriesCount(item.miscData.length);
-      }
-      if (item.miscName === 'collections') {
-        setCollections({ ...collections, miscData: item.miscData });
-        setCollectionsCount(item.miscData.length);
-      }
-      if (item.miscName === 'headers') {
-        setHeaders({ ...headers, miscData: item.miscData });
-        setHeadersCount(item.miscData.length);
-      }
-      if (item.miscName === 'shippingCost')
-        setShippingCost({ ...shippingCost, miscData: item.miscData });
-    });
+    if (data) {
+      data.map((item) => {
+        if (item.miscName === 'categories') {
+          setCategories({ ...categories, miscData: item.miscData });
+          setCategoriesCount(item.miscData.length);
+        }
+        if (item.miscName === 'collections') {
+          setCollections({ ...collections, miscData: item.miscData });
+          setCollectionsCount(item.miscData.length);
+        }
+        if (item.miscName === 'headers') {
+          setHeaders({ ...headers, miscData: item.miscData });
+          setHeadersCount(item.miscData.length);
+        }
+        if (item.miscName === 'shippingCost')
+          setShippingCost({ ...shippingCost, miscData: item.miscData });
+      });
+    }
   }, [data]);
 
   useEffect(() => {

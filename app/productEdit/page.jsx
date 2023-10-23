@@ -1,6 +1,5 @@
 'use client';
 import EditProducts from '@/components/EditProducts';
-import ProductCard from '@/components/ProductCard';
 import React, { useState, useEffect } from 'react';
 export default function ProductEdit({ searchParams }) {
   const sku = searchParams.sku;

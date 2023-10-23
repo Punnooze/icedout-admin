@@ -24,10 +24,6 @@ export default function Misc() {
     getData();
   }, []);
 
-  useEffect(() => {
-    if (data) console.log(data);
-  }, [data]);
-
   return (
     <>
       {data ? (

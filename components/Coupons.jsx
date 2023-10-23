@@ -8,12 +8,6 @@ import React, { useEffect, useState } from 'react';
 
 function Coupons({ data }) {
   const router = useRouter();
-  if (data) console.log('data', data);
-  // // console.log(router.refresh());
-  // if (searchParams) {
-  //   console.log(searchParams);
-  //   const id = searchParams.id;
-  // }
   const [formValues, setFormValues] = useState({
     couponName: '',
     couponID: '',
@@ -90,7 +84,6 @@ function Coupons({ data }) {
   const handleEdit = async (e) => {
     e.preventDefault();
     try {
-      console.log('value', formValues);
       const res = await fetch('/api/coupon', {
         method: 'PUT',
         headers: {
@@ -115,7 +108,6 @@ function Coupons({ data }) {
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      console.log(formValues);
       const res = await fetch('/api/coupon', {
         method: 'Delete',
         headers: {

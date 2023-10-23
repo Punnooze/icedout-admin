@@ -1,11 +1,8 @@
 'use client';
-
 import Coupons from '@/components/Coupons';
-import EditCoupons from '@/components/EditCoupons';
 import React, { useState, useEffect } from 'react';
 export default function CouponEdit({ searchParams }) {
   const idCoupon = searchParams.id;
-  console.log(idCoupon);
   const [data, setData] = useState({
     couponName: '',
     couponID: '',
@@ -18,9 +15,6 @@ export default function CouponEdit({ searchParams }) {
     _id: '',
     _v: '',
   });
-  // const countInStock = searchParams.countInStock;
-
-  // console.log(id);
 
   useEffect(() => {
     const getData = async () => {
@@ -49,10 +43,6 @@ export default function CouponEdit({ searchParams }) {
     };
     if (idCoupon) getData();
   }, [idCoupon]);
-
-  useEffect(() => {
-    if (data) console.log(data);
-  }, [data]);
 
   return (
     <div className="tw-h-[100vh] tw-bg-background tw-ml-[70px]">
