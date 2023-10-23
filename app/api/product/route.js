@@ -8,7 +8,6 @@ await connectMongoDB();
 export async function POST(request) {
   try {
     const { data } = await request.json();
-    console.log(data);
     const product = await Products.create(data);
     if (product)
       return NextResponse.json(

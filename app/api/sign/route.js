@@ -1,25 +1,3 @@
-// // pages/api/signature.js
-
-// import { v2 as cloudinary } from 'cloudinary';
-
-// export default async function handler(req, res) {
-//   try {
-//     console.log('route');
-//     const timestamp = Math.round(new Date().getTime() / 1000);
-//     const signature = cloudinary.utils.api_sign_request(
-//       { timestamp },
-//       process.env.CLOUDINARY_API_SECRET
-//     );
-
-//     res.status(200).json({ timestamp, signature });
-//   } catch (error) {
-//     console.error(error);
-//     res
-//       .status(500)
-//       .json({ error: 'Unable to generate signature and timestamp' });
-//   }
-// }
-
 import crypto from 'crypto';
 import { NextResponse } from 'next/server';
 
@@ -46,7 +24,6 @@ export async function GET() {
       success: true,
       data: [timestamp, signature],
     };
-    console.log(resp);
     return NextResponse.json(resp);
   } catch (err) {
     console.log(err);

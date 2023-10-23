@@ -5,7 +5,6 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
   try {
     const { data } = await request.json();
-    // console.log(data);
     const misc = await Misc.create(data);
     if (misc)
       return NextResponse.json(
@@ -22,9 +21,7 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const { data } = await request.json();
-    console.log(data);
     const misc = await Misc.findOne({ miscName: data.miscName });
-    console.log(misc);
     if (misc) {
       const miscelleneous = await Misc.findByIdAndUpdate(misc._id, {
         miscData: data.miscData,

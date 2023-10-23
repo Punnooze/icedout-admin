@@ -31,7 +31,6 @@ export async function POST(request) {
 export async function DELETE(request) {
   try {
     const { data } = await request.json();
-    console.log(data);
     const product = await Coupon.findByIdAndDelete(data._id);
     if (product)
       return NextResponse.json(
@@ -62,8 +61,6 @@ export async function PUT(request) {
       },
       { new: true }
     );
-    // const product = await Coupon.findById(data._id);
-    console.log(product);
     if (product)
       return NextResponse.json(
         { data: 'Successfully Created' },

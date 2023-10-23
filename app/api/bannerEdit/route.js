@@ -8,7 +8,6 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
     const data = await Banner.findById({ _id: id });
-    console.log(data);
     return NextResponse.json(
       { data: data, message: 'Successfully Created' },
       { status: 200 }

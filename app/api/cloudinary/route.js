@@ -24,11 +24,6 @@ export async function DELETE(request) {
         );
       }
     });
-
-    // You can also delete the image from your database if needed.
-    // For example, you can use Mongoose to delete the image from MongoDB:
-    // await Coupon.findByIdAndDelete(data._id);
-
     return NextResponse.json(
       { message: 'Successfully Deleted' },
       { status: 200 }

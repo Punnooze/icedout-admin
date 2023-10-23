@@ -6,7 +6,10 @@ export const config = {
     '/order',
     '/customers',
     '/products',
+    '/banners',
+    '/coupons',
     '/support',
     '/marketing',
+    '/misc',
   ],
 };
