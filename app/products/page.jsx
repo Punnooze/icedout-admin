@@ -23,16 +23,22 @@ export default function page() {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      console.log('0', data[0]);
+      console.log('1', data[1]);
+    }
+  }, [data]);
   return (
     <>
       {data ? (
-        <ProductTable data={data} />
+        <ProductTable data={data[0]} misc={data[1]} />
       ) : (
-        <div className="tw-h-[100vh] tw-p-[100px] tw-flex tw-items-center tw-bg-background ">
+        <div className="tw-h-[100vh] tw-p-[100px] tw-flex tw-items-center tw-overflow-y-clip tw-bg-background ">
           <Image src={logo} alt="logo" />
         </div>
       )}
     </>
   );
 }
-

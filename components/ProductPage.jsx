@@ -19,8 +19,9 @@ import { CldImage, CldUploadButton } from 'next-cloudinary';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { React, useState, useEffect } from 'react';
+import axios from 'axios';
 
-function ProductPage() {
+function ProductPage({ data, misc }) {
   const router = useRouter();
   const [formValues, setFormValues] = useState({
     sku: null,
@@ -53,8 +54,44 @@ function ProductPage() {
     useState(false);
   const [isCancelConfirmationOpen, setIsCancelConfirmationOpen] =
     useState(false);
-  const [picture, setPicture] = useState(false);
+  // const [picture, setPicture] = useState(false);
+  // const [selectedPicture, setSelectedPicture] = useState('');
+
   const [selectedPicture, setSelectedPicture] = useState('');
+  const [images, setImages] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [files, setFiles] = useState(false);
+  const [picture, setPicture] = useState(false);
+  const [categs, setCategs] = useState([]);
+  const [drp, setDrp] = useState([]);
+
+  useEffect(() => {
+    if (data) setFormValues(data);
+  }, [data]);
+
+  useEffect(() => {
+    if (misc) {
+      const categoriesElement = misc.find(
+        (item) => item.miscName === 'categories'
+      );
+      const collectionsElement = misc.find(
+        (item) => item.miscName === 'collections'
+      );
+      const categs = categoriesElement ? categoriesElement.miscData : [];
+      setCategs(categs);
+
+      const drp = collectionsElement ? collectionsElement.miscData : [];
+      setDrp(drp);
+    }
+  }, [misc]);
+
+  const handleCategoryChange = (e) => {
+    setFormValues({ ...formValues, category: e.target.value });
+  };
+
+  const handleDropChange = (e) => {
+    setFormValues({ ...formValues, drop: e.target.value });
+  };
 
   useEffect(() => {
     const handleDeletePicture = async () => {
@@ -91,13 +128,75 @@ function ProductPage() {
     handleDeletePicture();
   }, [selectedPicture]);
 
-  const handleUpload = (result) => {
-    const { images } = formValues;
-    images.push(result.info.secure_url);
-    setFormValues({
-      ...formValues,
-      images,
-    });
+  const handleFileChange = (e) => {
+    const selectedFiles = e.target.files;
+    const newImages = Array.from(selectedFiles);
+    setImages(newImages);
+  };
+
+  useEffect(() => {
+    if (images.length == 0) setFiles(false);
+    else setFiles(true);
+  }, [images]);
+
+  useEffect(() => {
+    console.log('image values', formValues);
+  }, [formValues]);
+
+  const handleFilesSubmit = async (e) => {
+    e.preventDefault();
+    if (images.length === 0) {
+      alert('Please Select images to Upload');
+    } else {
+      setUploading(true);
+      try {
+        const response = await axios.get('/api/sign');
+        if (response.data && response.data.data) {
+          const timestamp = response.data.data[0];
+          const signature = response.data.data[1];
+
+          let Resources = [];
+
+          for (let i = 0; i < images.length; i++) {
+            const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`;
+            const formData = new FormData();
+            formData.append('file', images[i]);
+            formData.append(
+              'api_key',
+              process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY
+            );
+            formData.append('timestamp', timestamp);
+            formData.append('signature', signature);
+            const { data } = await axios.post(url, formData);
+            console.log(data.secure_url);
+            Resources.push({
+              ResourceName: images[i].name,
+              ResourceLink: data.secure_url,
+            });
+          }
+
+          if (formValues.images[0] === '') {
+            const ResourceLinks = Resources.map(
+              (resource) => resource.ResourceLink
+            );
+            setFormValues({ ...formValues, images: ResourceLinks });
+          } else {
+            Resources.map((item) => {
+              formValues.images.push(item.ResourceLink);
+            });
+          }
+
+          console.log('formvalues', formValues);
+        } else {
+          console.error('Error: Unable to obtain timestamp and signature');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setImages([]);
+        setUploading(false);
+      }
+    }
   };
 
   const theme = createTheme({
@@ -197,26 +296,28 @@ function ProductPage() {
       ...formValues,
       countInStock,
     };
-    try {
-      const res = await fetch('/api/product', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ data: updatedFormValues }),
-      });
+    if (formValues.category !== null && formValues.drop !== null) {
+      try {
+        const res = await fetch('/api/product', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ data: updatedFormValues }),
+        });
 
-      if (res.ok) {
-        const data = await res.json();
-        if (data.data == 'Successfully Created') {
-          setIsDeleteConfirmationOpen(true);
-        } else alert(data.data);
-      } else {
-        console.log('Error:', res.statusText);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.data == 'Successfully Created') {
+            setIsDeleteConfirmationOpen(true);
+          } else alert(data.data);
+        } else {
+          console.log('Error:', res.statusText);
+        }
+      } catch (error) {
+        console.log('Error', error);
       }
-    } catch (error) {
-      console.log('Error', error);
-    }
+    } else alert('Please choose Category and Drop');
   };
   const handleStockChange = (event) => {
     const selectedSize = selectedcountInStock;
@@ -311,40 +412,51 @@ function ProductPage() {
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
-
             <div className="tw-w-1/2 tw-mb-[20px]">
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Category
               </label>
-              <input
+              <select
                 required
-                type="text"
-                placeholder="Enter Category"
-                onChange={(e) =>
-                  setFormValues({ ...formValues, category: e.target.value })
-                }
+                value={formValues.category || ''}
+                onChange={handleCategoryChange}
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-              />
+              >
+                <option value="" disabled>
+                  Select a Category
+                </option>
+                {categs.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
+
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Drop
               </label>
-              <input
+              <select
                 required
-                type="text"
-                onChange={(e) =>
-                  setFormValues({ ...formValues, drop: e.target.value })
-                }
-                placeholder="Enter Drop"
+                value={formValues.drop || ''}
+                onChange={handleDropChange}
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-              />
+              >
+                <option value="" disabled>
+                  Select a Drop
+                </option>
+                {drp.map((drops) => (
+                  <option key={drops} value={drops}>
+                    {drops}
+                  </option>
+                ))}
+              </select>
             </div>
-
             <div className="tw-w-1/2 tw-mb-[20px]">
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
                 Price
@@ -420,20 +532,39 @@ function ProductPage() {
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
             </div>
+
             <div className="tw-w-1/2 tw-mb-[20px]">
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                Attached Image
+                Product Images
               </label>
-              <div className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px] tw-flex tw-justify-center">
-                <CldUploadButton
-                  uploadPreset="ti9avygr"
-                  onUpload={handleUpload}
+              <div
+                className='   className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 md:tw-px-5 tw-px-1 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[8px] md:tw-text-[12px] tw-flex tw-justify-around '
+              >
+                <input
+                  type="file"
+                  multiple
+                  placeholder="Enter Discount (if any)"
+                  onChange={handleFileChange}
                 />
+                <button
+                  className={`${uploading ? 'tw-hidden' : 'tw-block'} ${
+                    files
+                      ? 'tw-bg-violet tw-text-darkgrey'
+                      : 'tw-bg-grey tw-text-white'
+                  } tw-p-[3px] tw-rounded-md tw-px-[10px]`}
+                  onClick={handleFilesSubmit}
+                  type="submit"
+                >
+                  Upload
+                </button>
+                {uploading && (
+                  <p className="tw-text-bluepurple">Uploading...</p>
+                )}
               </div>
-              <output></output>
             </div>
           </div>
-          {formValues.images[0] != null && (
+          {formValues.images[0] !== '' && (
             <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
               Images
             </label>
@@ -451,14 +582,16 @@ function ProductPage() {
                     {picture && (
                       <div
                         onClick={() => setSelectedPicture(img)}
-                        className="tw-absolute tw-bottom-0 tw-flex tw-justify-center tw-w-[100%] tw-items-center tw-bg-lightgrey tw-py-[10px]  tw-rounded-b-md tw-cursor-pointer"
+                        className="tw-absolute tw-bottom-0 tw-flex tw-justify-center tw-w-[100%] tw-items-center tw-bg-lightgrey tw-py-[5px] md:tw-py-[10px]  tw-rounded-b-md tw-cursor-pointer"
                       >
-                        <TrashIcon className="tw-w-4 tw-h-4" />
-                        <p>Delete</p>
+                        <TrashIcon className="tw-w-3 tw-h-3 md:tw-w-4 md:tw-h-4" />
+                        <p className="tw-text-[10px] md:tw-text-[12px] ">
+                          Delete
+                        </p>
                       </div>
                     )}
                     <Image
-                      height="200"
+                      height="50"
                       width="100"
                       src={img}
                       alt="Image"

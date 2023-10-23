@@ -28,9 +28,7 @@ export default function ProductEdit({ searchParams }) {
     _id: '',
     _v: '',
   });
-  // const countInStock = searchParams.countInStock;
-
-  // console.log(sku);
+  const [misc, setMisc] = useState('');
 
   useEffect(() => {
     const getData = async () => {
@@ -60,13 +58,31 @@ export default function ProductEdit({ searchParams }) {
     if (sku) getData();
   }, [sku]);
 
+  useEffect(() => {
+    const getMisc = async () => {
+      try {
+        const res = await fetch('api/fetchMisc', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await res.json();
+        if (data.data) setMisc(data.data);
+      } catch (error) {
+        console.log('Error', error);
+      }
+    };
+    getMisc();
+  }, []);
+
   // useEffect(() => {
   //   if (data) console.log(data);
   // }, [data]);
 
   return (
     <div className="tw-h-[100vh] tw-bg-background tw-ml-[70px]">
-      {data && <EditProducts data={data} />}
+      {data && <EditProducts data={data} misc={misc} />}
     </div>
   );
 }

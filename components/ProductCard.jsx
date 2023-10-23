@@ -23,18 +23,6 @@ function ProductCard({ data, edit }) {
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
 
-  // const openDeleteConfirmation = () => {
-  //   setIsDeleteConfirmationOpen(true);
-  //   handleMenuClose();
-  // };
-
-  // const handleEdit = () => {
-  //   router.push({
-  //     pathname: '/productEdit',
-  //     query: { data: data },
-  //   });
-  // };
-
   const handleDelete = async () => {
     try {
       const res = await fetch('/api/product', {
@@ -82,7 +70,9 @@ function ProductCard({ data, edit }) {
       <div className="tw-w-[100%] tw-h-[300px] tw-mt-[-25px] tw-bg-bluepurple tw-rounded-t-md tw-relative ">
         {data.isFeatured && (
           <div className="tw-absolute tw-bg-darkgrey tw-top-[30px]  tw-rounded-r-sm">
-            <p className="tw-text-lightgrey tw-py-[3px] tw-px-[5px]">{data.featuremsg}</p>
+            <p className="tw-text-lightgrey tw-py-[3px] tw-px-[5px]">
+              {data.featuremsg}
+            </p>
           </div>
         )}
         {

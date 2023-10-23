@@ -281,7 +281,9 @@ export default function BannersInput({ data }) {
                 >
                   Upload
                 </button>
-                {uploading && <p>Uploading...</p>}
+                {uploading && (
+                  <p className="tw-text-bluepurple">Uploading...</p>
+                )}
               </div>
             </div>
           </div>

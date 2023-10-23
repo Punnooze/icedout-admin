@@ -157,11 +157,15 @@ export default function MiscPage({ data }) {
         ...collections,
         miscData: sortedCollections,
       });
-      setFormValues(collections);
+      setFormValues({ ...formValues, miscName:'collections', miscData: sortedCollections });
     }
     if (p === 3) setFormValues(headers);
     if (p === 4) setFormValues(shippingCost);
   };
+
+  // useEffect(() => {
+  //   console.log(formValues);
+  // }, [formValues]);
 
   useEffect(() => {
     if (data) setCategories;
