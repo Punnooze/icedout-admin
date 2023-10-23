@@ -76,9 +76,6 @@ export default function ProductEdit({ searchParams }) {
     getMisc();
   }, []);
 
-  // useEffect(() => {
-  //   if (data) console.log(data);
-  // }, [data]);
 
   return (
     <div className="tw-h-[100vh] tw-bg-background tw-ml-[70px]">
