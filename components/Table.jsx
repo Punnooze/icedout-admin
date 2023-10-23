@@ -7,6 +7,11 @@ import { IconButton, Menu, MenuItem, Dialog } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import {
+  BookmarkIcon,
+  EnvelopeIcon,
+  TrashIcon,
+} from '@heroicons/react/24/outline';
 const columns = [
   {
     field: 'id',
@@ -457,18 +462,21 @@ const MyTable = ({ data }) => {
                 >
                   <button
                     onClick={handleSave}
-                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] tw-flex"
                   >
-                    Save
+                    <BookmarkIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
+                    <p>Save</p>
                   </button>
                   <button
                     onClick={openDeleteConfirmation}
-                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                    className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] tw-flex"
                   >
-                    Delete
+                    <TrashIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
+                    <p>Delete</p>
                   </button>
-                  <button className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] ">
-                    Email
+                  <button className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] tw-flex ">
+                    <EnvelopeIcon className="tw-w-5 tw-h-5 tw-mr-[5px]" />
+                    <p>Email</p>
                   </button>
                 </div>
               </div>
@@ -488,15 +496,17 @@ const MyTable = ({ data }) => {
               <div className="tw-w-[100%] tw-mt-[15px] tw-flex tw-justify-around ">
                 <button
                   onClick={closeDeleteConfirmation}
-                  className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                  className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] tw-flex"
                 >
-                  Cancel
+                  <XMarkIcon className='tw-w-5 tw-h-5 tw-mr-[5px]'/>
+                  <p>Cancel</p>
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] "
+                  className="tw-border-2 tw-border-violet tw-text-violet hover:tw-text-darkgrey tw-rounded-md hover:tw-bg-violet tw-p-[5px] tw-flex"
                 >
-                  Confirm
+                  <TrashIcon className='tw-w-5 tw-h-5 tw-mr-[5px]' />
+                  <p>Confirm</p>
                 </button>
               </div>
             </div>
