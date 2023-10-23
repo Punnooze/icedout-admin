@@ -263,6 +263,35 @@ function Sidebar() {
           </Typography>
         </ListItem>
         <br />
+        <ListItem
+          onClick={() => router.push('/misc')}
+          className={` tw-flex ${
+            click ? 'tw-justify-center' : 'tw-justify-between'
+          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
+           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
+           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
+           `}
+        >
+          <ListItemPrefix>
+            <WrenchScrewdriverIcon
+              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
+                click ? 'tw-w-6' : 'tw-w-5'
+              } ${
+                pathname === '/misc' ? 'tw-text-teal' : 'tw-text-bluepurple'
+              }`}
+            />
+          </ListItemPrefix>
+          <Typography
+            variant="h2"
+            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
+              pathname === '/misc' ? 'tw-text-teal' : 'tw-text-bluepurple'
+            }`}
+            color="blue-gray"
+          >
+            Miscellaneous
+          </Typography>
+        </ListItem>
+        <br />
 
         <ListItem
           onClick={() => router.push('/marketing')}
@@ -323,42 +352,6 @@ function Sidebar() {
             Support
           </Typography>
         </ListItem>
-        <br />
-        <ListItem
-          onClick={() => router.push('/misc')}
-          className={` tw-flex ${
-            click ? 'tw-justify-center' : 'tw-justify-between'
-          }  tw-items-center tw-align-middle  hover:tw-bg-darkergrey
-           hover:tw-shadow-sm tw-duration-200 tw-rounded-md 
-           ${click ? 'tw-p-[10px]' : 'tw-p-[5px]'} 
-           `}
-        >
-          <ListItemPrefix>
-            <WrenchScrewdriverIcon
-              className={`${click ? 'tw-h-6' : 'tw-h-5'} ${
-                click ? 'tw-w-6' : 'tw-w-5'
-              } ${
-                pathname === '/misc'
-                  ? 'tw-text-teal'
-                  : 'tw-text-bluepurple'
-              }`}
-            />
-          </ListItemPrefix>
-          <Typography
-            variant="h2"
-            className={`tw-text-[18px] ${click ? 'tw-hidden' : 'tw-visible'} ${
-              pathname === '/misc' ? 'tw-text-teal' : 'tw-text-bluepurple'
-            }`}
-            color="blue-gray"
-          >
-            Miscellaneous
-          </Typography>
-        </ListItem>
-
-        {/* <br /> */}
-        {/* <br />
-        <br />
-        <br /> */}
         <ListItem className=" hover:tw-bg-darkergrey hover:tw-shadow-sm tw-duration-200 tw-rounded-md tw-p-[5px] tw-px-[10px] tw-flex tw-justify-center tw-items-center tw-align-middle tw-mt-[20px] ">
           <button
             onClick={signOut}

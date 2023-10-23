@@ -4,7 +4,11 @@ import React from 'react';
 export default function page() {
   return (
     <>
-      <div className="tw-ml-[70px]">Support</div>
+      <div className="tw-flex tw-ml-[70px] tw-h-[100vh] tw-bg-background">
+        <h1 className="md:tw-ml-[20px] tw-font-medium tw-text-darkgrey">
+          SUPPORT
+        </h1>
+      </div>
     </>
   );
 }

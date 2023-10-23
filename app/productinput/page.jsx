@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
 import ProductPage from '@/components/ProductPage';
 
-export default function page() {
+export default function ProductInput() {
   const [data, setData] = useState(null);
   useEffect(() => {
     const getData = async () => {

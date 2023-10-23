@@ -17,7 +17,7 @@ import React, { useEffect, useState } from 'react';
 import logo from '../../public/logo.png';
 import Image from 'next/image';
 
-export default function page() {
+export default function Coupon() {
   const [data, setData] = useState(null);
   useEffect(() => {
     const getData = async () => {

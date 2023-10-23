@@ -30,7 +30,6 @@ export default function MiscPage({ data }) {
     miscData: null,
   });
 
-  const [isSuccessOpen, setIsSuccessOpen] = useState(true);
   const [categoriesCount, setCategoriesCount] = useState(1);
   const [collectionsCount, setCollectionsCount] = useState(1);
   const [headersCount, setHeadersCount] = useState(1);
@@ -157,7 +156,11 @@ export default function MiscPage({ data }) {
         ...collections,
         miscData: sortedCollections,
       });
-      setFormValues({ ...formValues, miscName:'collections', miscData: sortedCollections });
+      setFormValues({
+        ...formValues,
+        miscName: 'collections',
+        miscData: sortedCollections,
+      });
     }
     if (p === 3) setFormValues(headers);
     if (p === 4) setFormValues(shippingCost);
@@ -215,10 +218,10 @@ export default function MiscPage({ data }) {
   }, [formValues]);
 
   return (
-    <div className="tw-h-[100vh] tw-bg-background tw-p-[10px] tw-overflow-y-auto">
+    <div className="tw-h-[100vh] tw-bg-background tw-p-[10px] md:tw-px-[20px] lg:tw-px-[40px] tw-overflow-y-auto">
       <h1 className="md:tw-ml-[20px] tw-font-medium tw-text-darkgrey">
         <span className="tw-hidden md:tw-block">MISCELLANEOUS</span>
-        <span className="md:tw-hiden">MISC</span>
+        <span className="md:tw-hidden">MISC</span>
       </h1>
       <div className="tw-bg-darkergrey tw-rounded-md tw-p-[10px]">
         <div className="tw-mb-4.5 tw-flex tw-flex-col">
