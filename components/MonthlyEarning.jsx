@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect } from 'react';
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 import { Stack, Typography, Avatar, Fab } from '@mui/material';
-import { IconArrowUpRight, IconCurrencyDollar } from '@tabler/icons-react';
+import { IconCurrencyRupee } from '@tabler/icons-react';
 import DashboardCard from './DashboardCard';
 import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
 
@@ -12,14 +12,15 @@ const darkTheme = createTheme({
   },
 });
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const MonthlyEarnings = () => {
+const MonthlyEarnings = ({ earnings, marray }) => {
   // Initialize the theme using useTheme
   const theme = useTheme();
 
   // Check if theme.palette exists before accessing the mode property
-  const isDarkMode = theme.palette && theme.palette.mode === 'dark';
+  const isDarkMode = 'dark';
+  // theme.palette && theme.palette.mode === 'dark';
 
   // chart color
   const secondary = '#58B6C3';
@@ -30,7 +31,8 @@ const MonthlyEarnings = () => {
     chart: {
       type: 'area',
       fontFamily: "'Plus Jakarta Sans', sans-serif;",
-      foreColor: '#adb0bb',
+      foreColor: '#4f4f4f',
+      color: '#4f4f4f',
       toolbar: {
         show: false,
       },
@@ -60,38 +62,44 @@ const MonthlyEarnings = () => {
     {
       name: '',
       color: secondary,
-      data: [25, 66, 20, 40, 12, 58, 20],
+      data: marray,
     },
   ];
 
   return (
     <>
-    <ThemeProvider theme={darkTheme}>
-    <div class="tw-pr-3">
-    <DashboardCard
-      title="Monthly Earnings"
-      action={
-        <Fab color="#58B6C3" size="medium">
-          <IconCurrencyDollar width={25}/>
-        </Fab>
-      }
-      footer={
-        <Chart options={optionscolumnchart} series={seriescolumnchart} type="area" height="50%" width='100%'/>
-      }
-    >
-      <>
-        <Typography variant="h3" fontWeight="700" mt="-20px">
-          $6,820
-        </Typography>
-        <Stack direction="row" spacing={1} my={1} alignItems="center">
-          <Avatar sx={{ bgcolor: 'lightgreen', width: 27, height: 27 }}>
-            <IconArrowUpRight width={20} color="green" />
-          </Avatar>
-        </Stack>
-      </>
-    </DashboardCard>
-    </div>
-    </ThemeProvider>
+      <ThemeProvider theme={darkTheme}>
+        <div class="tw-pr-3">
+          <DashboardCard
+            title="Monthly Earnings"
+            action={
+              <Fab color="#58B6C3" size="medium">
+                <IconCurrencyRupee width={25} />
+              </Fab>
+            }
+            footer={
+              <Chart
+                options={optionscolumnchart}
+                series={seriescolumnchart}
+                type="area"
+                height="50%"
+                width="100%"
+              />
+            }
+          >
+            <>
+              <Typography variant="h3" fontWeight="700" mt="-20px">
+                ₹{earnings}
+              </Typography>
+              {/* <Stack direction="row" spacing={1} my={1} alignItems="center">
+                <Avatar sx={{ bgcolor: 'lightgreen', width: 27, height: 27 }}>
+                  <IconArrowUpRight width={20} color="green" />
+                </Avatar>
+              </Stack> */}
+            </>
+          </DashboardCard>
+        </div>
+      </ThemeProvider>
     </>
   );
 };

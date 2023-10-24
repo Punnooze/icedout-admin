@@ -16,7 +16,7 @@ function Coupons({ data }) {
     percentageDiscount: '',
     flatDiscount: '',
     minPurchase: '',
-    deliveryFee: true,
+    deliveryFree: false,
   });
   const [isSaveConfirmationOpen, setIsSaveConfirmationOpen] = useState(false);
 
@@ -148,9 +148,6 @@ function Coupons({ data }) {
               placeholder="Enter Coupon Name"
               className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[14px] md:tw-text-[15px]"
-              pattern="[A-Za-z0-9]*"
-              maxLength="6"
-              title="Only letters allowed and maximum length is 6 characters"
             />
           </div>
 
@@ -161,6 +158,9 @@ function Coupons({ data }) {
             <input
               required
               type="text"
+              pattern="[A-Za-z0-9]*"
+              maxLength="10"
+              title="Only letters allowed and maximum length is 10 characters"
               value={formValues.couponID}
               onChange={(e) =>
                 setFormValues({ ...formValues, couponID: e.target.value })
@@ -194,7 +194,7 @@ function Coupons({ data }) {
             </label>
             <input
               type="number"
-              value={formValues.flatDiscout}
+              value={formValues.flatDiscount}
               onChange={(e) =>
                 setFormValues({ ...formValues, flatDiscount: e.target.value })
               }
@@ -277,7 +277,7 @@ function Coupons({ data }) {
           <div className="tw-mb-6 tw-flex">
             <div className="tw-w-1/2">
               <label className="tw-mb-1 tw-text-[12px] md:tw-text-[15px] tw-block tw-text-bluepurple tw-font-medium">
-                Delivery Fee
+                Free Delivery
               </label>
               <ThemeProvider theme={theme}>
                 <RadioGroup
@@ -285,30 +285,30 @@ function Coupons({ data }) {
                   name="controlled-radio-buttons-group"
                 >
                   <FormControlLabel
-                    checked={formValues.deliveryFee === true}
+                    checked={formValues.deliveryFree === true}
                     name="Delivery Fee"
                     className="tw-text-lightgrey tw-text-[12px] md:tw-text-[15px]"
                     value="true"
                     control={<Radio />}
-                    label="Delivery Fee"
+                    label="YES"
                     onChange={() =>
                       setFormValues({
                         ...formValues,
-                        deliveryFee: true,
+                        deliveryFree: true,
                       })
                     }
                   />
                   <FormControlLabel
-                    checked={formValues.deliveryFee === false}
+                    checked={formValues.deliveryFree === false}
                     name="Delivery Fee"
                     className="tw-text-lightgrey tw-text-[12px] md:tw-text-[15px]"
                     value="false"
                     control={<Radio />}
-                    label="Free Delivery"
+                    label="NO"
                     onChange={() =>
                       setFormValues({
                         ...formValues,
-                        deliveryFee: false,
+                        deliveryFree: false,
                       })
                     }
                   />
@@ -321,6 +321,7 @@ function Coupons({ data }) {
                 Minimum Purchase Amount
               </label>
               <input
+                required
                 type="number"
                 value={formValues.minPurchase}
                 onChange={(e) =>

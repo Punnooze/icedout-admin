@@ -54,7 +54,7 @@ const columns = [
     headerClassName: 'custom-header',
   },
   {
-    field: 'flatDiscout',
+    field: 'flatDiscount',
     headerName: 'Discount',
     width: 100,
     headerClassName: 'custom-header',
@@ -72,8 +72,8 @@ const columns = [
     headerClassName: 'custom-header',
   },
   {
-    field: 'deliveryFee',
-    headerName: 'Delivery Fee',
+    field: 'deliveryFree',
+    headerName: 'Free Delivery',
     width: 100,
     headerClassName: 'custom-header',
   },

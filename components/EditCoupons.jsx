@@ -17,7 +17,7 @@ function EditCoupons({ data }) {
     percentageDiscount: '',
     flatDiscout: '',
     minPurchase: '',
-    deliveryFee: true,
+    deliveryFree: false,
   });
   const [isSaveConfirmationOpen, setIsSaveConfirmationOpen] = useState(false);
 
@@ -214,7 +214,7 @@ function EditCoupons({ data }) {
           <div className="tw-mb-6 tw-flex">
             <div className="tw-w-1/2">
               <label className="tw-mb-1 tw-text-[15px] tw-block tw-text-bluepurple tw-font-medium">
-                Delivery Fee
+                Free Delivery
               </label>
               <ThemeProvider theme={theme}>
                 <RadioGroup
@@ -222,7 +222,7 @@ function EditCoupons({ data }) {
                   name="controlled-radio-buttons-group"
                 >
                   <FormControlLabel
-                    checked={formValues.deliveryFee === true}
+                    checked={formValues.deliveryFree === true}
                     name="Delivery Fee"
                     className="tw-text-lightgrey"
                     value="true"
@@ -231,12 +231,12 @@ function EditCoupons({ data }) {
                     onChange={() =>
                       setFormValues({
                         ...formValues,
-                        deliveryFee: true,
+                        deliveryFree: true,
                       })
                     }
                   />
                   <FormControlLabel
-                    checked={formValues.deliveryFee === false}
+                    checked={formValues.deliveryFree === false}
                     name="Delivery Fee"
                     className="tw-text-lightgrey"
                     value="false"
@@ -245,7 +245,7 @@ function EditCoupons({ data }) {
                     onChange={() =>
                       setFormValues({
                         ...formValues,
-                        deliveryFee: false,
+                        deliveryFree: false,
                       })
                     }
                   />

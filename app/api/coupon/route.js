@@ -56,7 +56,7 @@ export async function PUT(request) {
         percentage: data.percentage,
         flatDiscount: data.flatDiscount,
         minPurchase: data.minPurchase,
-        deliverFee: data.deliverFee,
+        deliverFree: data.deliverFree,
         percentageDiscount: data.percentageDiscount,
       },
       { new: true }

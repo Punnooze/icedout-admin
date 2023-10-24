@@ -54,8 +54,7 @@ function ProductPage({ data, misc }) {
     useState(false);
   const [isCancelConfirmationOpen, setIsCancelConfirmationOpen] =
     useState(false);
-  // const [picture, setPicture] = useState(false);
-  // const [selectedPicture, setSelectedPicture] = useState('');
+  const [profits, setProfits] = useState('');
 
   const [selectedPicture, setSelectedPicture] = useState('');
   const [images, setImages] = useState([]);
@@ -556,7 +555,7 @@ function ProductPage({ data, misc }) {
           </div>
           {formValues.images[0] !== '' && (
             <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-              Images
+              Uploaded Images
             </label>
           )}
           <div className="tw-mb-4.5 tw-flex tw-space-x-4  tw-justify-around">

@@ -152,10 +152,10 @@ function ProductCard({ data, edit }) {
             <p className="tw-text-lightgrey tw-text-[12px]">{data.category}</p>
             <p>
               <span className="tw-text-lightgrey tw-mr-[10px] tw-line-through">
-                {data.price}
+                ₹{data.price}
               </span>
               <span className="tw-text-teal">
-                {Number(data.price) - Number(data.discount)}
+                ₹{Number(data.price) - Number(data.discount)}
               </span>
             </p>
 
