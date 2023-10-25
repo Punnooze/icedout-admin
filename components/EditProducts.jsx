@@ -22,7 +22,7 @@ import logo from '../public/logo.png';
 import Image from 'next/image';
 import axios from 'axios';
 
-function EditProducts({ data, misc }) {
+function EditProducts({ data, misc, profit }) {
   const router = useRouter();
   const [formValues, setFormValues] = useState({
     sku: '',
@@ -64,10 +64,15 @@ function EditProducts({ data, misc }) {
   const [picture, setPicture] = useState(false);
   const [categs, setCategs] = useState([]);
   const [drp, setDrp] = useState([]);
+  const [profits, setProfits] = useState('');
 
   useEffect(() => {
     if (data) setFormValues(data);
   }, [data]);
+
+  useEffect(() => {
+    if (profit) setProfits(profit);
+  }, [profit]);
 
   useEffect(() => {
     if (misc) {
@@ -327,13 +332,14 @@ function EditProducts({ data, misc }) {
       ...formValues,
       countInStock,
     };
+    const updatedValues = [updatedFormValues, profits];
     try {
       const res = await fetch('/api/productUpdate', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: updatedFormValues }),
+        body: JSON.stringify({ data: updatedValues }),
       });
 
       if (res.ok) {
@@ -434,13 +440,7 @@ function EditProducts({ data, misc }) {
                         <input
                           type="text"
                           value={formValues.sku}
-                          // style={{ textTransform: 'uppercase' }}
-                          onChange={(e) =>
-                            setFormValues({
-                              ...formValues,
-                              sku: e.target.value,
-                            })
-                          }
+                          disabled
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                           tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
@@ -869,6 +869,25 @@ function EditProducts({ data, misc }) {
                             </button>
                           </div>
                         )}
+                      </div>
+                    </div>
+
+                    <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+                      <div className="tw-w-1/2 tw-mb-[20px]">
+                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                          Profits
+                        </label>
+                        <input
+                          type="number"
+                          required
+                          placeholder="Enter Profit"
+                          onChange={(e) =>
+                            setProfits({ ...profits, profit: e.target.value })
+                          }
+                          value={profits.profit}
+                          className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                        />
                       </div>
                     </div>
 

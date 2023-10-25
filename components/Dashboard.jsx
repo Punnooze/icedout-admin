@@ -37,16 +37,16 @@ function Dashboard({ year }) {
     },
   ]);
 
-  const seriescolchart = [
-    {
-      name: 'Total Sales',
-      data: sales,
-    },
-    {
-      name: 'Total Revenue',
-      data: revenue,
-    },
-  ];
+  // const seriescolchart = [
+  //   {
+  //     name: 'Total Sales',
+  //     data: sales,
+  //   },
+  //   {
+  //     name: 'Total Revenue',
+  //     data: revenue,
+  //   },
+  // ];
 
   // chart color
   const theme = useTheme();
@@ -146,9 +146,14 @@ function Dashboard({ year }) {
         setSales(s);
         setRevenue(r);
         setDays(d);
-        const series = seriescolumnchart;
+        const series = [...seriescolumnchart];
         series[0].data = s;
+        series[0].name = 'Total Sales';
         series[1].data = r;
+        series[1].name = 'Total Revenue';
+
+        console.log('SERIEs', series);
+
         setSeriesColumnChart(series);
 
         // console.log(yearly);
@@ -191,14 +196,16 @@ function Dashboard({ year }) {
           >
             {seriescolumnchart[0].data !== null &&
               seriescolumnchart[1].data !== null &&
-              console.log('series', seriescolumnchart)}
+              (
+
+              
             <Chart
               options={optionscolumnchart}
-              series={seriescolchart}
+              series={seriescolumnchart}
               type="area"
               height="425px"
               width="1325px"
-            />
+            />)}
           </DashboardCard>
         </div>
       </ThemeProvider>
