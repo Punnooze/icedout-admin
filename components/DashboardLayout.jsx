@@ -36,7 +36,7 @@ function DashboardLayout() {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const res = await axios.get('api/fetch');
+        const res = await axios.get('/api/fetch');
         const data = await res.json();
         if (data.data) {
           setProfits(data.data[2]);
