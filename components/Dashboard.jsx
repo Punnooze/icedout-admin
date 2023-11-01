@@ -12,7 +12,7 @@ const darkTheme = createTheme({
   },
 });
 
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: true });
 
 function Dashboard({ year }) {
   let newDate = new Date();
