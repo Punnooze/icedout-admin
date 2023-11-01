@@ -30,6 +30,7 @@ function DashboardLayout() {
 
   // const [year, setYear] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [year, setYear] = useState(Array(12).fill([]));
+  const [runOnce, setRunOnce] = useState(true);
 
   useEffect(() => {
     const getOrders = async () => {
@@ -54,7 +55,7 @@ function DashboardLayout() {
   }, []);
 
   useEffect(() => {
-    if (orders) {
+    if (orders && runOnce) {
       let k = 0;
       const latestOrders = [];
       const noOfOrders = orders.length;
@@ -136,97 +137,6 @@ function DashboardLayout() {
       }
       setYear(arr);
 
-      // const arr = [...year];
-      // for (let i = 0; i < 12; i++) {
-      //   let month = arr[i];
-      //   const dailyProfits = Array(31).fill(0);
-      //   const dailyRevenue = Array(31).fill(0);
-      //   orders.forEach((order) => {
-      //     const createdMonth = Number(order.createdAt.slice(5, 7));
-      //     if (createdMonth === i + 1 && order.status !== 'Failed') {
-      //       const createdDay = Number(order.createdAt.slice(8, 10));
-      //       dailyRevenue[createdDay - 1] += order.totalPrice;
-
-      //       order.orderItems.forEach((orderItem) => {
-      //         const product = products.find((p) => p.sku === orderItem.sku);
-      //         if (product) {
-      //           const profitObj = profits.find(
-      //             (profit) => profit.productId === product._id
-      //           );
-      //           if (profitObj) dailyProfits[createdDay - 1] += profitObj.profit;
-      //         }
-      //       });
-      //       console.log(dailyProfits);
-      //     }
-      //   });
-      //   const monthData = [];
-      //   for (let day = 0; day < 31; day++) {
-      //     if (dailyProfits[day] !== 0 && dailyRevenue[day] !== 0) {
-      //       monthData.push({
-      //         day: day + 1,
-      //         profit: dailyProfits[day],
-      //         revenue: dailyRevenue[day],
-      //       });
-      //     }
-      //   }
-      //   month = monthData;
-      //   arr[i] = month;
-      // }
-      // setYear(arr);
-
-      // const arr = [...year];
-      // for (let i = 0; i < 12; i++) {
-      //   let month = arr[i];
-      //   const dailyRevenue = Array(31).fill(0);
-      //   const dailyProfit = Array(31).fill(0);
-
-      //   // Iterate through the orders
-      //   orders.forEach((item) => {
-      //     const createdMonth = Number(item.createdAt.slice(5, 7));
-      //     if (createdMonth === i + 1 && item.status !== 'Failed') {
-      //       const createdDay = Number(item.createdAt.slice(8, 10));
-      //       dailyRevenue[createdDay - 1] += item.totalPrice;
-
-      //       // Calculate daily profit based on order items
-      //       item.orderItems.forEach((orderItem) => {
-      //         // Find the product corresponding to the SKU
-      //         const product = products.find((p) => p.sku === orderItem.sku);
-
-      //         if (product) {
-      //           // Find the profit data based on productId
-      //           const profitData = profits.find(
-      //             (p) => p.productId === product._id
-      //           );
-
-      //           if (profitData) {
-      //             dailyProfit[createdDay - 1] += profitData.profit;
-      //           }
-      //         }
-      //       });
-      //     }
-      //   });
-
-      //   const monthData = [];
-      //   for (let day = 0; day < 31; day++) {
-      //     if (dailyRevenue[day] !== 0 || dailyProfit[day] !== 0) {
-      //       // Only push non-zero data
-      //       monthData.push({
-      //         day: day + 1, // Day of the month
-      //         revenue: dailyRevenue[day], // Daily revenue
-      //         profit: dailyProfit[day], // Daily profit
-      //       });
-      //     }
-      //   }
-
-      //   // Update the month's data in arr
-      //   month = monthData;
-
-      //   // Update arr with the new value of the month
-      //   arr[i] = month;
-      // }
-
-      // // Set the state year as arr
-      // setYear(arr);
 
       if (prev != 0) {
         const perc = Math.round(((monthly - prev) / prev) * 100);
@@ -243,8 +153,9 @@ function DashboardLayout() {
       // console.log('month array', monthlyArray);
 
       // console.log('latest', latestOrders);
+      setRunOnce(false)
     }
-  }, [orders]);
+  }, [currentDate,dailyArray,orders,monthlyArray,currentMonth,year,runOnce]);
 
   // useEffect(() => {
   //   if (calculate) {
