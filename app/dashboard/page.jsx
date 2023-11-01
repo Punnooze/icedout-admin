@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
-import Dashboard from './Dashboard';
+import Dashboard from '../../components/Dashboard';
 import MonthlyEarnings from '../../components/MonthlyEarning';
 import OrderDivision from '../../components/OrderDivision';
 import ProductStock from '../../components/ProductStock';
