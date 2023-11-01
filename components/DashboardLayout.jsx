@@ -186,8 +186,6 @@ function DashboardLayout() {
             </Grid>
           ) : null}
 
-          {/* Row containing Dashboard */}
-          {console.log('YAAR', year)}
           {calculate && (
             <Grid item xs={12} lg={12}>
               <Dashboard year={year} />

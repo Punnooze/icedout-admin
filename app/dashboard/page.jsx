@@ -3,8 +3,8 @@ import React from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
 import Sidebar from '@/components/Sidebar';
 
-function page() {
+function DashboardScreen() {
   return <DashboardLayout />;
 }
 
-export default page;
+export default DashboardScreen;
