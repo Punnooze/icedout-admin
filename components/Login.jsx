@@ -29,9 +29,10 @@ function Login() {
     // alert('in');
     try {
       const res = await signIn('credentials', {
-        name,
-        password,
-        redirect: false,
+        name:name,
+        password:password,
+        callbackUrl:'/dashboard',
+        redirect:true
       });
 
       if (res.error) {
@@ -39,7 +40,6 @@ function Login() {
         return false;
       }
       // alert('out');
-      router.push('/dashboard');
     } catch (error) {
       console.log(error);
     }
