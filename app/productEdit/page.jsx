@@ -28,6 +28,7 @@ export default function ProductEdit({ searchParams }) {
     _v: '',
   });
   const [misc, setMisc] = useState('');
+  const [profit, setProfit] = useState(0);
 
   useEffect(() => {
     const getData = async () => {
@@ -47,6 +48,31 @@ export default function ProductEdit({ searchParams }) {
               ...response.data[0],
             };
           });
+          console.log('HHHHHHHHHH', response.data[0]._id);
+          if (response.data[0]) {
+            console.log('AHHHHHHHHHH', response.data[0]._id);
+            try {
+              const resp = await fetch(
+                `api/fetchProfit?id=${response.data[0]._id}`,
+                {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                }
+              );
+              const respon = await resp.json();
+              const da = respon.data;
+              console.log('profits', da[0]);
+              if (res.ok) {
+                setProfit(da[0]);
+              } else {
+                console.log('Error:', resp.statusText);
+              }
+            } catch (error) {
+              console.log('Error', error);
+            }
+          }
         } else {
           console.log('Error:', res.statusText);
         }
@@ -75,10 +101,9 @@ export default function ProductEdit({ searchParams }) {
     getMisc();
   }, []);
 
-
   return (
     <div className="tw-h-[100vh] tw-bg-background tw-ml-[70px]">
-      {data && <EditProducts data={data} misc={misc} />}
+      {data && misc && <EditProducts data={data} misc={misc} profit={profit} />}
     </div>
   );
 }

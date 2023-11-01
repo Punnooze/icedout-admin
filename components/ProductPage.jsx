@@ -287,12 +287,13 @@ function ProductPage({ data, misc }) {
     };
     if (formValues.category !== null && formValues.drop !== null) {
       try {
+        const data = [formValues, profits];
         const res = await fetch('/api/product', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ data: updatedFormValues }),
+          body: JSON.stringify({ data: data }),
         });
 
         if (res.ok) {
@@ -768,6 +769,23 @@ function ProductPage({ data, misc }) {
                   </button>
                 </div>
               )}
+            </div>
+          </div>
+
+          <div className="tw-mb-4.5 tw-flex tw-space-x-4">
+            <div className="tw-w-1/2 tw-mb-[20px]">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                Profits
+              </label>
+              <input
+                type="number"
+                requied
+                placeholder="Enter Profit"
+                onChange={(e) => setProfits(e.target.value)}
+                value={profits}
+                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+              />
             </div>
           </div>
 

@@ -1,6 +1,7 @@
 import { connectMongoDB } from '@/lib/mongodb';
 import Misc from '@/models/miscModels';
 import Products from '@/models/productModels';
+import Profit from '@/models/profitsModels';
 import { NextResponse } from 'next/server';
 
 await connectMongoDB();
@@ -8,13 +9,23 @@ await connectMongoDB();
 export async function POST(request) {
   try {
     const { data } = await request.json();
-    const product = await Products.create(data);
-    if (product)
-      return NextResponse.json(
-        { data: 'Successfully Created' },
-        { status: 200 }
-      );
-    else
+    console.log(data[0], data[1]);
+    const product = await Products.create(data[0]);
+    if (product) {
+      const prof = {
+        productId: product._id,
+        profit: data[1],
+      };
+      const profit = await Profit.create(prof);
+
+      if (profit)
+        return NextResponse.json(
+          { data: 'Successfully Created' },
+          { status: 200 }
+        );
+      else
+        return NextResponse.json({ data: 'Could Not Create' }, { status: 200 });
+    } else
       return NextResponse.json({ data: 'Could Not Create' }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ data: 'Could Not Create' }, { status: 500 });
@@ -43,6 +54,7 @@ cloudinary.config({
 export async function DELETE(request) {
   try {
     const { data } = await request.json();
+
     data.images.forEach((image) => {
       const parts = image.split('/');
       const publicIdWithExtension = parts[parts.length - 1];
@@ -59,7 +71,10 @@ export async function DELETE(request) {
     });
 
     const product = await Products.findByIdAndDelete(data._id);
-    if (product)
+    const findProfit = await Profit.find({ productId: data._id });
+    const profit = await Profit.findByIdAndDelete(findProfit[0]._id);
+
+    if (product && profit)
       return NextResponse.json(
         { message: 'Successfully Deleted' },
         { status: 200 }

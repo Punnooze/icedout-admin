@@ -34,8 +34,7 @@ export default function BannersInput({ data }) {
   });
 
   useEffect(() => {
-    if (data)
-      setFormValues(data);
+    if (data) setFormValues(data);
   }, [data]);
 
   const handleFileChange = (e) => {
