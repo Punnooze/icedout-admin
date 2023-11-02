@@ -6,6 +6,7 @@ import MonthlyEarnings from './MonthlyEarning';
 import OrderDivision from './OrderDivision';
 import ProductStock from './ProductStock';
 import DailyEarning from './DailyEarning';
+import axios from 'axios';
 
 function DashboardLayout() {
   // select
@@ -35,12 +36,7 @@ function DashboardLayout() {
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const res = await fetch('api/fetch', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const res = await axios.get('/api/fetch');
         const data = await res.json();
         if (data.data) {
           setProfits(data.data[2]);
@@ -190,8 +186,6 @@ function DashboardLayout() {
             </Grid>
           ) : null}
 
-          {/* Row containing Dashboard */}
-          {console.log('YAAR', year)}
           {calculate && (
             <Grid item xs={12} lg={12}>
               <Dashboard year={year} />
