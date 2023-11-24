@@ -27,7 +27,10 @@ function ProductPage({ data, misc }) {
     sku: null,
     name: null,
     slug: null,
-    seo: null,
+    seo: {
+      desc: 'Shop for oversized t-shirts, crop-tops, heavyweight hoodies, cargo pants, joggers, posters & tote bags online at The Icedout Store - the one-stop destination for premium streetwear & accessories.',
+      keywords: [''],
+    },
     category: null,
     drop: null,
     images: [''],
@@ -63,6 +66,9 @@ function ProductPage({ data, misc }) {
   const [picture, setPicture] = useState(false);
   const [categs, setCategs] = useState([]);
   const [drp, setDrp] = useState([]);
+  const [keywords, setKeywords] = useState(
+    'Oversized T-shirts, Posters, hoodies, Premium hoodies, heavyweight hoodies, crop-tops, Graphic t-shirts, cargo pants, parachute pants, tote bags, graphic posters, y2k clothing, opium clothing, carti t-shirts, fashion, streetwear '
+  );
 
   useEffect(() => {
     if (data) setFormValues(data);
@@ -275,19 +281,31 @@ function ProductPage({ data, misc }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const countInStock = {};
-    for (const size in formValues.countInStock) {
-      if (formValues.countInStock[size] !== null) {
-        countInStock[size] = formValues.countInStock[size];
-      }
-    }
+    const keywordsArray = keywords.split(',').map((keyword) => keyword.trim());
+
     const updatedFormValues = {
       ...formValues,
-      countInStock,
+      seo: {
+        ...formValues.seo,
+        keywords: keywordsArray,
+      },
     };
-    if (formValues.category !== null && formValues.drop !== null) {
+
+    const countInStock = {};
+    for (const size in updatedFormValues.countInStock) {
+      if (updatedFormValues.countInStock[size] !== null) {
+        countInStock[size] = updatedFormValues.countInStock[size];
+      }
+    }
+    updatedFormValues.countInStock = countInStock;
+
+    if (
+      updatedFormValues.category !== null &&
+      updatedFormValues.drop !== null &&
+      updatedFormValues.seo.keywords !== ''
+    ) {
       try {
-        const data = [formValues, profits];
+        const data = [updatedFormValues, profits];
         const res = await fetch('/api/product', {
           method: 'POST',
           headers: {
@@ -298,7 +316,7 @@ function ProductPage({ data, misc }) {
 
         if (res.ok) {
           const data = await res.json();
-          if (data.data == 'Successfully Created') {
+          if (data.data === 'Successfully Created') {
             setIsDeleteConfirmationOpen(true);
           } else alert(data.data);
         } else {
@@ -309,6 +327,7 @@ function ProductPage({ data, misc }) {
       }
     } else alert('Please choose Category and Drop');
   };
+
   const handleStockChange = (event) => {
     const selectedSize = selectedcountInStock;
     const stockValue = event.target.value;
@@ -323,6 +342,17 @@ function ProductPage({ data, misc }) {
     }));
   };
 
+  const handleDescChange = (e) => {
+    const newDesc = e.target.value;
+
+    setFormValues({
+      ...formValues,
+      seo: {
+        ...formValues.seo,
+        desc: newDesc,
+      },
+    });
+  };
   return (
     <div className="tw-h-[100vh] tw-bg-background   tw-ml-[70px] tw-overflow-y-auto tw-pl-5 tw-pr-5 ">
       <h1 className="tw-font-medium tw-text-darkergrey">PRODUCTS FORM</h1>
@@ -595,15 +625,14 @@ function ProductPage({ data, misc }) {
           <div className="tw-mb-4.5 tw-flex tw-space-x-4">
             <div className="tw-w-1/2 tw-mb-[20px]">
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                SEO
+                Profits
               </label>
               <input
-                required
-                type="text"
-                placeholder="Enter SEO"
-                onChange={(e) =>
-                  setFormValues({ ...formValues, seo: e.target.value })
-                }
+                type="number"
+                requied
+                placeholder="Enter Profit"
+                onChange={(e) => setProfits(e.target.value)}
+                value={profits}
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
               />
@@ -772,19 +801,28 @@ function ProductPage({ data, misc }) {
             </div>
           </div>
 
-          <div className="tw-mb-4.5 tw-flex tw-space-x-4">
-            <div className="tw-w-1/2 tw-mb-[20px]">
+          <div className="tw-mb-4.5  tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-4">
+            <div className="tw-max-w-full md:tw-w-1/2 tw-mb-[20px]">
               <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                Profits
+                SEO Description
               </label>
-              <input
-                type="number"
-                requied
-                placeholder="Enter Profit"
-                onChange={(e) => setProfits(e.target.value)}
-                value={profits}
+              <textarea
+                value={formValues.seo.desc}
+                onChange={handleDescChange}
                 className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px] tw-h-[120px]"
+              />
+            </div>
+            <div className="tw-max-w-full md:tw-w-1/2 tw-mb-[20px]">
+              <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                SEO Keywords
+              </label>
+              <textarea
+                type="text"
+                value={keywords}
+                onChange={(e) => setKeywords(e.target.value)}
+                className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px] tw-h-[120px]"
               />
             </div>
           </div>

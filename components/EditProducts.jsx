@@ -28,7 +28,10 @@ function EditProducts({ data, misc, profit }) {
     sku: '',
     name: '',
     slug: '',
-    seo: '',
+    seo: {
+      desc: '',
+      keywords: [''],
+    },
     category: '',
     drop: '',
     images: [''],
@@ -65,6 +68,7 @@ function EditProducts({ data, misc, profit }) {
   const [categs, setCategs] = useState([]);
   const [drp, setDrp] = useState([]);
   const [profits, setProfits] = useState('');
+  const [keywords, setKeywords] = useState('');
 
   useEffect(() => {
     if (data) setFormValues(data);
@@ -333,6 +337,7 @@ function EditProducts({ data, misc, profit }) {
       countInStock,
     };
     const updatedValues = [updatedFormValues, profits];
+
     try {
       const res = await fetch('/api/productUpdate', {
         method: 'PUT',
@@ -386,6 +391,34 @@ function EditProducts({ data, misc, profit }) {
         [selectedcountInStock]: event.target.value,
       },
     }));
+  };
+
+  const handleKeywordsChange = (e) => {
+    setKeywords(e.target.value);
+    const inputKeywords = e.target.value;
+    const keywordsArray = inputKeywords
+      .split(',')
+      .map((keyword) => keyword.trim());
+
+    setFormValues({
+      ...formValues,
+      seo: {
+        ...formValues.seo,
+        keywords: keywordsArray,
+      },
+    });
+  };
+
+  const handleDescChange = (e) => {
+    const newDesc = e.target.value;
+
+    setFormValues({
+      ...formValues,
+      seo: {
+        ...formValues.seo,
+        desc: newDesc,
+      },
+    });
   };
 
   return (
@@ -686,18 +719,16 @@ function EditProducts({ data, misc, profit }) {
                     <div className="tw-mb-4.5 tw-flex tw-space-x-4">
                       <div className="tw-w-1/2 tw-mb-[20px]">
                         <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                          SEO
+                          Profits
                         </label>
                         <input
+                          type="number"
                           required
-                          type="text"
-                          value={formValues.seo}
+                          placeholder="Enter Profit"
                           onChange={(e) =>
-                            setFormValues({
-                              ...formValues,
-                              seo: e.target.value,
-                            })
+                            setProfits({ ...profits, profit: e.target.value })
                           }
+                          value={profits.profit}
                           className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
                 tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
                         />
@@ -782,6 +813,32 @@ function EditProducts({ data, misc, profit }) {
                           />
                         </div>
                       )}
+                    </div>
+
+                    <div className="tw-mb-4.5  tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-4">
+                      <div className="tw-max-w-full md:tw-w-1/2 tw-mb-[20px]">
+                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                          SEO Description
+                        </label>
+                        <textarea
+                          value={formValues.seo.desc}
+                          onChange={handleDescChange}
+                          className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px] tw-h-[120px]"
+                        />
+                      </div>
+                      <div className="tw-max-w-full md:tw-w-1/2 tw-mb-[20px]">
+                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
+                          SEO Keywords
+                        </label>
+                        <textarea
+                          type="text"
+                          value={formValues.seo.keywords.join(', ')}
+                          onChange={handleKeywordsChange}
+                          className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
+                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px] tw-h-[120px]"
+                        />
+                      </div>
                     </div>
 
                     <div className="tw-mb-4.5 tw-flex tw-space-x-4">
@@ -869,25 +926,6 @@ function EditProducts({ data, misc, profit }) {
                             </button>
                           </div>
                         )}
-                      </div>
-                    </div>
-
-                    <div className="tw-mb-4.5 tw-flex tw-space-x-4">
-                      <div className="tw-w-1/2 tw-mb-[20px]">
-                        <label className="tw-mb-1 tw-block tw-text-bluepurple tw-text-[13px] md:tw-text-[15px]">
-                          Profits
-                        </label>
-                        <input
-                          type="number"
-                          required
-                          placeholder="Enter Profit"
-                          onChange={(e) =>
-                            setProfits({ ...profits, profit: e.target.value })
-                          }
-                          value={profits.profit}
-                          className="tw-w-full tw-rounded tw-border tw-border-lightgrey tw-bg-darkergrey tw-py-3 tw-px-5 tw-font-medium tw-outline-none tw-duration-200 tw-text-lightgrey
-                tw-shadow-md hover:tw-shadow-lg focus:tw-border-bluepurple tw-text-[12px] md:tw-text-[16px]"
-                        />
                       </div>
                     </div>
 

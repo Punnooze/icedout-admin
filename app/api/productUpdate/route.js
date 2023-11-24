@@ -7,6 +7,7 @@ export async function PUT(request) {
     const { data } = await request.json();
     const productData = data[0];
     const profitData = data[1];
+
     const product = await Products.findByIdAndUpdate(
       productData._id,
       {
@@ -23,7 +24,8 @@ export async function PUT(request) {
         unavailable: productData.unavailable,
         isFeatured: productData.isFeatured,
         featuremsg: productData.featuremsg,
-        seo: productData.seo,
+        'seo.desc': productData.seo.desc,
+        'seo.keywords': productData.seo.keywords,
         images: productData.images,
       },
       { new: true }
