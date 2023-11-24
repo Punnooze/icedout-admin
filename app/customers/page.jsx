@@ -1,5 +1,5 @@
 'use client';
-import CustomersCard from '@/components/CustomersCard';
+import CustomersCard from '../../components/CustomersCard';
 import React, { useEffect, useState } from 'react';
 import logo from '../../public/logo.png';
 import Image from 'next/image';

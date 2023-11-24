@@ -1,5 +1,5 @@
 'use client';
-import BannersInput from '@/components/BannersInput';
+import BannersInput from '../../components/BannersInput';
 import React, { useEffect, useState } from 'react';
 
 export default function BannerInput({ searchParams }) {

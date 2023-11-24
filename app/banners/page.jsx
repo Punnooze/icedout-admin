@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from '../../public/logo.png';
 import Image from 'next/image';
-import BannersPage from '@/components/BannersPage';
+import BannersPage from '../../components/BannersPage';
 
 export default function Banners() {
   const [data, setData] = useState(null);

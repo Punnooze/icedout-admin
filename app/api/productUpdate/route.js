@@ -1,5 +1,5 @@
-import Products from '@/models/productModels';
-import Profit from '@/models/profitsModels';
+import Products from '../../../models/productModels';
+import Profit from '../../../models/profitsModels';
 import { NextResponse } from 'next/server';
 
 export async function PUT(request) {

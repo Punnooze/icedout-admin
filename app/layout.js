@@ -2,7 +2,7 @@
 import '../styles/globals.css';
 import { Inter } from 'next/font/google';
 import { AuthProvider } from './providers';
-import Sidebar from '@/components/Sidebar';
+import Sidebar from '../components/Sidebar';
 import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -11,14 +11,12 @@ export default function Layout({ title, children }) {
   return (
     <html lang="en">
       <head>
-        <title>
-          {title ? title + ' - Icedout Admin' : 'Icedout Admin'}
-        </title>
+        <title>{title ? title + ' - Icedout Admin' : 'Icedout Admin'}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
 
       <body>
-        {pathname === ('/') ? (
+        {pathname === '/' ? (
           <AuthProvider>{children}</AuthProvider>
         ) : (
           <AuthProvider>

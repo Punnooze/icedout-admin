@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import ProductPage from '@/components/ProductPage';
+import ProductPage from '../../components/ProductPage';
 
 export default function ProductInput() {
   const [data, setData] = useState(null);

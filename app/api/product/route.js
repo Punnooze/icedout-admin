@@ -1,7 +1,7 @@
-import { connectMongoDB } from '@/lib/mongodb';
-import Misc from '@/models/miscModels';
-import Products from '@/models/productModels';
-import Profit from '@/models/profitsModels';
+import { connectMongoDB } from '../../../lib/mongodb';
+import Misc from '../../../models/miscModels';
+import Products from '../../../models/productModels';
+import Profit from '../../../models/profitsModels';
 import { NextResponse } from 'next/server';
 
 await connectMongoDB();

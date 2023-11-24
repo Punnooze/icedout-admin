@@ -1,5 +1,5 @@
 'use client';
-import Coupons from '@/components/Coupons';
+import Coupons from '../../components/Coupons';
 import React, { useState, useEffect } from 'react';
 export default function CouponEdit({ searchParams }) {
   const idCoupon = searchParams.id;

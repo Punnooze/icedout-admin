@@ -1,5 +1,5 @@
-import { connectMongoDB } from '@/lib/mongodb';
-import Coupon from '@/models/couponModels';
+import { connectMongoDB } from '../../../lib/mongodb';
+import Coupon from '../../../models/couponModels';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {

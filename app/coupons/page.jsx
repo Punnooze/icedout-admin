@@ -1,18 +1,5 @@
-// import React from 'react'
-// import Sidebar from '@/components/Sidebar'
-
-// export default function page() {
-//   return (
-//     <>
-//       <div className='tw-flex'>
-//           <CouponTable/>
-//       </div>
-//     </>
-//   )
-// }
-
 'use client';
-import CouponTable from '@/components/CouponTable';
+import CouponTable from '../../components/CouponTable';
 import React, { useEffect, useState } from 'react';
 import logo from '../../public/logo.png';
 import Image from 'next/image';

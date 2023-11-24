@@ -1,5 +1,5 @@
-import { connectMongoDB } from '@/lib/mongodb';
-import User from '@/models/usersModels';
+import { connectMongoDB } from '../../../lib/mongodb';
+import User from '../../../models/usersModels';
 import { NextResponse } from 'next/server';
 
 export async function GET() {

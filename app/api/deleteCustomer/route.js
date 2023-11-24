@@ -1,4 +1,4 @@
-import User from '@/models/usersModels';
+import User from '../../../models/usersModels';
 import { NextResponse } from 'next/server';
 
 export async function DELETE(request) {

@@ -1,4 +1,4 @@
-import Order from '@/models/ordersModel';
+import Order from '../../../models/ordersModel';
 import { NextResponse } from 'next/server';
 
 export async function PUT(request) {

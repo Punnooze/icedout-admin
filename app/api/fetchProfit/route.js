@@ -1,5 +1,5 @@
-import { connectMongoDB } from '@/lib/mongodb';
-import Profit from '@/models/profitsModels';
+import { connectMongoDB } from '../../../lib/mongodb';
+import Profit from '../../../models/profitsModels';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
